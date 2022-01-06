@@ -8,6 +8,7 @@ import DashboardPage from './pages/DashboardPage';
 import SearchPage from './pages/SearchPage';
 
 function App() {
+
   return (
     <div className="App">
       <BrowserRouter>

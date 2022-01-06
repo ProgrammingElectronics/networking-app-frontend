@@ -1,3 +1,4 @@
+import NavbarComp from "../components/Navbar/NavbarComp"
 
 const HomePage = () => {
     return (
