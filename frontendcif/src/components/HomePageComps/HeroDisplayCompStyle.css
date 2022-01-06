@@ -1,0 +1,28 @@
+.attention-getter {
+  border: solid black 2px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  background-color: rgb(162,196,201);
+  border-radius: 30px;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.attention-title {
+  border: solid black 2px;
+}
+
+.attention-para {
+  border: solid black 2px;
+}
+
+.attention-end {
+  border: solid black 2px;
+}
+
+.standard-photo {
+  border: solid black 2px;
+  height: 300px;
+}
