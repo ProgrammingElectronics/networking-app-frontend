@@ -2,7 +2,8 @@ import { createContext } from "react"
 
  let defaultValue = {
    user: null,
-   setUser: () => {}
+   setUserLogin: () => {},
+   setUserLogout: () => {}
  }
  const UserContext = createContext(defaultValue)
 
