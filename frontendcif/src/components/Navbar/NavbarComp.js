@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import Navbar from "react-bootstrap/Navbar"
 import Nav from "react-bootstrap/Nav"
 import Container from "react-bootstrap/Container"
@@ -24,12 +24,19 @@ const NavbarComp = () => {
       <Navbar>
         <Container>
           <Nav>
+            { !user
+            ?
             <>
               <Nav.Link href="/">Home</Nav.Link>
               <SignUpModalComp />
               <LoginModalComp />
-              <LogoutModalComp />
             </>
+            :
+            <>
+            <Nav.Link href="/">Home</Nav.Link>
+            <LogoutModalComp />
+            </>
+            }
           </Nav>
         </Container>
       </Navbar>
