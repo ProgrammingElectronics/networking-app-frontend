@@ -13,7 +13,7 @@ const IndustryFilterComp = (props) => {
     /*
     TODO This will change to a getting token from useContext, or as prop
     */ 
-    const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6InN1cGVyIiwiZXhwIjoxNjQxNjU4NDQ4LCJlbWFpbCI6IiJ9.-EZZzOdYXPktL-Hnr7yoVanC-VUrg61Ukss8Ps1OTsQ"
+    const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6InN1cGVyIiwiZXhwIjoxNjQxNjcxNzUyLCJlbWFpbCI6IiJ9.Qv_nda-qjmyEGikYsuUDd8AojjdR0qMQGtCK2Ne81E8"
 
         
     /**
