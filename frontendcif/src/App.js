@@ -21,7 +21,9 @@ function App() {
     const getUser = async () => {
       if (localStorage.getItem("auth-user") !== 'null') {
         let response = await UserAPI.getLoggedInUser(localStorage.getItem("auth-user"));
+        console.log("made it to response")
         let data = await response.json();
+        console.log("Made it here")
         if (data.username) {
           setIsLoggedIn(true);
           setUser(data);
