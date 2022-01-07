@@ -46,13 +46,14 @@ const ConnectionsContainerComp = () => {
                         </MDBTabsLink>
                     </MDBTabsItem>
                 </MDBTabs>
-
-                <MDBTabsContent>
-                    <MDBTabsPane show={basicActive === 'tab1'}><MiniCardComp/> <MiniCardComp/><MiniCardComp/></MDBTabsPane>
-                        {/* pass props of array of connections here; also remove repeated MiniCardComp, put multiple in to simulate what scrolling looks like in container */}
-                    <MDBTabsPane show={basicActive === 'tab2'}><PendingMiniCardComp/></MDBTabsPane>
-                        {/* pass props of array of pending connections here */}
-                </MDBTabsContent>
+                <div className="tab-content">
+                    <MDBTabsContent>
+                        <MDBTabsPane show={basicActive === 'tab1'}><MiniCardComp/> <MiniCardComp/><MiniCardComp/></MDBTabsPane>
+                            {/* pass props of array of connections here; also remove repeated MiniCardComp, put multiple in to simulate what scrolling looks like in container */}
+                        <MDBTabsPane show={basicActive === 'tab2'}><PendingMiniCardComp/></MDBTabsPane>
+                            {/* pass props of array of pending connections here */}
+                    </MDBTabsContent>
+                </div>
            </div>
             
         </div>

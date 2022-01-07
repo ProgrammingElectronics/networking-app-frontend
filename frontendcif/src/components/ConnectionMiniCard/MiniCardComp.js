@@ -14,22 +14,25 @@ const MiniCardComp = () => {
 
     return (
         <div className="miniCard">
-              <MDBCard style={{ maxWidth: '540px' }}>
+              <MDBCard className="mdb-minicard" style={{ maxWidth: '540px' }}>
                 <MDBRow className='g-0'>
                     <MDBCol md='4'>
-                    <MDBCardImage src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQo-CP7ChC_RjSlZcIC59_FH4KBl41Enn74Zw&usqp=CAU' alt='...' fluid />
+                    <MDBCardImage classname="minicard-pic" style={{ maxHeight: '148px'}} src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQo-CP7ChC_RjSlZcIC59_FH4KBl41Enn74Zw&usqp=CAU' alt='...' fluid />
+                    {/* replace src with profile picture */}
                     </MDBCol>
-                    <MDBCol md='8'>
+                    <MDBCol md='6'>
                     <MDBCardBody>
                         <MDBCardTitle>Firstname Lastname</MDBCardTitle>
                         <MDBCardText>
                         Professional | Code Platoon
                         </MDBCardText>
                         <MDBCardText>
-                        <small className='text-muted'>Graduated 2020</small>
+                        <small>Graduated 2020</small>
                         </MDBCardText>
                     </MDBCardBody>
-                    <MDBBtn href='#'>View Details</MDBBtn>
+                    </MDBCol>
+                    <MDBCol className="btn-col">
+                        <MDBBtn class="btn btn-info btn-sm" href='#'>Details</MDBBtn>
                     </MDBCol>
                 </MDBRow>
               </MDBCard>

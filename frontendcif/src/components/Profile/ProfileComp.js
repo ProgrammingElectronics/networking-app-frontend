@@ -31,7 +31,7 @@ const ProfileComp = () => {
                     </p>
                 </div>
                 <div className="experiences">
-                    <h6>Experiences</h6>    
+                    <h5>Experiences</h5>    
                     <div className="industries">
                         <h6>Industries</h6>
                         {/* replace the following with a map function that maps each result of api call to backend 
