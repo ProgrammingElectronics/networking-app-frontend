@@ -1,21 +1,31 @@
 import industryAPI from '../../api/IndustryAPI'
 import DisplayFilters from './DisplayFiltersComp'
 
+//componets
 import { DropdownButton } from 'react-bootstrap'
 
-import { useEffect, useState } from 'react'
+// hooks
+import { useEffect, useState, useContext } from 'react'
+
+// context
+import UserContext from "../../contexts/UserContext";
 
 
 const IndustryFilterComp = (props) => {
 
-
+    // context
+    const userContext = useContext(UserContext);
+    const { user } = userContext;
+    
+    console.log("IndustryFilterComp | User ---> ", user)
+    //console.log("IndustryFilterComp | User.token ---> ", user.token ? user.token : "no token yo" )
     const [industryList, setIndustryList] = useState([])
     /*
     TODO This will change to a getting token from useContext, or as prop
     */ 
-    const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6InN1cGVyIiwiZXhwIjoxNjQxNjcxNzUyLCJlbWFpbCI6IiJ9.Qv_nda-qjmyEGikYsuUDd8AojjdR0qMQGtCK2Ne81E8"
-
-        
+    const token = localStorage.getItem("auth-user");    
+    console.log("IndustryFilterComp | Token ---> ", token)    
+    
     /**
         The below useEffect should be called when the "search page" first renders. Its purpose is to fill the industryList with the names of avialable industries from our database.
     */
