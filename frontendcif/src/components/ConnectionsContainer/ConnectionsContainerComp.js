@@ -1,4 +1,5 @@
 import React from 'react'
+import ConnectionMiniCardComp from '../ConnectionMiniCard/ConnectionMiniCardComp'
 
 //styles
 import "./ConnectionsContainerStyles.css"
@@ -6,7 +7,8 @@ import "./ConnectionsContainerStyles.css"
 const ConnectionsContainerComp = () => {
     return (
         <div className="connectionsContainer">
-            <h1>Display Connections here</h1>
+            <ConnectionMiniCardComp/>
+            <ConnectionMiniCardComp/>
         </div>
     )
 }

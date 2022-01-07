@@ -1,0 +1,20 @@
+.profileInfoContainer {
+    padding: 10px;
+}
+
+.aboutMe {
+    width: 350px;
+    display: inline-block;
+    border-radius: 15px;
+    border: 1px solid white;
+}
+
+.experiences {
+    border-radius: 15px;
+    border: 1px solid white;
+    text-align: left;
+    padding: 10px;
+}
+
+
+

@@ -12,7 +12,10 @@ import "../static/DashboardPageStyles.css"
 
 
 const DashboardPage = () => {
-    
+    //useEffect to setProfile
+    //getProfile
+
+    //pass array of connections as props to ConnectionsContainerComp
 
     return (
         <div>
