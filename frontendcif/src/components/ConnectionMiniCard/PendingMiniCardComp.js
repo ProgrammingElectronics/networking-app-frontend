@@ -4,7 +4,7 @@ import { MDBCard, MDBCardTitle, MDBCardText, MDBCardBody, MDBCardImage, MDBRow, 
 //styles
 import "./MiniCardStyles.css"
 
-const MiniCardComp = () => {
+const PendingMiniCardComp = () => {
     //for each connection, display a mini-card
     //mini card needs to grab the following data:
         // Profile Pic
@@ -23,13 +23,13 @@ const MiniCardComp = () => {
                     <MDBCardBody>
                         <MDBCardTitle>Firstname Lastname</MDBCardTitle>
                         <MDBCardText>
-                        Professional | Code Platoon
+                        Professional | Hack Reactor
                         </MDBCardText>
                         <MDBCardText>
-                        <small className='text-muted'>Graduated 2020</small>
+                        <small className='text-muted'>Graduated 2019</small>
                         </MDBCardText>
                     </MDBCardBody>
-                    <MDBBtn href='#'>View Details</MDBBtn>
+                    <MDBBtn disabled>Pending</MDBBtn>
                     </MDBCol>
                 </MDBRow>
               </MDBCard>
@@ -37,4 +37,4 @@ const MiniCardComp = () => {
     )
 }
 
-export default MiniCardComp
+export default PendingMiniCardComp

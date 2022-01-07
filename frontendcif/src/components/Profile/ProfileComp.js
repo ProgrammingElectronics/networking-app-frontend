@@ -30,9 +30,8 @@ const ProfileComp = () => {
                     Blah Blah Blah Blah Blah Blah Blah Blah Blah
                     </p>
                 </div>
-                <h6>Experiences</h6>
-                <div className="experiences">    
-                    <br/>
+                <div className="experiences">
+                    <h6>Experiences</h6>    
                     <div className="industries">
                         <h6>Industries</h6>
                         {/* replace the following with a map function that maps each result of api call to backend 
