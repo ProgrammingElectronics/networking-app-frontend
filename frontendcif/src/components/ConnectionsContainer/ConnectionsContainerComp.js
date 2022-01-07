@@ -1,5 +1,5 @@
 import React from 'react'
-import ConnectionMiniCardComp from '../ConnectionMiniCard/ConnectionMiniCardComp'
+import MiniCardComp from '../ConnectionMiniCard/MiniCardComp'
 
 //styles
 import "./ConnectionsContainerStyles.css"
@@ -7,8 +7,10 @@ import "./ConnectionsContainerStyles.css"
 const ConnectionsContainerComp = () => {
     return (
         <div className="connectionsContainer">
-            <ConnectionMiniCardComp/>
-            <ConnectionMiniCardComp/>
+            <div>
+                Connections here
+            </div>
+            <MiniCardComp/>
         </div>
     )
 }

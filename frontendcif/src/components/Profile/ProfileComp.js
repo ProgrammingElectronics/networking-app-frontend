@@ -1,4 +1,5 @@
 import React from 'react'
+import { MDBBtn, MDBIcon } from 'mdb-react-ui-kit';
 //components
 import ProfilePicComp from './ProfilePicComp'
 import EditProfileButtonComp from './EditProfileButtonComp'
@@ -17,6 +18,9 @@ const ProfileComp = () => {
                     <h3>Kristen Ruprecht</h3>
                     {/* Role | Bootcamp */}
                     <h5>Recent Grad | Code Platoon</h5>
+                    <MDBBtn tag='a' color='none' className='m-1' style={{ color: '#ac2bac' }}>
+                        <MDBIcon fab icon='instagram' size='lg' />
+                    </MDBBtn>
                     <p>Github: link | LinkedIn: link</p>
                 </div>
                 <div className="aboutMe">
