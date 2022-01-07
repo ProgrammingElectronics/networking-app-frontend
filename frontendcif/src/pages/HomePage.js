@@ -10,12 +10,13 @@ import './HomePageStyle.css'
 import HeroDisplayComp from '../components/HomePageComps/HeroDisplayComp';
 import ImageOverlayComp from '../components/HomePageComps/ImageOverlayComp';
 import HookDisplayComp from '../components/HomePageComps/HookDisplayComp';
+import NavbarComp from '../components/Navbar/NavbarComp';
 
 const HomePage = () => {
     return (
         <Container fluid className='background'>
             <Container fluid>
-                <h1>This is the navbar holder</h1>
+                <NavbarComp />
             </Container>
             <Container >
                 <HeroDisplayComp />
