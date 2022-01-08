@@ -5,6 +5,7 @@ import BusinessSizeFilterComp from '../components/SearchComps/BusinessSizeFilter
 import BootcampFilterComp from '../components/SearchComps/BootcampFilterComp'
 import ProfileCardListComp from '../components/SearchComps/ProfileCardComps/ProfileCardListComp'
 import NavbarComp from '../components/Navbar/NavbarComp'
+import { MDBAccordion, MDBAccordionItem } from 'mdb-react-ui-kit';
 
 import { useState } from 'react'
 
@@ -20,18 +21,25 @@ const SearchPage = () => {
      that will filter profiles. The profiles will get passed into the component that will display all the relevant profiles for the filter states.
      */ 
     // states
-    const [industryFilter, setIndustryFilter] = useState("All")
-    const [skillFilter, setSkillFilter] = useState("All")
-    const [bootcampFilter, setBootcampFilter] = useState("All")
+    const [industryFilter, setIndustryFilter] = useState([])
+    const [skillFilter, setSkillFilter] = useState([])
+    const [bootcampFilter, setBootcampFilter] = useState([])
 
     return (
         <div>
             <NavbarComp/>
             <div id="filter-controls">
-                <IndustryFilterComp industryFilter={industryFilter} setIndustryFilter={setIndustryFilter} />
-                <SkillFilterComp skillFilter={skillFilter} setSkillFilter={setSkillFilter}/>
-                <BootcampFilterComp bootcampFilter={bootcampFilter} setBootcampFilter={setBootcampFilter}/>
-                <BusinessSizeFilterComp/>
+            <MDBAccordion>
+                <MDBAccordionItem collapseId='panelsStayOpen-collapse1' headerTitle='Filter by Industries'>
+                    <IndustryFilterComp industryFilter={industryFilter} setIndustryFilter={setIndustryFilter} />
+                </MDBAccordionItem>
+                <MDBAccordionItem collapseId='panelsStayOpen-collapse2' headerTitle='Filter by Skills'>
+                    <SkillFilterComp skillFilter={skillFilter} setSkillFilter={setSkillFilter}/>
+                </MDBAccordionItem>
+                <MDBAccordionItem collapseId='panelsStayOpen-collapse3' headerTitle='Filter by Bootcamps'>
+                    <BootcampFilterComp bootcampFilter={bootcampFilter} setBootcampFilter={setBootcampFilter}/>
+                </MDBAccordionItem>
+            </MDBAccordion>
             </div>
             <div id="profile-card-list">
                 <ProfileCardListComp/>

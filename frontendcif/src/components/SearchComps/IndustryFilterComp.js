@@ -1,63 +1,46 @@
 import industryAPI from '../../api/IndustryAPI'
 import DisplayFilters from './DisplayFiltersComp'
-
-//componets
-import { DropdownButton } from 'react-bootstrap'
+import { Form } from 'react-bootstrap'
 
 // hooks
-import { useEffect, useState, useContext } from 'react'
-
-// context
-import UserContext from "../../contexts/UserContext";
-
+import { useEffect, useState} from 'react'
 
 const IndustryFilterComp = (props) => {
 
-    // context
-    const userContext = useContext(UserContext);
-    const { user } = userContext;
-    
-    console.log("IndustryFilterComp | User ---> ", user)
-    //console.log("IndustryFilterComp | User.token ---> ", user.token ? user.token : "no token yo" )
-    const [industryList, setIndustryList] = useState([])
-    /*
-    TODO This will change to a getting token from useContext, or as prop
-    */ 
+    // User Auth
     const token = localStorage.getItem("auth-user");    
-    console.log("IndustryFilterComp | Token ---> ", token)    
+    
+    // This state is only for displaying the checkbox items it does NOT tracked checked, unchecked states.  
+    const [industryList, setIndustryList] = useState([])
     
     /**
-        The below useEffect should be called when the "search page" first renders. Its purpose is to fill the industryList with the names of avialable industries from our database.
-    */
+     The below useEffect should be called when the "search page" first renders. Its purpose is to fill the list with the names of avialable from our database. This is for display purposes only.
+     */
     useEffect(() => {
-
         const getIndustries = async () => {
-            console.log("IndustryFilterComp | useEffect | getIndustries")
-            const data = await industryAPI.getAllIndustries(token)
-
-            console.log(data)
-
+            const data = await industryAPI.getAllIndustries(token)        
             if(data) {
                 setIndustryList(data)
             }
         }
         getIndustries()
     }, [])
-
+    
+    // Create the filter checkboxes
+    const items = industryList.map((item,idx) => 
+        
+        <DisplayFilters 
+            key={idx}
+            item={item}
+            filterList={props.industryFilter} 
+            setFilter={props.setIndustryFilter}
+        />
+    )
 
     return (
-        <div>
-            <h1>Select Industry</h1>
-            <DropdownButton 
-                id="dropdown-button-dark-example2"
-                variant="secondary"
-                menuVariant="dark"
-                className="mt-2"
-                title={props.industryFilter}
-            >
-                <DisplayFilters filterList={industryList} setFilter={props.setIndustryFilter}></DisplayFilters>
-            </DropdownButton>
-        </div>
+        <Form>      
+            {items}  
+        </Form> 
     )
 }
 

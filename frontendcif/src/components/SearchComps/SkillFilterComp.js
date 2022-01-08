@@ -1,26 +1,24 @@
 import skillAPI from '../../api/SkillAPI'
 import DisplayFilters from './DisplayFiltersComp'
-import { DropdownButton } from 'react-bootstrap'
+import { Form } from 'react-bootstrap'
+
+// hooks
 import { useEffect, useState } from 'react'
-
-
 
 const SkillFilterComp = (props) => {
 
+    // User Auth
+    const token = localStorage.getItem("auth-user");    
+    
+    // This state is only for displaying the checkbox items it does NOT tracked checked, unchecked states.  
     const [skillList, setSkillList] = useState([])
-    /*
-    TODO This will change to a getting token from useContext, or as prop
-    */ 
-    const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6InN1cGVyIiwiZXhwIjoxNjQxNjcxNzUyLCJlbWFpbCI6IiJ9.Qv_nda-qjmyEGikYsuUDd8AojjdR0qMQGtCK2Ne81E8"
-
+    
+    /**
+     The below useEffect should be called when the "search page" first renders. Its purpose is to fill the list with the names of avialable from our database. This is for display purposes only.
+     */
     useEffect(() => {
-
         const getSkills = async () => {
-            console.log("SkillFilterComp | useEffect | getIndustries")
             const data = await skillAPI.getAllSkills(token)
-
-            console.log(data)
-
             if(data) {
                 setSkillList(data)
             }
@@ -28,19 +26,21 @@ const SkillFilterComp = (props) => {
         getSkills()
     }, [])
 
+        // Create the filter checkboxes
+        const items = skillList.map((item,idx) => 
+        
+        <DisplayFilters 
+            key={idx}
+            item={item}
+            filterList={props.skillFilter} 
+            setFilter={props.setSkillFilter}
+        />
+    )
+
     return (
-        <div>
-            <h1>Skill Filter</h1>
-            <DropdownButton 
-                id="dropdown-button-dark-example2"
-                variant="secondary"
-                menuVariant="dark"
-                className="mt-2"
-                title={props.skillFilter}
-            >
-                <DisplayFilters filterList={skillList} setFilter={props.setSkillFilter}></DisplayFilters>
-            </DropdownButton>
-        </div>
+        <Form>      
+            {items}  
+        </Form> 
     )
 }
 
