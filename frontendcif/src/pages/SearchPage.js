@@ -29,20 +29,20 @@ const SearchPage = () => {
         <div>
             <NavbarComp/>
             <div id="filter-controls">
-            <MDBAccordion>
-                <MDBAccordionItem collapseId='panelsStayOpen-collapse1' headerTitle='Filter by Industries'>
-                    <IndustryFilterComp industryFilter={industryFilter} setIndustryFilter={setIndustryFilter} />
-                </MDBAccordionItem>
-                <MDBAccordionItem collapseId='panelsStayOpen-collapse2' headerTitle='Filter by Skills'>
-                    <SkillFilterComp skillFilter={skillFilter} setSkillFilter={setSkillFilter}/>
-                </MDBAccordionItem>
-                <MDBAccordionItem collapseId='panelsStayOpen-collapse3' headerTitle='Filter by Bootcamps'>
-                    <BootcampFilterComp bootcampFilter={bootcampFilter} setBootcampFilter={setBootcampFilter}/>
-                </MDBAccordionItem>
-            </MDBAccordion>
+                <MDBAccordion>
+                    <MDBAccordionItem collapseId='panelsStayOpen-collapse1' headerTitle='Filter by Industries'>
+                        <IndustryFilterComp industryFilter={industryFilter} setIndustryFilter={setIndustryFilter} />
+                    </MDBAccordionItem>
+                    <MDBAccordionItem collapseId='panelsStayOpen-collapse2' headerTitle='Filter by Skills'>
+                        <SkillFilterComp skillFilter={skillFilter} setSkillFilter={setSkillFilter}/>
+                    </MDBAccordionItem>
+                    <MDBAccordionItem collapseId='panelsStayOpen-collapse3' headerTitle='Filter by Bootcamps'>
+                        <BootcampFilterComp bootcampFilter={bootcampFilter} setBootcampFilter={setBootcampFilter}/>
+                    </MDBAccordionItem>
+                </MDBAccordion>
             </div>
             <div id="profile-card-list">
-                <ProfileCardListComp/>
+                <ProfileCardListComp industryFilter={industryFilter} skillFilter={skillFilter} bootcampFilter={bootcampFilter}/>
             </div>
         </div>
     )
