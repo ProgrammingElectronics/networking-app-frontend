@@ -13,6 +13,7 @@ const HeroDisplayComp = () => {
     <Container className="attention-getter">
       <Row>
         {/* <Col> */}
+        {/* testing out putting a looped video as a background; will edit this later */}
         <video width="100%" autoPlay loop muted>
           <source src={myVideo} type="video/mp4"></source>
         </video>

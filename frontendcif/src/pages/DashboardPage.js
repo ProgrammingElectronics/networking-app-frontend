@@ -1,7 +1,9 @@
 import React from 'react'
 //components
 import ConnectionsContainerComp from '../components/ConnectionsContainer/ConnectionsContainerComp'
+import NavbarComp from '../components/Navbar/NavbarComp'
 import ProfileContainerComp from '../components/ProfileContainer/ProfileContainerComp'
+import ProfileFormComp from '../components/ProfileForm/ProfileFormComp'
 //connectionsContainer
     //connections mini card within that
     //show connections/show pending component
@@ -19,7 +21,7 @@ const DashboardPage = () => {
 
     return (
         <div>
-            <h1>Navbar Comp</h1>
+            <NavbarComp/>
             <div className="dashboardPageContainer">
                 <div>
                     <ProfileContainerComp/>  
@@ -27,6 +29,9 @@ const DashboardPage = () => {
                 <div>
                     <ConnectionsContainerComp/>
                 </div>
+            </div>
+            <div>
+                <ProfileFormComp/>
             </div>
         </div>
     
