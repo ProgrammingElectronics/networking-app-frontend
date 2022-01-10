@@ -11,4 +11,9 @@ const tryCatchFetch = async (url, init = null) => {
   }
 }
 
-export { tryCatchFetch, BASE_URL }
+const baseAPI = {
+  tryCatchFetch,
+  BASE_URL
+}
+
+export default baseAPI

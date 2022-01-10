@@ -14,10 +14,23 @@ const getAllProfiles = async (token) => {
   }
   return await tryCatchFetch(url, data)
 }
-
-
-const ProfileAPIexports = {
-  getAllProfiles
+const getProfileByID = async (token, profile_id) => {
+  // console.log("API ----- getAllWorkflows ----->")
+  const url = BASE_URL + profile_id + '/'
+  const data = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      'Authorization': `JWT ${token}`
+    }
+  }
+  return await tryCatchFetch(url, data)
 }
 
-export default ProfileAPIexports
+
+const ProfileAPI = {
+  getAllProfiles,
+  getProfileByID
+}
+
+export default ProfileAPI

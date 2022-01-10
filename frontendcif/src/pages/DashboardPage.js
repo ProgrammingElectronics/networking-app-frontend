@@ -5,6 +5,7 @@ import ProfileContainerComp from '../components/ProfileContainer/ProfileContaine
 import { useState,useContext } from 'react'
 import UserContext from '../contexts/UserContext'
 import ConnectionRequestAPI from '../api/ConnectionRequestAPI'
+import ProfileAPI from '../api/ProfileAPI'
 //connectionsContainer
     //connections mini card within that
     //show connections/show pending component
@@ -16,25 +17,39 @@ import "../static/DashboardPageStyles.css"
 
 const DashboardPage = () => {
     // should we grab all of the profile information and set it as a useContext?
+    // states
     const [ profile, setProfile ] = useState(null)
     const [ connections, setConnections ] = useState([])
 
     // setting the user by context
     const userContext = useContext(UserContext);
     const { user } = userContext;
-    console.log(user)
     //useEffect to setProfile
     useEffect(() => {
+        let token = localStorage.getItem("auth-user")
         const getConnections = async () => {
-            let response = await ConnectionRequestAPI.getConnections(localStorage.getItem("auth-user"));
-            console.log(localStorage.getItem("auth-user"))
+            let response = await ConnectionRequestAPI.getConnections(token);
             let data = await response.json();
             setConnections(data)
         }
+        const getProfile = async () => {
+            let profile_id = user.profile
+            console.log(profile_id)
+            if (profile_id) {
+                let response = await  ProfileAPI.getProfileByID(token, profile_id);
+                let data = await response.json();
+                setProfile(data)
+            }
+        }
+        // These two fetch calls are working, but I cannot access the data. If you check the developer panel -> application -> XHR and fetch they are grabbing the data, but it is not setting it here... I am not sure why.
         getConnections()
+        getProfile()
       }, [])
     //getProfile
     //pass array of connections as props to ConnectionsContainerComp
+
+    connections ? console.log("CONNECTIONS:", connections) : console.log("connections not rendered")
+    profile ? console.log("PROFILE:", profile) : console.log("profile not rendered")
 
     return (
         <div>

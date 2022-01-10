@@ -1,4 +1,4 @@
-import { tryCatchFetch } from '../api/baseAPI'
+import baseAPI from "./baseAPI"
 const BASE_URL = "http://localhost:8000/core/bootcamps/"
 
 
@@ -12,7 +12,7 @@ const getAllBootcamps = async (token) => {
       'Authorization': `JWT ${token}`
     }
   }
-  return await tryCatchFetch(url, data)
+  return await baseAPI.tryCatchFetch(url, data)
 }
 
 

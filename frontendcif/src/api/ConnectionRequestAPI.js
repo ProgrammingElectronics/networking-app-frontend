@@ -1,9 +1,10 @@
-import { tryCatchFetch, BASE_URL } from '../api/baseAPI'
+import baseAPI from "./baseAPI"
 const CONNECT_URL = "connection-requests/"
 
 // Returns a list of all connection requests where the profile is either from_profile or to_profile
 const getConnections = async (token) => {
-  const url = BASE_URL + CONNECT_URL
+  const url = baseAPI.BASE_URL + CONNECT_URL
+  console.log(url)
   const data = {
     method: "GET",
     headers: {
@@ -11,7 +12,7 @@ const getConnections = async (token) => {
       'Authorization': `JWT ${token}`
     }
   }
-  return await tryCatchFetch(url, data)
+  return await baseAPI.tryCatchFetch(url, data)
 }
 
 const ConnectionRequestAPI = {
