@@ -13,27 +13,20 @@ const MiniCardComp = (props) => {
     let lastName = connection['from_profile']['user']['last_name']
     let role = connection['from_profile']['is_professional']
     let bootcamp = connection['from_profile']['enrollment'][0]['bootcamp']['name']
-    console.log(bootcamp)
-    //for each connection, display a mini-card
-    //mini card needs to grab the following data:
-        // Profile Pic url done
-        // First and last name inside of user done
-        // Role (isProfessional or not)
-        // And bootcamp graduated from done
 
     return (
         <div className="miniCard">
               <MDBCard className="mdb-minicard" style={{ maxWidth: '540px' }}>
                 <MDBRow className='g-0'>
                     <MDBCol md='4'>
-                    <MDBCardImage classname="minicard-pic" style={{ maxHeight: '148px'}} src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQo-CP7ChC_RjSlZcIC59_FH4KBl41Enn74Zw&usqp=CAU' alt='...' fluid />
+                    <MDBCardImage classname="minicard-pic" style={{ maxHeight: '148px'}} src={imageURL} alt='profile picture' fluid />
                     {/* replace src with profile picture */}
                     </MDBCol>
                     <MDBCol md='6'>
                     <MDBCardBody>
-                        <MDBCardTitle>Firstname Lastname</MDBCardTitle>
+                        <MDBCardTitle>{firstName} {lastName}</MDBCardTitle>
                         <MDBCardText>
-                        Professional | Code Platoon
+                        Professional | {bootcamp}
                         </MDBCardText>
                         <MDBCardText>
                         <small>Graduated 2020</small>
