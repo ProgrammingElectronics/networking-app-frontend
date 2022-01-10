@@ -24,6 +24,7 @@ const NavbarComp = () => {
 
   return (
     <>
+
       <Navbar fluid className="navbar" bg="light" variant="light">
         <Container>
             { !user
@@ -39,12 +40,11 @@ const NavbarComp = () => {
             </>
             :
             <>
-            <Nav>
-              <Nav.Link href="/">Home</Nav.Link>
-            </Nav>
-            <Nav>
+
+              <Nav.Link href="/dashboard">Dashboard</Nav.Link>
+              <Nav.Link href="/search">Connect</Nav.Link>
               <LogoutModalComp />
-            </Nav>
+
             </>
             }
         </Container>
