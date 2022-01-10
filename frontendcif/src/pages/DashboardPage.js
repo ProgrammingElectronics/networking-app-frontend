@@ -1,14 +1,14 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Navigate } from 'react-router-dom';
+
 //components
 import ConnectionsContainerComp from '../components/ConnectionsContainer/ConnectionsContainerComp'
 import NavbarComp from '../components/Navbar/NavbarComp'
 import ProfileContainerComp from '../components/ProfileContainer/ProfileContainerComp'
-import ProfileFormComp from '../components/ProfileForm/ProfileFormComp'
-//connectionsContainer
-    //connections mini card within that
-    //show connections/show pending component
-//profile container
+
+import UserContext from '../contexts/UserContext'
+import ConnectionRequestAPI from '../api/ConnectionRequestAPI'
+import ProfileAPI from '../api/ProfileAPI'
 
 //styles
 import "../static/DashboardPageStyles.css"
@@ -21,9 +21,33 @@ import UserContext from "../contexts/UserContext";
 
 
 const DashboardPage = () => {
-    //useEffect to setProfile
-    //getProfile
+    // should we grab all of the profile information and set it as a useContext?
+    // states
+    const [ profile, setProfile ] = useState(null)
+    const [ connections, setConnections ] = useState(null)
 
+    // setting the user by context
+    const userContext = useContext(UserContext);
+    const { user } = userContext;
+    const profile_id = localStorage.getItem('user_profile')
+
+    //useEffect to setProfile and setConnections
+    useEffect(() => {
+        let token = localStorage.getItem("auth-user")
+        const getConnections = async () => {
+            let data = await ConnectionRequestAPI.fetchConnections(token);
+            setConnections(data)
+        }
+        const getProfile = async () => {
+            if (profile_id) {
+                let data = await  ProfileAPI.getProfileByID(token, profile_id);
+                setProfile(data)
+            }
+        }
+        getConnections()
+        getProfile()
+      }, [])
+    //getProfile
     //pass array of connections as props to ConnectionsContainerComp
 
     // context
@@ -42,14 +66,24 @@ const DashboardPage = () => {
             </Container>
             <div className="dashboardPageContainer">
                 <div>
-                    <ProfileContainerComp/>  
+                    {
+                    profile
+                    ?
+                    <ProfileContainerComp profile={profile}/>
+                    :
+                    <></>
+                    }
                 </div>
                 <div>
-                    <ConnectionsContainerComp/>
+                    {
+                    connections
+                    ?
+                    <ConnectionsContainerComp connections={connections}/>
+                    :
+                    <></>
+                    }
+                    
                 </div>
-            </div>
-            <div>
-                <ProfileFormComp/>
             </div>
         </div>
     

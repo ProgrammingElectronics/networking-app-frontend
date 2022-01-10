@@ -13,18 +13,16 @@ import SearchPage from './pages/SearchPage';
 import CompleteProfilePage from './pages/CompleteProfilePage'
 
 function App() {
-
+  // states
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser ] = useState(null);
   const [error, setError] = useState(null);
-  
+  // effects
   useEffect(() => {
     const getUser = async () => {
       if (localStorage.getItem("auth-user") !== 'null') {
         let response = await UserAPI.getLoggedInUser(localStorage.getItem("auth-user"));
-        //console.log("made it to response")
         let data = await response.json();
-        //console.log("Made it here")
         if (data.username) {
           setIsLoggedIn(true);
           setUser(data);
@@ -38,7 +36,7 @@ function App() {
     }
   }, [user])
 
-
+  // handlers
   const handleLogin = async (evt) => {
     evt.preventDefault();
     let userObject = {
@@ -51,9 +49,10 @@ function App() {
     console.log(data)
     if (data.token) {
       localStorage.setItem("auth-user", `${data.token}`);
+      localStorage.setItem("user", data['user'])
+      localStorage.setItem('user_profile', data['user']['profile'])
       setIsLoggedIn(true);
-      setUser(data.user);
-      console.log(user)
+      setUser(data['user']);
     }
 
   }

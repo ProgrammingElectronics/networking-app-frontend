@@ -1,10 +1,10 @@
-import { tryCatchFetch } from '../api/baseAPI'
-const BASE_URL = "http://localhost:8000/core/industries/"
+import baseAPI from "./baseAPI"
+const INDUSTRY_URL = "industries/"
 
 
 const getAllIndustries = async (token) => {
   
-  const url = BASE_URL
+  const url = baseAPI.BASE_URL + INDUSTRY_URL
   const data = {
     method: "GET",
     headers: {
@@ -12,7 +12,7 @@ const getAllIndustries = async (token) => {
       'Authorization': `JWT ${token}`
     }
   }
-  return await tryCatchFetch(url, data)
+  return await baseAPI.tryCatchFetch(url, data)
 }
 
 
