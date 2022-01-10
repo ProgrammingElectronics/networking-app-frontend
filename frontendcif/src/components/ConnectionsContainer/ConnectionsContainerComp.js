@@ -29,20 +29,19 @@ const ConnectionsContainerComp = (props) => {
 
     // helpers
     // write filter here that filters connection based on type of connections(pending, active, denied)
-
     const checkPending = (connection) => {
         let isCurrentUserProfile = connection.from_profile.id == userProfileID
         return connection.status === 'pending' && !isCurrentUserProfile
     }
-    
+   
     const checkActive = (connection) => {
         let isCurrentUserProfile = connection.from_profile.id == userProfileID
-        return connection.status === 'active' && !isCurrentUserProfile
+        return connection.status === 'accepted' && !isCurrentUserProfile
     }
 
     const checkDenied = (connection) => {
         let isCurrentUserProfile = connection.from_profile.id == userProfileID
-        return connection.status === 'denied' && !isCurrentUserProfile
+        return connection.status === 'rejected' && !isCurrentUserProfile
     }
 
     // effects
