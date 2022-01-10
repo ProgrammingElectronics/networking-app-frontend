@@ -28,7 +28,12 @@ const DashboardPage = () => {
     // setting the user by context
     const userContext = useContext(UserContext);
     const { user } = userContext;
-    const profile_id = localStorage.getItem('user_profile')
+    console.log("Dashboard | user", user)
+    //const profile_id = localStorage.getItem('user')
+    const profile_id = user.profile
+    console.log("Dashboard | profile_id", profile_id)
+
+    
 
     //useEffect to setProfile and setConnections
     useEffect(() => {
