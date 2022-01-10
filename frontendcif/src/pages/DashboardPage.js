@@ -4,6 +4,7 @@ import ConnectionsContainerComp from '../components/ConnectionsContainer/Connect
 import ProfileContainerComp from '../components/ProfileContainer/ProfileContainerComp'
 import { useState,useContext } from 'react'
 import UserContext from '../contexts/UserContext'
+import ConnectionRequestAPI from '../api/ConnectionRequestAPI'
 //connectionsContainer
     //connections mini card within that
     //show connections/show pending component
@@ -23,9 +24,16 @@ const DashboardPage = () => {
     const { user } = userContext;
     console.log(user)
     //useEffect to setProfile
-    
+    useEffect(() => {
+        const getConnections = async () => {
+            let response = await ConnectionRequestAPI.getConnections(localStorage.getItem("auth-user"));
+            console.log(localStorage.getItem("auth-user"))
+            let data = await response.json();
+            setConnections(data)
+        }
+        getConnections()
+      }, [])
     //getProfile
-
     //pass array of connections as props to ConnectionsContainerComp
 
     return (
