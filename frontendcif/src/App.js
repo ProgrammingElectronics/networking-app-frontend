@@ -27,7 +27,7 @@ function App() {
         if (data.username) {
           setIsLoggedIn(true);
           setUser(data);
-          console.log(user)
+          console.log("user", data)
         }
       }
     }

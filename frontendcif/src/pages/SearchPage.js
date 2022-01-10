@@ -1,8 +1,8 @@
 import React from 'react'
-import SkillFilterComp from '../components/SearchComps/SkillFilterComp'
-import IndustryFilterComp from '../components/SearchComps/IndustryFilterComp'
-import BusinessSizeFilterComp from '../components/SearchComps/BusinessSizeFilterComp'
-import BootcampFilterComp from '../components/SearchComps/BootcampFilterComp'
+import SkillFilterComp from "../components/SearchComps/FilterControlComps/SkillFilterComp"
+import IndustryFilterComp from '../components/SearchComps/FilterControlComps/IndustryFilterComp'
+import './SearchPage.css'
+import BootcampFilterComp from '../components/SearchComps/FilterControlComps/BootcampFilterComp'
 import ProfileCardListComp from '../components/SearchComps/ProfileCardComps/ProfileCardListComp'
 import NavbarComp from '../components/Navbar/NavbarComp'
 import { MDBAccordion, MDBAccordionItem } from 'mdb-react-ui-kit';
@@ -26,23 +26,25 @@ const SearchPage = () => {
     const [bootcampFilter, setBootcampFilter] = useState([])
 
     return (
-        <div>
+        <div id="search-page">
             <NavbarComp/>
-            <div id="filter-controls">
-                <MDBAccordion>
-                    <MDBAccordionItem collapseId='panelsStayOpen-collapse1' headerTitle='Filter by Industries'>
-                        <IndustryFilterComp industryFilter={industryFilter} setIndustryFilter={setIndustryFilter} />
-                    </MDBAccordionItem>
-                    <MDBAccordionItem collapseId='panelsStayOpen-collapse2' headerTitle='Filter by Skills'>
-                        <SkillFilterComp skillFilter={skillFilter} setSkillFilter={setSkillFilter}/>
-                    </MDBAccordionItem>
-                    <MDBAccordionItem collapseId='panelsStayOpen-collapse3' headerTitle='Filter by Bootcamps'>
-                        <BootcampFilterComp bootcampFilter={bootcampFilter} setBootcampFilter={setBootcampFilter}/>
-                    </MDBAccordionItem>
-                </MDBAccordion>
-            </div>
-            <div id="profile-card-list">
-                <ProfileCardListComp industryFilter={industryFilter} skillFilter={skillFilter} bootcampFilter={bootcampFilter}/>
+            <div id="search-page-content-area">
+                <div id="filter-controls">
+                    <MDBAccordion>
+                        <MDBAccordionItem collapseId='panelsStayOpen-collapse1' headerTitle='Filter by Industries'>
+                            <IndustryFilterComp industryFilter={industryFilter} setIndustryFilter={setIndustryFilter} />
+                        </MDBAccordionItem>
+                        <MDBAccordionItem collapseId='panelsStayOpen-collapse2' headerTitle='Filter by Skills'>
+                            <SkillFilterComp skillFilter={skillFilter} setSkillFilter={setSkillFilter}/>
+                        </MDBAccordionItem>
+                        <MDBAccordionItem collapseId='panelsStayOpen-collapse3' headerTitle='Filter by Bootcamps'>
+                            <BootcampFilterComp bootcampFilter={bootcampFilter} setBootcampFilter={setBootcampFilter}/>
+                        </MDBAccordionItem>
+                    </MDBAccordion>
+                </div>
+                <div id="profile-card-list">
+                    <ProfileCardListComp industryFilter={industryFilter} skillFilter={skillFilter} bootcampFilter={bootcampFilter}/>
+                </div>
             </div>
         </div>
     )

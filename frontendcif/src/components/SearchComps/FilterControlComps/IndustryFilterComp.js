@@ -1,4 +1,4 @@
-import industryAPI from '../../api/IndustryAPI'
+import industryAPI from '../../../api/IndustryAPI'
 import DisplayFilters from './DisplayFiltersComp'
 import { Form } from 'react-bootstrap'
 

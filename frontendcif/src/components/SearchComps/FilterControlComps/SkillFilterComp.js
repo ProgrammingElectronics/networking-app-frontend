@@ -1,4 +1,4 @@
-import skillAPI from '../../api/SkillAPI'
+import skillAPI from '../../../api/SkillAPI'
 import DisplayFilters from './DisplayFiltersComp'
 import { Form } from 'react-bootstrap'
 

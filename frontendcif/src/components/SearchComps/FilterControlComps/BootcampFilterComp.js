@@ -1,4 +1,4 @@
-import bootcampAPI from '../../api/BootcampAPI'
+import bootcampAPI from '../../../api/BootcampAPI'
 import DisplayFilters from './DisplayFiltersComp'
 import { Form } from 'react-bootstrap'
 
