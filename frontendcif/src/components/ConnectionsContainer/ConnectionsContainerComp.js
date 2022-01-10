@@ -62,6 +62,14 @@ const ConnectionsContainerComp = (props) => {
       setBasicActive(value);
     };
 
+    // helper functions
+    const renderMiniCardComps = (connectionsList) => {
+        let newMiniCardList = connectionsList.map((connection)=>{
+            return <MiniCardComp connection={connection}/>
+        })
+        return newMiniCardList
+    }
+
     return (
         <div className="connectionsContainer">
            {/* This contains all the approved and pending connections */}
@@ -81,13 +89,14 @@ const ConnectionsContainerComp = (props) => {
                 <div className="tab-content">
                     <MDBTabsContent>
                         <MDBTabsPane show={basicActive === 'tab1'}>
-                            <MiniCardComp/>
-                            <MiniCardComp/>
-                            <MiniCardComp/>
+                        {activeConnections ? renderMiniCardComps(activeConnections) : <></>}
                             </MDBTabsPane>
                             {/* pass props of array of connections here; also remove repeated MiniCardComp, put multiple in to simulate what scrolling looks like in container */}
-                        <MDBTabsPane show={basicActive === 'tab2'}><PendingMiniCardComp/></MDBTabsPane>
+                        <MDBTabsPane show={basicActive === 'tab2'}>
+                            <PendingMiniCardComp/>
+                            </MDBTabsPane>
                             {/* pass props of array of pending connections here */}
+                            {pendingConnections ? renderMiniCardComps(pendingConnections) : <></>}
                     </MDBTabsContent>
                 </div>
            </div>

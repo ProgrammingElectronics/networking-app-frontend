@@ -4,7 +4,16 @@ import { MDBCard, MDBCardTitle, MDBCardText, MDBCardBody, MDBCardImage, MDBRow, 
 //styles
 import "./MiniCardStyles.css"
 
-const MiniCardComp = () => {
+const MiniCardComp = (props) => {
+    // props
+    const { connection } = props
+    // card variables
+    let imageURL = connection['from_profile']['img_url']
+    let firstName = connection['from_profile']['user']['first_name']
+    let lastName = connection['from_profile']['user']['last_name']
+    let role = connection['from_profile']['is_professional']
+    let bootcamp = connection['from_profile']['enrollment'][0]['bootcamp']['name']
+    console.log(bootcamp)
     //for each connection, display a mini-card
     //mini card needs to grab the following data:
         // Profile Pic url done
