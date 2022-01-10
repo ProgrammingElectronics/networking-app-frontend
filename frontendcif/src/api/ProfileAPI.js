@@ -1,10 +1,10 @@
-import tryCatchFetch from '../api/baseAPI'
-const BASE_URL = "http://localhost:8000/core/profile/"
+import baseAPI from "./baseAPI"
+const PROFILE_URL = "profiles/"
 
 
 const getAllProfiles = async (token) => {
   // console.log("API ----- getAllWorkflows ----->")
-  const url = BASE_URL
+  const url = baseAPI.BASE_URL + PROFILE_URL
   const data = {
     method: "GET",
     headers: {
@@ -12,19 +12,18 @@ const getAllProfiles = async (token) => {
       'Authorization': `JWT ${token}`
     }
   }
-  return await tryCatchFetch(url, data)
+  return await baseAPI.tryCatchFetch(url, data)
 }
 const getProfileByID = async (token, profile_id) => {
-  // console.log("API ----- getAllWorkflows ----->")
-  const url = BASE_URL + profile_id + '/'
+  const url = baseAPI.BASE_URL + PROFILE_URL + profile_id + '/'
+  console.log(url)
   const data = {
-    method: "GET",
     headers: {
       "Content-Type": "application/json",
       'Authorization': `JWT ${token}`
     }
   }
-  return await tryCatchFetch(url, data)
+  return await baseAPI.tryCatchFetch(url, data)
 }
 
 

@@ -12,11 +12,11 @@ import DashboardPage from './pages/DashboardPage';
 import SearchPage from './pages/SearchPage';
 
 function App() {
-
+  // states
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser ] = useState(null);
   const [error, setError] = useState(null);
-  
+  // effects
   useEffect(() => {
     const getUser = async () => {
       if (localStorage.getItem("auth-user") !== 'null') {
@@ -35,7 +35,7 @@ function App() {
     }
   }, [user])
 
-
+  // handlers
   const handleLogin = async (evt) => {
     evt.preventDefault();
     let userObject = {
@@ -48,9 +48,10 @@ function App() {
     console.log(data)
     if (data.token) {
       localStorage.setItem("auth-user", `${data.token}`);
+      localStorage.setItem("user", data['user'])
+      localStorage.setItem('user_profile', data['user']['profile'])
       setIsLoggedIn(true);
-      setUser(data.user);
-      console.log(user)
+      setUser(data['user']);
     }
 
   }

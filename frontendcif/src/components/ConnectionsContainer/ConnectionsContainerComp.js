@@ -14,14 +14,17 @@ import {
   } from 'mdb-react-ui-kit';
 import PendingMiniCardComp from '../ConnectionMiniCard/PendingMiniCardComp';
 
-const ConnectionsContainerComp = () => {
-    //getConnections api call
-    //getPendingConnections api call
-    //setConnections to array of connections
-    //setPendingConnections to array of pending connections
-
+const ConnectionsContainerComp = (props) => {
+    // states
     const [basicActive, setBasicActive] = useState('tab1');
 
+    // props
+    const { connections } = props
+
+    // helpers
+    // write filter here that filters connection based on type of connections(pending, active, denied)
+
+    // handlers
     const handleBasicClick = (value) => {
       if (value === basicActive) {
         return;
