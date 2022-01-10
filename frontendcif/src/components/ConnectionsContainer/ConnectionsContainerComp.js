@@ -48,8 +48,10 @@ const ConnectionsContainerComp = (props) => {
     useEffect(()=>{
       if (connections) {
           let newPendingList = connections.filter(checkPending)
+          console.log("PENDING:",newPendingList)
           setPendingConnections(newPendingList)
           let newActiveList = connections.filter(checkActive)
+          console.log("APPROVED:", newActiveList)
           setActiveConnections(newActiveList)
           let newDeniedList = connections.filter(checkDenied)
           setDeniedConnections(newDeniedList)
@@ -92,14 +94,12 @@ const ConnectionsContainerComp = (props) => {
                 <div className="tab-content">
                     <MDBTabsContent>
                         <MDBTabsPane show={basicActive === 'tab1'}>
-                        {activeConnections ? renderMiniCardComps(activeConnections) : <></>}
+                            {/* {activeConnections ? renderMiniCardComps(activeConnections) : <></>} */}
                             </MDBTabsPane>
-                            {/* pass props of array of connections here; also remove repeated MiniCardComp, put multiple in to simulate what scrolling looks like in container */}
                         <MDBTabsPane show={basicActive === 'tab2'}>
-                            <PendingMiniCardComp/>
-                            </MDBTabsPane>
-                            {/* pass props of array of pending connections here */}
+                            {/* <PendingMiniCardComp/> */}
                             {pendingConnections ? renderMiniCardComps(pendingConnections) : <></>}
+                            </MDBTabsPane>
                     </MDBTabsContent>
                 </div>
            </div>
