@@ -1,5 +1,6 @@
 import { React, useState } from 'react'
 import { Form, Row, Button, Col, InputGroup, FormControl } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 import DropdownMultiselect from 'react-multiselect-dropdown-bootstrap'
 
 //style
@@ -7,6 +8,9 @@ import "./ProfileFormStyels.css"
 
 const ProfileFormComp = () => {
     //need a useState array for each selection field (i.e. industries, languages, etc.) to pass to database
+    //add required=True for model fields that can't be blank
+    //handleFormSubmit that takes element values and puts it in profile object
+        //if data then navigate to dashboard with all info in profile
 
     return (
         <div className="profile-form-display">
@@ -154,6 +158,8 @@ const ProfileFormComp = () => {
                 <Button variant="primary" type="submit">
                     Submit
                 </Button>
+                <br/>
+                <Link to={'/dashboard'}><Button variant="secondary" size="sm">Skip for now</Button></Link>
             </Form>
         </div>
     )
