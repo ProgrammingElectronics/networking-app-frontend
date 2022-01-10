@@ -21,7 +21,8 @@ const ConnectionsContainerComp = (props) => {
     const [ activeConnections, setActiveConnections ] = useState([])
     const [ deniedConnections, setDeniedConnections ] = useState([])
 
-
+    // localStorage
+    const userProfileID = localStorage.getItem('user_profile')
 
     // props
     const { connections } = props
@@ -30,15 +31,18 @@ const ConnectionsContainerComp = (props) => {
     // write filter here that filters connection based on type of connections(pending, active, denied)
 
     const checkPending = (connection) => {
-        return connection.status === 'pending'
+        let isCurrentUserProfile = connection.from_profile.id == userProfileID
+        return connection.status === 'pending' && !isCurrentUserProfile
     }
     
     const checkActive = (connection) => {
-        return connection.status === 'active'
+        let isCurrentUserProfile = connection.from_profile.id == userProfileID
+        return connection.status === 'active' && !isCurrentUserProfile
     }
 
     const checkDenied = (connection) => {
-        return connection.status === 'denied'
+        let isCurrentUserProfile = connection.from_profile.id == userProfileID
+        return connection.status === 'denied' && !isCurrentUserProfile
     }
 
     // effects
