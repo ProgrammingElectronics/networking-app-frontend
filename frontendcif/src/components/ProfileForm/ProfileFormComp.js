@@ -1,65 +1,160 @@
-import React from 'react'
+import { React, useState } from 'react'
+import { Form, Row, Button, Col, InputGroup, FormControl } from 'react-bootstrap'
+import DropdownMultiselect from 'react-multiselect-dropdown-bootstrap'
 
 //style
 import "./ProfileFormStyels.css"
 
 const ProfileFormComp = () => {
+    //need a useState array for each selection field (i.e. industries, languages, etc.) to pass to database
+
     return (
-        <div>
-            {/* need to come back and edit this form with all required info for backend */}
-            <form className="profile-form">
-                <div class="row mb-4">
-                    <div class="col">
-                    <div class="form-outline">
-                        <input type="text" id="form6Example1" class="form-control" />
-                        <label class="form-label" for="form6Example1">First name</label>
-                    </div>
-                    </div>
-                    <div class="col">
-                    <div class="form-outline">
-                        <input type="text" id="form6Example2" class="form-control" />
-                        <label class="form-label" for="form6Example2">Last name</label>
-                    </div>
-                    </div>
-                </div>
-                <div class="form-outline mb-4">
-                    <input type="text" id="form6Example3" class="form-control" />
-                    <label class="form-label" for="form6Example3">Company name</label>
-                </div>
+        <div className="profile-form-display">
+            <Form>
+                <Row className="mb-3">
+                    <Form.Group as={Col} controlId="formGridFirstName">
+                        <Form.Label>First Name</Form.Label>
+                        <Form.Control placeholder="first name" />
+                    </Form.Group>
 
-                <div class="form-outline mb-4">
-                    <input type="text" id="form6Example4" class="form-control" />
-                    <label class="form-label" for="form6Example4">Address</label>
-                </div>
+                    <Form.Group as={Col} controlId="formGridLastName">
+                        <Form.Label>Last Name</Form.Label>
+                        <Form.Control placeholder="last name" />
+                    </Form.Group>
+                </Row>
+            
+                <Row className="mb-3">
+                    <Form.Group as={Col} xs={7} controlId="formGridBootcampName">
+                        <Form.Label>Bootcamp Name</Form.Label>
+                        <Form.Control placeholder="e.g. Code Platoon, Hack Reactor, etc." />
+                    </Form.Group>
+                    <Form.Group as={Col} controlId="formGridGraduationStatus">
+                        {['radio'].map((type) => (
+                            <div key={`default-${type}`} className="mb-3">
+                            <Form.Check
+                                inline
+                                label="Enrolled"
+                                type={type}
+                                id={`default-${type}-1`}
+                            />
+                            <Form.Check
+                                inline
+                                label="Graduated"
+                                type={type}
+                                id={`default-${type}-2`}
+                            />
+                            </div>
+                        ))}
+                    </Form.Group>
+                    {/* make this a dropdown with years */}
+                    <Form.Group as={Col} controlId="formGridYearGraduated">
+                        <Form.Label>Year Graduated</Form.Label>
+                        <Form.Control placeholder="enter year" />
+                    </Form.Group>
+                </Row>
+                <Form.Select controlId="formGridRoleSelect">
+                    {/* value 1 means isProfessional=True, value 2 means False */}
+                    <option>Select Role Type</option>
+                    <option value="1">Mentor/Professional</option> 
+                    <option value="2">Mentee/Recent Grad</option>
+                </Form.Select>
+   
 
-                <div class="form-outline mb-4">
-                    <input type="email" id="form6Example5" class="form-control" />
-                    <label class="form-label" for="form6Example5">Email</label>
-                </div>
+                <Row className="mb-3">
+                    <Form.Group as={Col}>
+                    <Form.Label htmlFor="basic-url">LinkedIn URL</Form.Label>
+                        <InputGroup className="mb-3">
+                            <InputGroup.Text id="basic-addon3">
+                            https://linkedin.com/in/
+                            </InputGroup.Text>
+                            <FormControl id="basic-url" aria-describedby="basic-addon3" />
+                        </InputGroup>
+                    </Form.Group>
 
-                <div class="form-outline mb-4">
-                    <input type="number" id="form6Example6" class="form-control" />
-                    <label class="form-label" for="form6Example6">Phone</label>
-                </div>
-
-                <div class="form-outline mb-4">
-                    <textarea class="form-control" id="form6Example7" rows="4"></textarea>
-                    <label class="form-label" for="form6Example7">Additional information</label>
-                </div>
-
-                <div class="form-check d-flex justify-content-center mb-4">
-                    <input
-                    class="form-check-input me-2"
-                    type="checkbox"
-                    value=""
-                    id="form6Example8"
-                    checked
-                    />
-                    <label class="form-check-label" for="form6Example8"> Create an account? </label>
-                </div>
-
-                <button type="submit" class="btn btn-primary btn-block mb-4">Place order</button>
-            </form>
+                    <Form.Group as={Col}>
+                    <Form.Label htmlFor="basic-url">Github URL</Form.Label>
+                        <InputGroup className="mb-3">
+                            <InputGroup.Text id="basic-addon3">
+                            https://github.com/
+                            </InputGroup.Text>
+                            <FormControl id="basic-url" aria-describedby="basic-addon3" />
+                        </InputGroup>
+                    </Form.Group>
+                </Row>
+                <Form.Label>Experience</Form.Label>
+                <Row>
+                    <Form.Group as={Col} controlId="my_multiselect_field">
+                        <DropdownMultiselect
+                            options={["Finance", "Education", "Entertainment", "Medical", "Pharma", "Marketing", "Retail", "Government", "Environmental/Sustainability"]}
+                            name="industries"
+                            placeholder="Select Industries"
+                        />
+                    </Form.Group>
+                    <Form.Group as={Col} controlId="my_multiselect_field">
+                        <DropdownMultiselect
+                            options={["Big", "Medium", "Small", "Startup"]}
+                            name="size of companies"
+                            placeholder="Select sizes of companies you've worked for"
+                        />
+                    </Form.Group>
+                </Row>
+                <Form.Label>Skills</Form.Label>
+                <Row>
+                    <Form.Group as={Col} controlId="my_multiselect_field">
+                        <Form.Label>Languages</Form.Label>
+                        {/* populate options with backend data instead of hardcoding */}
+                        <DropdownMultiselect
+                            options={["C++", "C#", "Java", "JavaScript", "Python", "Ruby"]}
+                            name="languages"
+                            placeholder="Select Languages"
+                        />
+                    </Form.Group>
+                    <Form.Group as={Col} controlId="my_multiselect_field">
+                        <Form.Label>Web Development</Form.Label>
+                        {/* populate options with backend data instead of hardcoding */}
+                        <DropdownMultiselect
+                            options={["Angular", "Django", "Express", "HTML/CSS", "jQuery", "Node.js", "React", "Redux"]}
+                            name="web dev"
+                            placeholder="Select Frameworks"
+                        />
+                    </Form.Group>
+                    <Form.Group as={Col} controlId="my_multiselect_field">
+                        <Form.Label>Mobile App Development</Form.Label>
+                        {/* populate options with backend data instead of hardcoding */}
+                        <DropdownMultiselect
+                            options={["Android", "iOS", "Kotlin", "Swift", "Xcode", "React Native"]}
+                            name="mobile app"
+                            placeholder="Select Frameworks"
+                        />
+                    </Form.Group>
+                    <Form.Group as={Col} controlId="my_multiselect_field">
+                        <Form.Label>Database/Operations</Form.Label>
+                        <DropdownMultiselect
+                            options={["AWS", "Heroku", "Linux", "MongoDB", "MySQL", "Postgres", "SQL"]}
+                            name="database/operations"
+                            placeholder="Select database/ops"
+                        />
+                    </Form.Group>
+                </Row>
+                <Form.Group className="mb-3" id="formGridAbout">
+                    <Form.Label>About Me</Form.Label>
+                    <Form.Control as="textarea" rows={5} placeholder="Write about your background, interests, hobbies..." />
+                </Form.Group>
+                <Row>
+                    {/* probably need phone number validation */}
+                    <Form.Group as={Col} controlId="formGridPhoneNumber">
+                        <Form.Label>Phone Number</Form.Label>
+                        <Form.Control placeholder="enter phone number" />
+                    </Form.Group>      
+                    <Form.Group as={Col} className="mb-3" controlId="formGridEmail">
+                        <Form.Label>Email</Form.Label>
+                        <Form.Control type="email" placeholder="email" />
+                    </Form.Group>
+                </Row>
+                <Button variant="primary" type="submit">
+                    Submit
+                </Button>
+            </Form>
         </div>
     )
 }

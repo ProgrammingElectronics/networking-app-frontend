@@ -10,6 +10,7 @@ import UserAPI from './api/UserAPI.js';
 import HomePage from './pages/HomePage';
 import DashboardPage from './pages/DashboardPage';
 import SearchPage from './pages/SearchPage';
+import CompleteProfilePage from './pages/CompleteProfilePage'
 
 function App() {
 
@@ -79,6 +80,7 @@ function App() {
       <BrowserRouter>
         <UserContext.Provider value={{ user: user, setUserLogin: handleLogin, setUserLogout: handleLogout, setUserSignup: handleSignup, error: error }}>
           <Routes>
+            <Route path="/profile" element={<CompleteProfilePage/>}/>
             <Route path="/search" element={<SearchPage/>}/>
             <Route path="/dashboard" element={<DashboardPage/>}/>
             <Route path="/" element={<HomePage/>}/>
