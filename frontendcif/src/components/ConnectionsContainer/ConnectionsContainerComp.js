@@ -1,4 +1,4 @@
-import { useState, React } from 'react'
+import { useState, React, useEffect } from 'react'
 
 //components
 import MiniCardComp from '../ConnectionMiniCard/MiniCardComp'
@@ -16,7 +16,8 @@ import PendingMiniCardComp from '../ConnectionMiniCard/PendingMiniCardComp';
 
 const ConnectionsContainerComp = (props) => {
     // states
-    const [basicActive, setBasicActive] = useState('tab1');
+    const [ basicActive, setBasicActive ] = useState('tab1');
+    const [ pendingConnections, setPendingConnections ] = useState([])
 
     // props
     const { connections } = props
@@ -24,6 +25,19 @@ const ConnectionsContainerComp = (props) => {
     // helpers
     // write filter here that filters connection based on type of connections(pending, active, denied)
 
+    const checkPending = (connection) => {
+        return connection.status === 'pending'
+    }
+    
+    const checkActive = (connection) => {
+        return connection.status === 'active'
+    }
+
+    const checkDenied = (connection) => {
+        return connection.status === 'denied'
+    }
+
+    
     // handlers
     const handleBasicClick = (value) => {
       if (value === basicActive) {

@@ -18,8 +18,8 @@ import "../static/DashboardPageStyles.css"
 const DashboardPage = () => {
     // should we grab all of the profile information and set it as a useContext?
     // states
-    const [ profile, setProfile ] = useState()
-    const [ connections, setConnections ] = useState()
+    const [ profile, setProfile ] = useState(null)
+    const [ connections, setConnections ] = useState(null)
 
     // setting the user by context
     const userContext = useContext(UserContext);
@@ -44,17 +44,29 @@ const DashboardPage = () => {
       }, [])
     //getProfile
     //pass array of connections as props to ConnectionsContainerComp
-    console.log("Profile:",profile)
 
     return (
         <div>
             <h1>Navbar Comp</h1>
             <div className="dashboardPageContainer">
                 <div>
-                    <ProfileContainerComp/>  
+                    {
+                    profile
+                    ?
+                    <ProfileContainerComp profile={profile}/>
+                    :
+                    <></>
+                    }
                 </div>
                 <div>
+                    {
+                    connections
+                    ?
                     <ConnectionsContainerComp connections={connections}/>
+                    :
+                    <></>
+                    }
+                    
                 </div>
             </div>
         </div>
