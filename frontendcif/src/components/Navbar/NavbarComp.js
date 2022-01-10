@@ -21,7 +21,7 @@ const NavbarComp = () => {
 
   return (
     <>
-      <Navbar>
+      <Navbar bg="dark" variant="dark">
         <Container>
           <Nav>
             { !user
@@ -33,7 +33,8 @@ const NavbarComp = () => {
             </>
             :
             <>
-            <Nav.Link href="/">Home</Nav.Link>
+            <Nav.Link href="/dashboard">Dashboard</Nav.Link>
+            <Nav.Link href="/search">Connect</Nav.Link>
             <LogoutModalComp />
             </>
             }

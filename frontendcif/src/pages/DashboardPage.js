@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { Navigate } from 'react-router-dom';
 //components
 import ConnectionsContainerComp from '../components/ConnectionsContainer/ConnectionsContainerComp'
+import NavbarComp from '../components/Navbar/NavbarComp'
 import ProfileContainerComp from '../components/ProfileContainer/ProfileContainerComp'
 //connectionsContainer
     //connections mini card within that
@@ -10,6 +12,12 @@ import ProfileContainerComp from '../components/ProfileContainer/ProfileContaine
 //styles
 import "../static/DashboardPageStyles.css"
 
+//bootstrap
+import Container from "react-bootstrap/Container";
+
+// context
+import UserContext from "../contexts/UserContext";
+
 
 const DashboardPage = () => {
     //useEffect to setProfile
@@ -17,9 +25,20 @@ const DashboardPage = () => {
 
     //pass array of connections as props to ConnectionsContainerComp
 
+    // context
+    const userContext = useContext(UserContext);
+    const { user } = userContext;
+
+    // if user not logged in, cannot access this page
+    if (!user) {
+        return <Navigate to="/"/>
+    }
+
     return (
         <div>
-            <h1>Navbar Comp</h1>
+            <Container>
+                <NavbarComp />
+            </Container>
             <div className="dashboardPageContainer">
                 <div>
                     <ProfileContainerComp/>  
