@@ -31,6 +31,7 @@ const DashboardPage = () => {
         let token = localStorage.getItem("auth-user")
         const getConnections = async () => {
             let data = await ConnectionRequestAPI.fetchConnections(token);
+            console.log(data)
             setConnections(data)
         }
         const getProfile = async () => {

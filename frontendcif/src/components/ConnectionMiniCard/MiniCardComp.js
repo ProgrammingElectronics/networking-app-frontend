@@ -7,10 +7,10 @@ import "./MiniCardStyles.css"
 const MiniCardComp = () => {
     //for each connection, display a mini-card
     //mini card needs to grab the following data:
-        // Profile Pic
-        // First and last name
+        // Profile Pic url done
+        // First and last name inside of user done
         // Role (isProfessional or not)
-        // And bootcamp graduated from
+        // And bootcamp graduated from done
 
     return (
         <div className="miniCard">
