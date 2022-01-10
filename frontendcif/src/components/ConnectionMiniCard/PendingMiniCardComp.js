@@ -13,7 +13,7 @@ const PendingMiniCardComp = (props) => {
     let lastName = connection['from_profile']['user']['last_name']
     let role = connection['from_profile']['is_professional']
     let bootcamp = connection['from_profile']['enrollment'][0]['bootcamp']['name']
-    
+
 
     return (
         <div className="miniCard">
@@ -24,9 +24,9 @@ const PendingMiniCardComp = (props) => {
                     </MDBCol>
                     <MDBCol md='6'>
                     <MDBCardBody>
-                        <MDBCardTitle>Firstname Lastname</MDBCardTitle>
+                        <MDBCardTitle>{firstName} {lastName}</MDBCardTitle>
                         <MDBCardText>
-                        Professional | Hack Reactor
+                        Professional | {bootcamp}
                         </MDBCardText>
                         <MDBCardText>
                         <small>Graduated 2019</small>
