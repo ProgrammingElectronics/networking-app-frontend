@@ -4,6 +4,7 @@ import { Navigate } from 'react-router-dom';
 import ConnectionsContainerComp from '../components/ConnectionsContainer/ConnectionsContainerComp'
 import NavbarComp from '../components/Navbar/NavbarComp'
 import ProfileContainerComp from '../components/ProfileContainer/ProfileContainerComp'
+import ProfileFormComp from '../components/ProfileForm/ProfileFormComp'
 //connectionsContainer
     //connections mini card within that
     //show connections/show pending component
@@ -46,6 +47,9 @@ const DashboardPage = () => {
                 <div>
                     <ConnectionsContainerComp/>
                 </div>
+            </div>
+            <div>
+                <ProfileFormComp/>
             </div>
         </div>
     
