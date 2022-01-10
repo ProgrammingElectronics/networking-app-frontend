@@ -25,7 +25,7 @@ const NavbarComp = () => {
   return (
     <>
 
-      <Navbar fluid className="navbar" bg="light" variant="light">
+      <Navbar fluid="true" className="navbar" bg="light" variant="light">
         <Container>
             { !user
             ?

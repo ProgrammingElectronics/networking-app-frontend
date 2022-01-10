@@ -19,7 +19,9 @@ const MiniCardComp = (props) => {
               <MDBCard className="mdb-minicard" style={{ maxWidth: '540px' }}>
                 <MDBRow className='g-0'>
                     <MDBCol md='4'>
-                    <MDBCardImage classname="minicard-pic" style={{ maxHeight: '148px'}} src={imageURL} alt='profile picture' fluid />
+
+                    <MDBCardImage className="minicard-pic" style={{ maxHeight: '148px'}} src={imageURL} alt='profile picture' fluid='true' />
+
                     {/* replace src with profile picture */}
                     </MDBCol>
                     <MDBCol md='6'>
@@ -34,7 +36,7 @@ const MiniCardComp = (props) => {
                     </MDBCardBody>
                     </MDBCol>
                     <MDBCol className="btn-col">
-                        <MDBBtn class="btn btn-info btn-sm" href='#'>Details</MDBBtn>
+                        <MDBBtn className="btn btn-info btn-sm" href='#'>Details</MDBBtn>
                     </MDBCol>
                 </MDBRow>
               </MDBCard>
