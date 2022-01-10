@@ -6,7 +6,6 @@ import ConnectionsContainerComp from '../components/ConnectionsContainer/Connect
 import NavbarComp from '../components/Navbar/NavbarComp'
 import ProfileContainerComp from '../components/ProfileContainer/ProfileContainerComp'
 
-import UserContext from '../contexts/UserContext'
 import ConnectionRequestAPI from '../api/ConnectionRequestAPI'
 import ProfileAPI from '../api/ProfileAPI'
 
@@ -49,10 +48,6 @@ const DashboardPage = () => {
       }, [])
     //getProfile
     //pass array of connections as props to ConnectionsContainerComp
-
-    // context
-    const userContext = useContext(UserContext);
-    const { user } = userContext;
 
     // if user not logged in, cannot access this page
     if (!user) {
