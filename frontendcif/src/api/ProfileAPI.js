@@ -5,6 +5,7 @@ const PROFILE_URL = "profiles/"
 const getAllProfiles = async (token) => {
   // console.log("API ----- getAllWorkflows ----->")
   const url = baseAPI.BASE_URL + PROFILE_URL
+
   const data = {
     method: "GET",
     headers: {
@@ -24,6 +25,7 @@ const getProfileByID = async (token, profile_id) => {
   }
   return await baseAPI.tryCatchFetch(url, data)
 }
+
 
 
 const ProfileAPI = {
