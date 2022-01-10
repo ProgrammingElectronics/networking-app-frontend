@@ -11,6 +11,9 @@ import LogoutModalComp from "../ModalComps/LogoutModalComp";
 // context
 import UserContext from "../../contexts/UserContext";
 
+//styles
+import "./NavbarStyles.css"
+
 
 const NavbarComp = () => {
   
@@ -21,23 +24,29 @@ const NavbarComp = () => {
 
   return (
     <>
-      <Navbar>
+      <Navbar fluid className="navbar" bg="light" variant="light">
         <Container>
-          <Nav>
             { !user
             ?
             <>
+            <Nav>
               <Nav.Link href="/">Home</Nav.Link>
+            </Nav>
+            <Nav>
               <SignUpModalComp />
               <LoginModalComp />
+            </Nav>
             </>
             :
             <>
-            <Nav.Link href="/">Home</Nav.Link>
-            <LogoutModalComp />
+            <Nav>
+              <Nav.Link href="/">Home</Nav.Link>
+            </Nav>
+            <Nav>
+              <LogoutModalComp />
+            </Nav>
             </>
             }
-          </Nav>
         </Container>
       </Navbar>
     </>
