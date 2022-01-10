@@ -1,3 +1,5 @@
+const BASE_URL = "http://localhost:8000/core/"
+
 const tryCatchFetch = async (url, init = null) => {
   try {
     let response = await fetch(url, init)
@@ -9,4 +11,4 @@ const tryCatchFetch = async (url, init = null) => {
   }
 }
 
-export { tryCatchFetch }
+export { tryCatchFetch, BASE_URL }
