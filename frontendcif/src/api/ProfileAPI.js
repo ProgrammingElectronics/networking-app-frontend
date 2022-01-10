@@ -1,9 +1,8 @@
-import tryCatchFetch from '../api/baseAPI'
-const BASE_URL = "http://localhost:8000/core/profile/"
+import { tryCatchFetch } from '../api/baseAPI'
+const BASE_URL = "http://localhost:8000/core/profiles/"
 
 
 const getAllProfiles = async (token) => {
-  // console.log("API ----- getAllWorkflows ----->")
   const url = BASE_URL
   const data = {
     method: "GET",
@@ -16,8 +15,10 @@ const getAllProfiles = async (token) => {
 }
 
 
-const ProfileAPIexports = {
+
+
+const profileAPI = {
   getAllProfiles
 }
 
-export default ProfileAPIexports
+export default profileAPI

@@ -1,0 +1,21 @@
+#search-page {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+#search-page-content-area {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+#filter-controls {
+  margin: 20px;
+  position: sticky;
+  top: 4rem;
+}
+
+#profile-card-list {
+  max-width: 60%;
+}
