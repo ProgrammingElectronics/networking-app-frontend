@@ -16,7 +16,6 @@ const getAllProfiles = async (token) => {
 }
 const getProfileByID = async (token, profile_id) => {
   const url = baseAPI.BASE_URL + PROFILE_URL + profile_id + '/'
-  console.log(url)
   const data = {
     headers: {
       "Content-Type": "application/json",

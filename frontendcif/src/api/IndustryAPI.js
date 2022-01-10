@@ -1,10 +1,10 @@
 import baseAPI from "./baseAPI"
-const BASE_URL = "http://localhost:8000/core/industries/"
+const INDUSTRY_URL = "industries/"
 
 
 const getAllIndustries = async (token) => {
   
-  const url = BASE_URL
+  const url = baseAPI.BASE_URL + INDUSTRY_URL
   const data = {
     method: "GET",
     headers: {
