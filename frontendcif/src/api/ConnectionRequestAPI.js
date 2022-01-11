@@ -13,8 +13,22 @@ const fetchConnections = async (token) => {
   return await baseAPI.tryCatchFetch(url, data)
 }
 
+const createConnection = (token, connectionObj) => {
+  const url = baseAPI.BASE_URL + CONNECT_URL
+  const data = {
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `JWT ${token}`
+    },
+    body : JSON.stringify(connectionObj)
+  }
+  return await baseAPI.tryCatchFetch(url, data)
+}
+
 const ConnectionRequestAPI = {
-  fetchConnections
+  fetchConnections,
+  createConnection
 }
 
 export default ConnectionRequestAPI
