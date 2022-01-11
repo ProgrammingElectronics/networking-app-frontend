@@ -1,15 +1,35 @@
 import PropertyDisplayComp from "./PropertyDisplayComp"
 import "./ProfileCardComp.css"
+import UserContext from "../../../contexts/UserContext"
+import { useContext } from "react"
+import ConnectionRequestAPI from "../../../api/ConnectionRequestAPI"
 
 const ProfileCardComp = (props) => {
 
+  const { user } = useContext(UserContext)
+  const userInfo = user
+
+  const connectionHandler = async () => {
+    
+    console.log("ProfileCardComp | connectionHandler | e.target", props.profile.id)
+    const userToken = localStorage['auth-user']
+
+    const connectionObj = {
+      "from_profile": userInfo.profile,
+      "to_profile": props.profile.id,
+      "status": "pending"
+    }
+
+    await ConnectionRequestAPI.createConnection(userToken, connectionObj)
+
+  }
 
   return (
     <div id="profileCard" className="card">
       <div id="profileCard-left-column">
           <img src={props.profile.img_url} width="150"
           className="img-fluid" alt="profile"/>
-          <button type="button" className="btn btn-info btn-rounded">Connect</button>
+          <button onClick={connectionHandler} type="button" className="btn btn-info btn-rounded">Connect</button>
       </div>
       <div id="profileCard-right-column" className="card-body">
         <div id="profileCard-right-column-top">
