@@ -1,4 +1,5 @@
 import ProfileCardComp from "./ProfileCardComp"
+import NoResultsProfileCardComp from "./NoResultsProfileCardComp"
 import profileAPI from '../../../api/ProfileAPI'
 import { useEffect, useState, useContext } from "react"
 import UserContext from "../../../contexts/UserContext"
@@ -47,6 +48,7 @@ const ProfileCardListComp = (props) => {
     const getProfiles = async () => {
         const filter = buildFilters()
         const data = await profileAPI.getFilteredProfiles(token, filter)
+        console.log("ProfileCardListComp | useEffect | getProfiles | data ", data)
         
         // filter out the logged in user from results
         if(data && userInfo) {
@@ -67,9 +69,14 @@ const ProfileCardListComp = (props) => {
       />
   )
    
+  
   return (
     <div>
-      {profileCards}
+      {/* show no results card if no profiles meet match */}
+      { profiles.length > 0 ?
+       profileCards :
+       <NoResultsProfileCardComp></NoResultsProfileCardComp>
+      }
     </div>
   )
 }
