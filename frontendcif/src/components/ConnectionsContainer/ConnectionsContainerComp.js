@@ -48,10 +48,10 @@ const ConnectionsContainerComp = (props) => {
     useEffect(()=>{
       if (connections) {
           let newPendingList = connections.filter(checkPending)
-          console.log("PENDING:",newPendingList)
+        //   console.log("PENDING:",newPendingList)
           setPendingConnections(newPendingList)
           let newActiveList = connections.filter(checkActive)
-          console.log("APPROVED:", newActiveList)
+        //   console.log("APPROVED:", newActiveList)
           setActiveConnections(newActiveList)
           let newDeniedList = connections.filter(checkDenied)
           setDeniedConnections(newDeniedList)

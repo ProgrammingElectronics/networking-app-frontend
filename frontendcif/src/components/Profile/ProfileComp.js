@@ -5,19 +5,24 @@ import ProfilePicComp from './ProfilePicComp'
 import EditProfileButtonComp from './EditProfileButtonComp'
 //styles 
 import "./ProfileStyles.css"
-const ProfileComp = () => {
+const ProfileComp = (props) => {
+
+    //props
+    const { profile } = props
+    console.log('profilecomp | profile', profile)
 
     const renderProfile = () => {
-        //if (!props.user)
-            //return null
+
+        if (!profile)
+            return null
+
 
         return (
             <div className="profileInfoContainer">
                 <div className="introInfo">
-                    {/*replace with profile data*/}
-                    <h3>Kristen Ruprecht</h3>
+                    <h3>{profile['user']['first_name']} {profile['user']['last_name']}</h3>
                     {/* Role | Bootcamp */}
-                    <h5>Recent Grad | Code Platoon</h5>
+                    <h5>{profile['enrollment'][0]['bootcamp']['name']} | {profile['enrollment'][0]['graduation_year']}</h5>
                     <MDBBtn tag='a' color='none' className='m-1' style={{ color: '#ac2bac' }}>
                         <MDBIcon fab icon='instagram' size='lg' />
                     </MDBBtn>
@@ -25,10 +30,7 @@ const ProfileComp = () => {
                 </div>
                 <div className="aboutMe">
                     <h6>About Me:</h6>
-                       {/*replace with profile data*/}
-                    <p>Blah Blah Blah Blah Blah Blah Blah Blah Blah
-                    Blah Blah Blah Blah Blah Blah Blah Blah Blah
-                    </p>
+                    <p>{profile['about_me']}</p>
                 </div>
                 <div className="experiences">
                     <h5>Experiences</h5>    
@@ -71,8 +73,8 @@ const ProfileComp = () => {
 
     return (
         <div>
-            <ProfilePicComp/>
-            <EditProfileButtonComp/> {/* Might move this button */}
+            <ProfilePicComp profile={profile}/>
+            <EditProfileButtonComp/>
             {renderProfile()}
         </div>
     )

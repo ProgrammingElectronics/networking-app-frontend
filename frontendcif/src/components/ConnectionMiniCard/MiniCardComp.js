@@ -10,7 +10,7 @@ const MiniCardComp = (props) => {
 
     // props
     const { connection } = props
-    console.log('minicardcomp | connection', connection)
+    // console.log('minicardcomp | connection', connection)
 
     //helper variables
     let fromProfileID = connection['from_profile']
@@ -22,7 +22,6 @@ const MiniCardComp = (props) => {
         try {
             if (connection) {
                 let data = await  ProfileAPI.getProfileByID(token, fromProfileID);
-                console.log('from profile data', data)
                 setFromProfile(data)
             }
         } catch(e) {
@@ -33,9 +32,7 @@ const MiniCardComp = (props) => {
     const getToProfile = async () => {
         if (connection) {
             let data = await  ProfileAPI.getProfileByID(token, toProfileID);
-            console.log('to profile data', data)
             setToProfile(data)
-            console.log(toProfile['is_professional'])
         }
     }
     useEffect(() => {
@@ -46,9 +43,11 @@ const MiniCardComp = (props) => {
     //card variables
     let status = connection['status']
 
-    return (
-        <div className="miniCard">
-             {toProfile
+    const renderMiniCard = () => {
+
+        return (
+            <div>
+                {toProfile
                 ?
                 <>
               <MDBCard className="mdb-minicard" style={{ maxWidth: '540px' }}>
@@ -88,6 +87,13 @@ const MiniCardComp = (props) => {
               {null}
               </>
                 }
+            </div>
+        );
+    }
+
+    return (
+        <div className="miniCard">
+            {renderMiniCard()}
         </div>
     )
 }

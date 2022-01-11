@@ -28,7 +28,7 @@ const DashboardPage = () => {
     // setting the user by context
     const userContext = useContext(UserContext);
     const { user } = userContext;
-    console.log("Dashboard | user", user)
+    // console.log("Dashboard | user", user)
     //const profile_id = localStorage.getItem('user')
 
     //these lines are giving me user=null
@@ -42,15 +42,14 @@ const DashboardPage = () => {
         let token = localStorage.getItem("auth-user")
         const getConnections = async () => {
             let data = await ConnectionRequestAPI.fetchConnections(token);
-            console.log('connections data', data)
+            // console.log('connections data', data)
             setConnections(data)
         }
         const getProfile = async () => {
-            if (user) {
-                let data = await  ProfileAPI.getProfileByID(token, user.profile);
-                console.log('profile data', data)
-                setProfile(data)
-            }
+            let data = await  ProfileAPI.getProfileByID(token, user.profile);
+            // console.log('profile data', data)
+            setProfile(data)
+            
         }
         getConnections()
         getProfile()
