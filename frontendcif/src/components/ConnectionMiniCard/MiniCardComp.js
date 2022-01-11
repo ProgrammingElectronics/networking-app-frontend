@@ -17,7 +17,7 @@ const MiniCardComp = (props) => {
     let toProfileID = connection['to_profile']
 
     let token = localStorage.getItem("auth-user")
-    
+
     const getFromProfile = async () => {
         try {
             if (connection) {
