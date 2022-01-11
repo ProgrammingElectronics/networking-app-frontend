@@ -29,11 +29,24 @@ const getProfileByID = async (token, profile_id) => {
   return await baseAPI.tryCatchFetch(url, data)
 }
 
+const addProfile = async (token, profileObj) => {
+  const url = baseAPI.BASE_URL + PROFILE_URL + '/'
+  const data = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      'Authorization': `JWT ${token}`
+    },
+    body: JSON.stringify(profileObj)
+  }
+  return await baseAPI.tryCatchFetch(url, data)
+}
 
 
 const ProfileAPI = {
   getAllProfiles,
-  getProfileByID
+  getProfileByID,
+  addProfile
 }
 
 export default ProfileAPI

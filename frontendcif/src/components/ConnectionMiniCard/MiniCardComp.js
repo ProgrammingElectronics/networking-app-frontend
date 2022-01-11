@@ -5,7 +5,7 @@ import ProfileAPI from '../../api/ProfileAPI'
 import "./MiniCardStyles.css"
 
 const MiniCardComp = (props) => {
-    const [fromProfile, setFromProfile] = useState(null)
+    // const [fromProfile, setFromProfile] = useState(null)
     const [toProfile, setToProfile] = useState(null)
 
     // props
@@ -18,17 +18,6 @@ const MiniCardComp = (props) => {
 
     let token = localStorage.getItem("auth-user")
     
-    const getFromProfile = async () => {
-        try {
-            if (connection) {
-                let data = await  ProfileAPI.getProfileByID(token, fromProfileID);
-                setFromProfile(data)
-            }
-        } catch(e) {
-            console.error(e)
-        }
-       
-    }
     const getToProfile = async () => {
         if (connection) {
             let data = await  ProfileAPI.getProfileByID(token, toProfileID);
@@ -36,7 +25,7 @@ const MiniCardComp = (props) => {
         }
     }
     useEffect(() => {
-        getFromProfile()
+        // getFromProfile()
         getToProfile()
       }, [])
 

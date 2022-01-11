@@ -1,36 +1,138 @@
-import { React, useState } from 'react'
+import { React, useState, useEffect } from 'react'
 import { Form, Row, Button, Col, InputGroup, FormControl } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import { YearPicker } from 'react-dropdown-date';
+import { Link, useNavigate } from 'react-router-dom'
 import DropdownMultiselect from 'react-multiselect-dropdown-bootstrap'
+
+import ProfileAPI from '../../api/ProfileAPI'
+import BootcampAPI from '../../api/BootcampAPI'
 
 //style
 import "./ProfileFormStyels.css"
 
-const ProfileFormComp = () => {
-    //need a useState array for each selection field (i.e. industries, languages, etc.) to pass to database
-    //add required=True for model fields that can't be blank
-    //handleFormSubmit that takes element values and puts it in profile object
-        //if data then navigate to dashboard with all info in profile
+const ProfileFormComp = (props) => {
+
+    //states
+    const [pro, setPro] = useState('false')
+    const [bootcamps, setBootcamps] = useState([])
+
+    //set user
+    const { user } = props
+
+    const navigate = useNavigate()
+
+    //useEffect
+    useEffect(() => {
+        let token = localStorage.getItem("auth-user")
+
+        const getBootcamps = async () => {
+            let data = await  BootcampAPI.getAllBootcamps(token);
+            console.log(data)
+            setBootcamps(data)   
+        }
+        getBootcamps()
+    }, [])
+    
+    const bootcampArray = bootcamps.push
+
+    //handlers
+    const handleChangePro = (event) => {
+        const newValue = event.target.value
+        // console.log('select value',event.target.value)
+        setPro(newValue)   
+    }
+
+    const handleFormSubmit = async (event) => {
+        event.preventDefault()
+        console.log('form elements', event.target.elements)
+
+        const profileObj = {
+            user: {
+                username: user.username, 
+                first_name: event.target.elements[0].value,
+                last_name: event.target.elements[1].value,
+                email: event.target.elements[64].value,
+            },
+            education: event.target.elements[2].value,
+            is_professional: pro,
+            phone_number: event.target.elements[63].value,
+            linkedin_url: 'https://linkedin.com/in/' + event.target.elements[8].value,
+            github_url: 'https://github.com/' + event.target.elements[9].value,
+            img_url: '',
+            about_me: event.target.elements[62].value,
+            enrollment: {
+
+            }
+        }   
+
+        console.log('profileObj', profileObj)
+        
+        const data = await ProfileAPI.addProfile(profileObj)
+        if (data) {
+            console.log('data', data)
+            navigate( `/trips/${data.id}/`)
+        }
+    }
 
     return (
         <div className="profile-form-display">
-            <Form>
+            <Form onSubmit={handleFormSubmit}>
                 <Row className="mb-3">
                     <Form.Group as={Col} controlId="formGridFirstName">
                         <Form.Label>First Name</Form.Label>
                         <Form.Control placeholder="first name" />
                     </Form.Group>
-
                     <Form.Group as={Col} controlId="formGridLastName">
                         <Form.Label>Last Name</Form.Label>
                         <Form.Control placeholder="last name" />
                     </Form.Group>
                 </Row>
-            
+                {/* <Form.Group as={Col} controlId="formGridEmail">
+                        <Form.Label>Email</Form.Label>
+                        <Form.Control type="email" placeholder="name@example.com" />
+                </Form.Group> */}
+                <Form.Group as={Col} controlId="formGridEducation">
+                        <Form.Label>Education</Form.Label>
+                        <Form.Control placeholder="Enter any schools of higher education" />
+                </Form.Group>
+                
+                {/* <Form.Group as={Col} controlId="formGridIsProfessional">
+                    {/* <Form.Label>Which role will you take on as a user of this site?</Form.Label>
+                       
+                        <div  className="radioPro">
+                            <Form.Check 
+                                name='pro'
+                                inline
+                                label="Professional (mostly giving help)"
+                                value="true"
+                                type='radio'
+                                onChange={handleChangePro}
+                                id='1'
+                            />
+                            <Form.Check
+                                name='pro'
+                                inline
+                                label="Newcomer - mostly seeking help"
+                                value='false'
+                                type='radio'
+                                onChange={handleChangePro}
+                                id='2'
+                            />
+                        </div> */}
+                    
+                {/* </Form.Group> */} 
                 <Row className="mb-3">
-                    <Form.Group as={Col} xs={7} controlId="formGridBootcampName">
+                    {/* <Form.Group as={Col} xs={7} controlId="formGridBootcampName">
                         <Form.Label>Bootcamp Name</Form.Label>
                         <Form.Control placeholder="e.g. Code Platoon, Hack Reactor, etc." />
+                    </Form.Group> */}
+                    <Form.Group as={Col} controlId="my_multiselect_field">
+                        <Form.Label>Bootcamp</Form.Label>
+                        <DropdownMultiselect
+                            options={}
+                            name="bootcamps"
+                            placeholder="Select bootcamp"
+                        />
                     </Form.Group>
                     <Form.Group as={Col} controlId="formGridGraduationStatus">
                         {['radio'].map((type) => (
@@ -53,22 +155,23 @@ const ProfileFormComp = () => {
                     {/* make this a dropdown with years */}
                     <Form.Group as={Col} controlId="formGridYearGraduated">
                         <Form.Label>Year Graduated</Form.Label>
-                        <Form.Control placeholder="enter year" />
+                        <YearPicker defaultValue={'select year'} start={2000} reverse/>
+                        {/* <Form.Control placeholder="enter year" /> */}
                     </Form.Group>
                 </Row>
-                <Form.Select controlId="formGridRoleSelect">
+                <Form.Select controlId="formGridRoleSelect" onChange={handleChangePro}>
                     {/* value 1 means isProfessional=True, value 2 means False */}
                     <option>Select Role Type</option>
-                    <option value="1">Mentor/Professional</option> 
-                    <option value="2">Mentee/Recent Grad</option>
+                    <option value="true">Mentor/Professional</option> 
+                    <option value="false">Mentee/Recent Grad</option>
                 </Form.Select>
    
 
                 <Row className="mb-3">
                     <Form.Group as={Col}>
-                    <Form.Label htmlFor="basic-url">LinkedIn URL</Form.Label>
+                    <Form.Label htmlFor="linkedin-url">LinkedIn URL</Form.Label>
                         <InputGroup className="mb-3">
-                            <InputGroup.Text id="basic-addon3">
+                            <InputGroup.Text id="linkedin">
                             https://linkedin.com/in/
                             </InputGroup.Text>
                             <FormControl id="basic-url" aria-describedby="basic-addon3" />
@@ -76,9 +179,9 @@ const ProfileFormComp = () => {
                     </Form.Group>
 
                     <Form.Group as={Col}>
-                    <Form.Label htmlFor="basic-url">Github URL</Form.Label>
+                    <Form.Label htmlFor="github-url">Github URL</Form.Label>
                         <InputGroup className="mb-3">
-                            <InputGroup.Text id="basic-addon3">
+                            <InputGroup.Text id="github">
                             https://github.com/
                             </InputGroup.Text>
                             <FormControl id="basic-url" aria-describedby="basic-addon3" />

@@ -1,12 +1,14 @@
-import React from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import ProfileFormComp from '../components/ProfileForm/ProfileFormComp'
+import UserContext from '../contexts/UserContext';
 
-//putting the profile form in another page for now so I can more easily edit component
 const CompleteProfilePage = () => {
+    const userContext = useContext(UserContext);
+    const { user } = userContext;
+
     return (
         <div>
-            <h1>This is where you fill out more info for profile</h1>
-            <ProfileFormComp/>
+            <ProfileFormComp user={user}/>
         </div>
     )
 }

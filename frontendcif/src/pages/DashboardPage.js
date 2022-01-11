@@ -53,7 +53,7 @@ const DashboardPage = () => {
         }
         getConnections()
         getProfile()
-      }, [])
+    }, [])
     //getProfile
     //pass array of connections as props to ConnectionsContainerComp
 
