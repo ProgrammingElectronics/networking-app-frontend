@@ -33,38 +33,32 @@ const ProfileComp = (props) => {
                     <p>{profile['about_me']}</p>
                 </div>
                 <div className="experiences">
-                    <h5>Experiences</h5>    
+                    <h5>Experience</h5>    
                     <div className="industries">
                         <h6>Industries</h6>
-                        {/* replace the following with a map function that maps each result of api call to backend 
-                            something like: 
-                                {
-                                    industries.map((industry, index) =>
-                                        <div key={index}>{industry}</div>
-                                )}
-                            
-                            *can probably also map corresponding years of experience and size of company here too? 
-                        */}
-                        <p>Pharma, Healthcare, Finance</p>
+                        <ul>
+                        {
+                            profile['industries'].map((industry, index) =>
+                                <li key={index}>{industry.name}</li>
+                        )}
+                        </ul>
+                        {/* figure out size of companies */}
                     </div>
                     <div className="skills">
-                         {/* replace the following divs with a map function that maps each result of api call to backend in a div  
-                            something like: 
-                                {
-                                    skills.map((skill, index) =>
-                                        <div key={index}>{skill}</div>
-                                )}
-                            *have to figure out how to map them into appropriate skill types
-                        */}
-                        <h6>Languages:</h6>
-                            <div className="languageDiv">
-                                <p>Javascript, Python, C++</p>
-                            </div>
-                            
-                        <h6>Frameworks:</h6>
-                            <div className="frameworksDiv">
-                                <p>Django, React, Springboot</p>
-                            </div>
+                       <h5>Skills</h5>
+                       <h6>Languages:</h6>
+                       <ul>
+                       {profile['skills'].filter(skills => skills.type === 'language').map((language, index) =>
+                            <li key={index}>{language.name}</li>
+                       )}
+                       </ul>
+                        {/* refactor later to pull in skills['types'] instead of hardcoding */}
+                        <h6>Web Development:</h6>
+                        <ul>
+                            {profile['skills'].filter(skills => skills.type === 'Web Development').map((framework, index) =>
+                                    <li key={index}>{framework.name}</li>
+                            )}
+                        </ul>
                     </div>
                 </div>
             </div>
