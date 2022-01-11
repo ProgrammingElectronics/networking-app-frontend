@@ -43,14 +43,7 @@ const MiniCardComp = (props) => {
         getToProfile()
       }, [])
 
-
-    // card variables
-    let imageURL = connection['from_profile']['img_url']
-    // let firstName = connection['from_profile']['user']['first_name']
-    // let firstName = toProfile['user']['first_name']
-    // let lastName = connection['from_profile']['user']['last_name']
-    // let role = connection['from_profile']['is_professional']
-    // let bootcamp = connection['from_profile']['enrollment'][0]['bootcamp']['name']
+    //card variables
     let status = connection['status']
 
     return (
@@ -87,7 +80,7 @@ const MiniCardComp = (props) => {
                         <MDBBtn className="btn btn-info btn-sm" href='#'>Details</MDBBtn>
                     </MDBCol>
                 </MDBRow>
-                
+
               </MDBCard>
               </>
               :
