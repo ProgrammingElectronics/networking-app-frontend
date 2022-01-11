@@ -3,7 +3,7 @@ import profileAPI from '../../../api/ProfileAPI'
 import { useEffect, useState, useContext } from "react"
 import UserContext from "../../../contexts/UserContext"
 
-const ProfileCardListComp = () => {
+const ProfileCardListComp = (props) => {
 
   // User Auth
   const token = localStorage.getItem("auth-user");    
@@ -13,11 +13,19 @@ const ProfileCardListComp = () => {
 
   const [profiles, setProfiles] = useState([])
   
+  
   /**
    * This useEffect updates the profile list based on the selected filters.
    */
+
+  // useEffect(() => {
+  //   console.log("ProfileCardListComp | useEffect | I EXIST")
+  // }, [props.industryFilter, props.skillFilter, props.bootcampFilter])
+
   useEffect(() => {
     const getProfiles = async () => {
+
+        console.log("ProfileCardListComp | props.skillFilter ", props.skillFilter)
         const data = await profileAPI.getAllProfiles(token)
         
         // TODO -> Why is user null?  I just pulled it in from useContext, and it just display from app.js
@@ -25,13 +33,6 @@ const ProfileCardListComp = () => {
         console.log("ProfileCardListComp | useEffect | getProfiles | data", data)
 
         if(data) {
-          // TODO -> 
-          // Remove the current user profiles
-          // const filterData = data.filter((profile) => {
-          //     return profile.id !==  user.id
-          //   }
-          // )
-          // setProfiles(filterData)
           setProfiles(data)
         }
     }
