@@ -17,6 +17,7 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser ] = useState(null);
   const [error, setError] = useState(null);
+  
   // effects
   useEffect(() => {
     const getUser = async () => {
@@ -26,7 +27,7 @@ function App() {
         if (data.username) {
           setIsLoggedIn(true);
           setUser(data);
-          console.log("user", data)
+          console.log("App.js | useEffect | user", data)
         }
       }
     }

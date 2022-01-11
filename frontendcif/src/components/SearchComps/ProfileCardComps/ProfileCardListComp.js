@@ -3,41 +3,61 @@ import profileAPI from '../../../api/ProfileAPI'
 import { useEffect, useState, useContext } from "react"
 import UserContext from "../../../contexts/UserContext"
 
-const ProfileCardListComp = (props) => {
 
+const ProfileCardListComp = (props) => {
+  
   // User Auth
   const token = localStorage.getItem("auth-user");    
   
-  // This does not seem to work
-  const { user } = useContext(UserContext)
+  // get user context
+  const  { user } = useContext(UserContext)
+  const userInfo = user
 
+  // states
   const [profiles, setProfiles] = useState([])
   
+  /**
+   * This functions composes the URL for hitting the API and
+   * getting filtered results. 
+   * */
+  const buildFilters = () => {
+    
+    let filters = "?"
+    
+    if(props.industryFilter){
+      filters += "industry=" + props.industryFilter.join(",") + "&"
+    }
+    
+    if(props.skillFilter){
+      filters += "skill=" + props.skillFilter.join(",") + "&"
+    }
+    
+    if(props.bootcampFilter){
+      filters += "bootcamp=" + props.bootcampFilter.join(",") + "&"
+    }
+
+    return filters
+  }
   
   /**
    * This useEffect updates the profile list based on the selected filters.
    */
-
-  // useEffect(() => {
-  //   console.log("ProfileCardListComp | useEffect | I EXIST")
-  // }, [props.industryFilter, props.skillFilter, props.bootcampFilter])
-
   useEffect(() => {
+
     const getProfiles = async () => {
-
-        console.log("ProfileCardListComp | props.skillFilter ", props.skillFilter)
-        const data = await profileAPI.getAllProfiles(token)
+        const filter = buildFilters()
+        const data = await profileAPI.getFilteredProfiles(token, filter)
         
-        // TODO -> Why is user null?  I just pulled it in from useContext, and it just display from app.js
-        console.log("ProfileCardListComp | useEffect | getProfiles | user", user)
-        console.log("ProfileCardListComp | useEffect | getProfiles | data", data)
-
-        if(data) {
+        // filter out the logged in user from results
+        if(data && userInfo) {
+          const filteredData = data.filter(obj => { return obj.id !== userInfo.profile})
+          setProfiles(filteredData)
+        } else if (data) {
           setProfiles(data)
         }
     }
     getProfiles()
-  }, [])
+  }, [props.industryFilter, props.skillFilter, props.bootcampFilter, userInfo])
 
 
   const profileCards = profiles.map((profile, idx) =>

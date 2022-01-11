@@ -15,23 +15,19 @@ const DisplayFilters = (props) => {
    */
   const handleSetFilter = (e) => {
     
-    const updatedFilterList = props.filterList
+    //const updatedFilterList = props.filterList
+    const updatedFilterList = [...props.filterList] //copy array
     
     if(!isChecked) {  
-      
       // Add the item to the filter
       updatedFilterList.push(props.item.name)
-      console.log("DisplayFilters--handleSetFilter | updatedFilterList", updatedFilterList)
       props.setFilter(updatedFilterList)
       setIsChecked(true)
-
     } else {
-      
       // Remove the item to the filter
       const index = updatedFilterList.indexOf(props.item.name)
       if(index !== -1) {
         updatedFilterList.splice(index,1)
-        console.log("DisplayFilters--handleSetFilter | updatedFilterList", updatedFilterList)
         props.setFilter(updatedFilterList)
       }
       setIsChecked(false)

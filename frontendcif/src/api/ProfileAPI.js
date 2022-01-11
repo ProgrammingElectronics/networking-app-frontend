@@ -17,7 +17,7 @@ const getAllProfiles = async (token) => {
 
 const getFilteredProfiles = async (token, filters) => {
   
-  const url = baseAPI.BASE_URL + PROFILE_URL
+  const url = baseAPI.BASE_URL + PROFILE_URL + filters
 
   const data = {
     method: "GET",
