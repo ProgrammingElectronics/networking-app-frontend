@@ -30,8 +30,10 @@ const DashboardPage = () => {
     const { user } = userContext;
     console.log("Dashboard | user", user)
     //const profile_id = localStorage.getItem('user')
-    const profile_id = user.profile
-    console.log("Dashboard | profile_id", profile_id)
+
+    //these lines are giving me user=null
+    // const profile_id = user.profile
+    // console.log("Dashboard | profile_id", profile_id)
 
     
 
@@ -40,12 +42,13 @@ const DashboardPage = () => {
         let token = localStorage.getItem("auth-user")
         const getConnections = async () => {
             let data = await ConnectionRequestAPI.fetchConnections(token);
-            console.log(data)
+            console.log('connections data', data)
             setConnections(data)
         }
         const getProfile = async () => {
-            if (profile_id) {
-                let data = await  ProfileAPI.getProfileByID(token, profile_id);
+            if (user) {
+                let data = await  ProfileAPI.getProfileByID(token, user.profile);
+                console.log('profile data', data)
                 setProfile(data)
             }
         }

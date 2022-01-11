@@ -70,7 +70,7 @@ const ConnectionsContainerComp = (props) => {
     // helper functions
     const renderMiniCardComps = (connectionsList) => {
         let newMiniCardList = connectionsList.map((connection)=>{
-            return <MiniCardComp connection={connection}/>
+            return <MiniCardComp key={connection.id} connection={connection}/>
         })
         return newMiniCardList
     }
@@ -94,7 +94,7 @@ const ConnectionsContainerComp = (props) => {
                 <div className="tab-content">
                     <MDBTabsContent>
                         <MDBTabsPane show={basicActive === 'tab1'}>
-                            {/* {activeConnections ? renderMiniCardComps(activeConnections) : <></>} */}
+                            {activeConnections ? renderMiniCardComps(activeConnections) : <></>}
                             </MDBTabsPane>
                         <MDBTabsPane show={basicActive === 'tab2'}>
                             {/* <PendingMiniCardComp/> */}

@@ -13,7 +13,9 @@ const PendingMiniCardComp = (props) => {
     let lastName = connection['from_profile']['user']['last_name']
     let role = connection['from_profile']['is_professional']
     let bootcamp = connection['from_profile']['enrollment'][0]['bootcamp']['name']
+    let status = connection['status']
 
+    //this card is not needed, logic is already set in ConnectionsContainerComp to separate pending vs active connections
 
     return (
         <div className="miniCard">
@@ -29,7 +31,10 @@ const PendingMiniCardComp = (props) => {
                         Professional | {bootcamp}
                         </MDBCardText>
                         <MDBCardText>
-                        <small>Graduated 2019</small>
+                            <small>Graduated 2019</small>
+                        </MDBCardText>
+                        <MDBCardText>
+                            <small>Graduated 2019</small>
                         </MDBCardText>
                     </MDBCardBody>
                     </MDBCol>
