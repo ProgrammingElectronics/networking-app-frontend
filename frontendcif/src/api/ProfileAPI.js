@@ -3,8 +3,21 @@ const PROFILE_URL = "profiles/"
 
 
 const getAllProfiles = async (token) => {
-  // console.log("API ----- getAllWorkflows ----->")
   const url = baseAPI.BASE_URL + PROFILE_URL
+
+  const data = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      'Authorization': `JWT ${token}`
+    }
+  }
+  return await baseAPI.tryCatchFetch(url, data)
+}
+
+const getFilteredProfiles = async (token, filters) => {
+  
+  const url = baseAPI.BASE_URL + PROFILE_URL + filters
 
   const data = {
     method: "GET",
@@ -33,7 +46,8 @@ const getProfileByID = async (token, profile_id) => {
 
 const ProfileAPI = {
   getAllProfiles,
-  getProfileByID
+  getProfileByID,
+  getFilteredProfiles
 }
 
 export default ProfileAPI

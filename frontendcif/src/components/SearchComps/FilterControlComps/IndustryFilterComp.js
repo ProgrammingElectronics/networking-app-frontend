@@ -14,7 +14,9 @@ const IndustryFilterComp = (props) => {
     const [industryList, setIndustryList] = useState([])
     
     /**
-     The below useEffect should be called when the "search page" first renders. Its purpose is to fill the list with the names of avialable from our database. This is for display purposes only.
+     The below useEffect should be called when the "search page" first renders. 
+     Its purpose is to fill the list with the names of avialable from our database. 
+     This is for display purposes only.
      */
     useEffect(() => {
         const getIndustries = async () => {
