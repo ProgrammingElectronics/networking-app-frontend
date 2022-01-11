@@ -13,7 +13,7 @@ const fetchConnections = async (token) => {
   return await baseAPI.tryCatchFetch(url, data)
 }
 
-const createConnection = (token, connectionObj) => {
+const createConnection = async (token, connectionObj) => {
   const url = baseAPI.BASE_URL + CONNECT_URL
   const data = {
     method: "POST",
@@ -25,6 +25,22 @@ const createConnection = (token, connectionObj) => {
   }
   return await baseAPI.tryCatchFetch(url, data)
 }
+
+// use this for button submits
+// const handleCreateConnection = async () => {
+//   // assign all needed variables
+//   const userToken = localStorage['auth-user']
+//   const to_profile_id = 1
+//   const from_profile_id = 2
+
+//   const connectionObj = {
+//     "from_profile": to_profile_id,
+//     "to_profile": from_profile_id
+//   }
+
+//   const data = await ConnectionRequestAPI.createConnection(userToken, connectionObj)
+  
+// }
 
 const ConnectionRequestAPI = {
   fetchConnections,
