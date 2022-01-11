@@ -5,19 +5,24 @@ import ProfilePicComp from './ProfilePicComp'
 import EditProfileButtonComp from './EditProfileButtonComp'
 //styles 
 import "./ProfileStyles.css"
-const ProfileComp = () => {
+const ProfileComp = (props) => {
+
+    //props
+    const { profile } = props
+    console.log('profilecomp | profile', profile)
 
     const renderProfile = () => {
-        //if (!props.user)
-            //return null
+
+        if (!profile)
+            return null
+
 
         return (
             <div className="profileInfoContainer">
                 <div className="introInfo">
-                    {/*replace with profile data*/}
-                    <h3>Kristen Ruprecht</h3>
+                    <h3>{profile['user']['first_name']} {profile['user']['last_name']}</h3>
                     {/* Role | Bootcamp */}
-                    <h5>Recent Grad | Code Platoon</h5>
+                    <h5>{profile['enrollment'][0]['bootcamp']['name']} | {profile['enrollment'][0]['graduation_year']}</h5>
                     <MDBBtn tag='a' color='none' className='m-1' style={{ color: '#ac2bac' }}>
                         <MDBIcon fab icon='instagram' size='lg' />
                     </MDBBtn>
@@ -25,44 +30,35 @@ const ProfileComp = () => {
                 </div>
                 <div className="aboutMe">
                     <h6>About Me:</h6>
-                       {/*replace with profile data*/}
-                    <p>Blah Blah Blah Blah Blah Blah Blah Blah Blah
-                    Blah Blah Blah Blah Blah Blah Blah Blah Blah
-                    </p>
+                    <p>{profile['about_me']}</p>
                 </div>
                 <div className="experiences">
-                    <h5>Experiences</h5>    
+                    <h5>Experience</h5>    
                     <div className="industries">
                         <h6>Industries</h6>
-                        {/* replace the following with a map function that maps each result of api call to backend 
-                            something like: 
-                                {
-                                    industries.map((industry, index) =>
-                                        <div key={index}>{industry}</div>
-                                )}
-                            
-                            *can probably also map corresponding years of experience and size of company here too? 
-                        */}
-                        <p>Pharma, Healthcare, Finance</p>
+                        <ul>
+                        {
+                            profile['industries'].map((industry, index) =>
+                                <li key={index}>{industry.name}</li>
+                        )}
+                        </ul>
+                        {/* figure out size of companies */}
                     </div>
                     <div className="skills">
-                         {/* replace the following divs with a map function that maps each result of api call to backend in a div  
-                            something like: 
-                                {
-                                    skills.map((skill, index) =>
-                                        <div key={index}>{skill}</div>
-                                )}
-                            *have to figure out how to map them into appropriate skill types
-                        */}
-                        <h6>Languages:</h6>
-                            <div className="languageDiv">
-                                <p>Javascript, Python, C++</p>
-                            </div>
-                            
-                        <h6>Frameworks:</h6>
-                            <div className="frameworksDiv">
-                                <p>Django, React, Springboot</p>
-                            </div>
+                       <h5>Skills</h5>
+                       <h6>Languages:</h6>
+                       <ul>
+                       {profile['skills'].filter(skills => skills.type === 'language').map((language, index) =>
+                            <li key={index}>{language.name}</li>
+                       )}
+                       </ul>
+                        {/* refactor later to pull in skills['types'] instead of hardcoding */}
+                        <h6>Web Development:</h6>
+                        <ul>
+                            {profile['skills'].filter(skills => skills.type === 'Web Development').map((framework, index) =>
+                                    <li key={index}>{framework.name}</li>
+                            )}
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -71,8 +67,8 @@ const ProfileComp = () => {
 
     return (
         <div>
-            <ProfilePicComp/>
-            <EditProfileButtonComp/> {/* Might move this button */}
+            <ProfilePicComp profile={profile}/>
+            <EditProfileButtonComp/>
             {renderProfile()}
         </div>
     )

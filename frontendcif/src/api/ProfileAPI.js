@@ -31,7 +31,7 @@ const getFilteredProfiles = async (token, filters) => {
 
 const getProfileByID = async (token, profile_id) => {
   const url = baseAPI.BASE_URL + PROFILE_URL + profile_id + '/'
-  console.log("ProfileAPI | getProfileByID | profile_id", profile_id)
+  // console.log("ProfileAPI | getProfileByID | profile_id", profile_id)
 
   const data = {
     headers: {
