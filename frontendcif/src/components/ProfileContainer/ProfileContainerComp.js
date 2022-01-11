@@ -4,10 +4,13 @@ import ProfileComp from '../Profile/ProfileComp'
 //styles
 import "./ProfileContainerStyles.css"
 
-const ProfileContainerComp = () => {
+const ProfileContainerComp = (props) => {
+    //props
+    const { profile } = props
+
     return (
         <div className="profileContainer">
-            <ProfileComp/>
+            <ProfileComp profile={profile}/>
         </div>
     )
 }
