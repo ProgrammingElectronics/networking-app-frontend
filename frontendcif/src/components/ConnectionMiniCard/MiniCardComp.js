@@ -61,30 +61,25 @@ const MiniCardComp = (props) => {
               <MDBCard className="mdb-minicard" style={{ maxWidth: '540px' }}>
                 <MDBRow className='g-0'>
                     <MDBCol md='3'>
-
-                    <MDBCardImage className="minicard-pic" style={{ maxHeight: '148px'}} src={toProfile['img_url']} alt='profile picture' fluid='true' />
-
-                    {/* replace src with profile picture */}
+                        <MDBCardImage className="minicard-pic" style={{ maxHeight: '148px'}} src={toProfile['img_url']} alt='profile picture' fluid='true' />
                     </MDBCol>
+
                     <MDBCol md='6'>
-                   
-                    <MDBCardBody>
-                        <MDBCardTitle>{toProfile['user']['first_name']} {toProfile['user']['last_name']}</MDBCardTitle>
-                        <MDBCol>
-                            {!toProfile['is_professional'] &&
-                                <MDBCardText>Student: {toProfile['enrollment'][0]['bootcamp']['name']}</MDBCardText>
-                            }
-                            {toProfile['is_professional'] && 
-                                <MDBCardText>Professional: {toProfile['enrollment'][0]['bootcamp']['name']}</MDBCardText>
-                            }
-                        </MDBCol>
-                        <MDBCol>
-                            {(toProfile['enrollment'][0]['bootcamp']['graduation_year'] !== "") &&  <MDBCardText><small>Graduated {toProfile['enrollment'][0]['bootcamp']['graduation_year']}</small></MDBCardText>}
-                        </MDBCol>
-                        <MDBCardText>
-                            <small>Status: {status}</small>
-                        </MDBCardText>
-                    </MDBCardBody>
+                    
+                        <MDBCardBody>
+                            <MDBCardTitle>{toProfile['user']['first_name']} {toProfile['user']['last_name']}</MDBCardTitle>
+                            <MDBCol>
+                                {!toProfile['is_professional'] &&
+                                    <MDBCardText>Student: {toProfile['enrollment'][0]['bootcamp']['name']} <small>{toProfile['enrollment'][0]['graduation_year']}</small></MDBCardText>
+                                }
+                                {toProfile['is_professional'] && 
+                                    <MDBCardText>Professional: {toProfile['enrollment'][0]['bootcamp']['name']} <small>{toProfile['enrollment'][0]['graduation_year']}</small></MDBCardText>
+                                }
+                            </MDBCol>
+                            <MDBCardText>
+                                <small>Status: {status}</small>
+                            </MDBCardText>
+                        </MDBCardBody>
                    
                     </MDBCol>
                     
@@ -92,6 +87,7 @@ const MiniCardComp = (props) => {
                         <MDBBtn className="btn btn-info btn-sm" href='#'>Details</MDBBtn>
                     </MDBCol>
                 </MDBRow>
+                
               </MDBCard>
               </>
               :
