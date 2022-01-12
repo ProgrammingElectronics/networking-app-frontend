@@ -1,6 +1,6 @@
 .dashboardPageContainer {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     color: white;
     margin-top: 50px;
 }

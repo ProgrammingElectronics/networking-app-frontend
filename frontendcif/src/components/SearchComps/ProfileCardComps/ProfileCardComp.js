@@ -13,9 +13,10 @@ const ProfileCardComp = (props) => {
       </div>
       <div id="profileCard-right-column" className="card-body">
         <div id="profileCard-right-column-top">
-          <h3 className="card-title">
+          {/* had to add this logic to see search results because some profiles had no bootcamp */}
+          {props.profile.enrollment[0] && <h3 className="card-title">
             {props.profile.user.first_name} {props.profile.user.last_name}, {props.profile.enrollment[0].bootcamp.name} 
-          </h3>
+          </h3> }
           <p className="card-text">
             {props.profile.about_me}
           </p>

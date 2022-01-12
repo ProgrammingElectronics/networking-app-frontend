@@ -13,10 +13,11 @@ import ProfileAPI from '../api/ProfileAPI'
 import "../static/DashboardPageStyles.css"
 
 //bootstrap
-import Container from "react-bootstrap/Container";
+import { Container, Col } from "react-bootstrap";
 
 // context
 import UserContext from "../contexts/UserContext";
+import HackReactorComp from '../components/HackReactor/HackReactorComp';
 
 
 const DashboardPage = () => {
@@ -67,27 +68,32 @@ const DashboardPage = () => {
             <Container fluid>
                 <NavbarComp />
             </Container>
-            <div className="dashboardPageContainer">
-                <div>
+            <Container fluid className="dashboardPageContainer">
+             
+                <Col xs={5}>
                     {
                     profile
                     ?
                     <ProfileContainerComp profile={profile}/>
                     :
-                    <></>
+                    <>
+                    </>
                     }
-                </div>
-                <div>
+                </Col>
+                <Col xs={6}>
+                    <HackReactorComp/>
                     {
                     connections
                     ?
+                    
                     <ConnectionsContainerComp connections={connections}/>
                     :
-                    <></>
+                    <>      
+                    </>
                     }
                     
-                </div>
-            </div>
+                </Col>
+            </Container>
         </div>
     
     )

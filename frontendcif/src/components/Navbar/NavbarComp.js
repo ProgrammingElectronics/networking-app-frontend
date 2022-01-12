@@ -13,6 +13,7 @@ import UserContext from "../../contexts/UserContext";
 
 //styles
 import "./NavbarStyles.css"
+import { CodeSlash } from 'react-bootstrap-icons'
 
 
 const NavbarComp = () => {
@@ -26,6 +27,9 @@ const NavbarComp = () => {
     <>
 
       <Navbar fluid="true" className="navbar" bg="light" variant="light">
+        <Navbar.Brand className='logo' href='/'>
+            <CodeSlash className='codeslash-icon'/> codeForward
+        </Navbar.Brand>
         <Container>
             { !user
             ?

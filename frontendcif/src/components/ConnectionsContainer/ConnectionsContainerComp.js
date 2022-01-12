@@ -12,7 +12,8 @@ import {
     MDBTabsContent,
     MDBTabsPane
   } from 'mdb-react-ui-kit';
-import PendingMiniCardComp from '../ConnectionMiniCard/PendingMiniCardComp';
+import { Container } from 'react-bootstrap'
+// import PendingMiniCardComp from '../ConnectionMiniCard/PendingMiniCardComp';
 
 const ConnectionsContainerComp = (props) => {
     // states
@@ -76,7 +77,7 @@ const ConnectionsContainerComp = (props) => {
     }
 
     return (
-        <div className="connectionsContainer">
+        <Container className="connectionsContainer">
            {/* This contains all the approved and pending connections */}
            <div className="tabs">
             <MDBTabs className='mb-3'>
@@ -104,7 +105,7 @@ const ConnectionsContainerComp = (props) => {
                 </div>
            </div>
             
-        </div>
+        </Container>
     )
 }
 
