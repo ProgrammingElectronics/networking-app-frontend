@@ -17,6 +17,7 @@ const ProfileFormComp = (props) => {
     const [bootcamps, setBootcamps] = useState([])
     const [selectedBootcamps, setSelectedBootcamps] = useState([])
     const [selectedGradStatus, setSelectedGradStatus] = useState('')
+    const [selectedLanguages, setSelectedLanguages] = useState([])
 
     //set user
     const { user } = props
@@ -62,6 +63,8 @@ const ProfileFormComp = (props) => {
             gradStatus = event.target.elements[10].value
         }
 
+
+
         const profileObj = {
             user: {
                 username: user.username, 
@@ -72,19 +75,27 @@ const ProfileFormComp = (props) => {
             education: event.target.elements[2].value,
             is_professional: pro,
             phone_number: event.target.elements[68].value,
-            linkedin_url: 'https://linkedin.com/in/' + event.target.elements[13].value,
-            github_url: 'https://github.com/' + event.target.elements[14].value,
+            linkedin_url: event.target.elements[13].value,
+            github_url: event.target.elements[14].value,
             img_url: '',
-            about_me: event.target.elements[62].value,
-            enrollment: {
+            about_me: event.target.elements[67].value,
+            enrollment: [{
                 bootcamp: {
                     name: selectedBootcamps.toString()      
                 },
                 graduation_year: event.target.elements[11].value,
                 graduation_status: gradStatus
-            },
-            skills: ''
-        }   
+            }],
+            skills: [{
+                name: 'Javascript',
+                type: 'language'
+            }],
+            industries: [{
+                name: 'Pharma',
+                size: 'Big'
+            }]
+             
+        }
 
         console.log('profileObj', profileObj)
 
@@ -113,38 +124,8 @@ const ProfileFormComp = (props) => {
                 <Form.Group as={Col} controlId="formGridEducation">
                         <Form.Label>Education</Form.Label>
                         <Form.Control placeholder="Enter any schools of higher education" />
-                </Form.Group>
-                
-                {/* <Form.Group as={Col} controlId="formGridIsProfessional">
-                    {/* <Form.Label>Which role will you take on as a user of this site?</Form.Label>
-                       
-                        <div  className="radioPro">
-                            <Form.Check 
-                                name='pro'
-                                inline
-                                label="Professional (mostly giving help)"
-                                value="true"
-                                type='radio'
-                                onChange={handleChangePro}
-                                id='1'
-                            />
-                            <Form.Check
-                                name='pro'
-                                inline
-                                label="Newcomer - mostly seeking help"
-                                value='false'
-                                type='radio'
-                                onChange={handleChangePro}
-                                id='2'
-                            />
-                        </div> */}
-                    
-                {/* </Form.Group> */} 
+                </Form.Group>                  
                 <Row className="mb-3">
-                    {/* <Form.Group as={Col} xs={7} controlId="formGridBootcampName">
-                        <Form.Label>Bootcamp Name</Form.Label>
-                        <Form.Control placeholder="e.g. Code Platoon, Hack Reactor, etc." />
-                    </Form.Group> */}
                     <Form.Group as={Col} controlId="my_multiselect_field">
                         <Form.Label>Bootcamp</Form.Label>
                         <Form.Group as={Col} controlId="my_multiselect_field">
@@ -197,14 +178,13 @@ const ProfileFormComp = (props) => {
                         <Form.Control placeholder="enter year" />
                     </Form.Group>
                 </Row>
-                <Form.Select controlId="formGridRoleSelect" >
-                    {/* value 1 means isProfessional=True, value 2 means False */}
+                <Form.Select controlId="formGridRoleSelect" onChange={(selected) => {
+                                setPro(selected.target.value)
+                            }}>
                     <option>Select Role Type</option>
                     <option value="true">Mentor/Professional</option> 
-                    <option value="false">Mentee/Recent Grad</option>
+                    <option value="false">Mentee/Newcomer</option>
                 </Form.Select>
-   
-
                 <Row className="mb-3">
                     <Form.Group as={Col}>
                     <Form.Label htmlFor="linkedin-url">LinkedIn URL</Form.Label>
