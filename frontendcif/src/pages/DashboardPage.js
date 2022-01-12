@@ -64,7 +64,7 @@ const DashboardPage = () => {
 
     return (
         <div>
-            <Container>
+            <Container fluid>
                 <NavbarComp />
             </Container>
             <div className="dashboardPageContainer">

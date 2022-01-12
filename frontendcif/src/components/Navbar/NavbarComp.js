@@ -40,11 +40,13 @@ const NavbarComp = () => {
             </>
             :
             <>
-
-              <Nav.Link href="/dashboard">Dashboard</Nav.Link>
-              <Nav.Link href="/search">Connect</Nav.Link>
-              <LogoutModalComp />
-
+              <Nav>
+                <Nav.Link href="/dashboard">Dashboard</Nav.Link>
+                <Nav.Link href="/search">Connect</Nav.Link>
+              </Nav>
+              <Nav>
+                <LogoutModalComp />
+              </Nav>
             </>
             }
         </Container>
