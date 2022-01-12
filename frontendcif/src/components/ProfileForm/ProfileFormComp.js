@@ -15,6 +15,8 @@ const ProfileFormComp = (props) => {
     //states
     const [pro, setPro] = useState('false')
     const [bootcamps, setBootcamps] = useState([])
+    const [selectedBootcamps, setSelectedBootcamps] = useState([])
+    const [selectedGradStatus, setSelectedGradStatus] = useState('')
 
     //set user
     const { user } = props
@@ -27,50 +29,71 @@ const ProfileFormComp = (props) => {
 
         const getBootcamps = async () => {
             let data = await  BootcampAPI.getAllBootcamps(token);
-            console.log(data)
             setBootcamps(data)   
         }
         getBootcamps()
     }, [])
     
-    const bootcampArray = bootcamps.push
-
+    const bootcampArray = bootcamps.map((bootcamp) => {
+        return bootcamp.name
+    }) 
+    
     //handlers
-    const handleChangePro = (event) => {
-        const newValue = event.target.value
-        // console.log('select value',event.target.value)
-        setPro(newValue)   
+    // const handleChangePro = (event) => {
+    //     const newValue = event.target.value
+    //     // console.log('select value',event.target.value)
+    //     setPro(newValue)   
+    // }
+
+    const handleBootcampChange = (event) => {
+        const newArray = event.target.value
+        console.log('select value', event.target.value)
+        setSelectedBootcamps(newArray)
     }
 
     const handleFormSubmit = async (event) => {
         event.preventDefault()
         console.log('form elements', event.target.elements)
 
+        let gradStatus = ''
+        if (event.target.elements[9].checked === 'true') {
+            gradStatus = event.target.elements[9].value
+        } else {
+            gradStatus = event.target.elements[10].value
+        }
+
         const profileObj = {
             user: {
                 username: user.username, 
                 first_name: event.target.elements[0].value,
                 last_name: event.target.elements[1].value,
-                email: event.target.elements[64].value,
+                email: event.target.elements[69].value,
             },
             education: event.target.elements[2].value,
             is_professional: pro,
-            phone_number: event.target.elements[63].value,
-            linkedin_url: 'https://linkedin.com/in/' + event.target.elements[8].value,
-            github_url: 'https://github.com/' + event.target.elements[9].value,
+            phone_number: event.target.elements[68].value,
+            linkedin_url: 'https://linkedin.com/in/' + event.target.elements[13].value,
+            github_url: 'https://github.com/' + event.target.elements[14].value,
             img_url: '',
             about_me: event.target.elements[62].value,
             enrollment: {
-
-            }
+                bootcamp: {
+                    name: selectedBootcamps.toString()      
+                },
+                graduation_year: event.target.elements[11].value,
+                graduation_status: gradStatus
+            },
+            skills: ''
         }   
 
         console.log('profileObj', profileObj)
+
+        console.log('selected bootcamps', selectedBootcamps)
         
         const data = await ProfileAPI.addProfile(profileObj)
         if (data) {
             console.log('data', data)
-            navigate( `/trips/${data.id}/`)
+            // navigate( `/trips/${data.id}/`)
         }
     }
 
@@ -87,10 +110,6 @@ const ProfileFormComp = (props) => {
                         <Form.Control placeholder="last name" />
                     </Form.Group>
                 </Row>
-                {/* <Form.Group as={Col} controlId="formGridEmail">
-                        <Form.Label>Email</Form.Label>
-                        <Form.Control type="email" placeholder="name@example.com" />
-                </Form.Group> */}
                 <Form.Group as={Col} controlId="formGridEducation">
                         <Form.Label>Education</Form.Label>
                         <Form.Control placeholder="Enter any schools of higher education" />
@@ -128,38 +147,57 @@ const ProfileFormComp = (props) => {
                     </Form.Group> */}
                     <Form.Group as={Col} controlId="my_multiselect_field">
                         <Form.Label>Bootcamp</Form.Label>
+                        <Form.Group as={Col} controlId="my_multiselect_field">
                         <DropdownMultiselect
-                            options={}
+                            options={["Code Platoon", "Parris Island", "Galvanize", "Hack Reactor"]}
+                            name="bootcamps"
+                            placeholder="Select Bootcamp"
+                            handleOnChange={(selected) => {
+                                setSelectedBootcamps(selected)
+                            }}
+                        />
+                        </Form.Group>
+                        {/* Couldn't figure out how to dynamically populate dropdown values
+                        
+                        <DropdownMultiselect
+                            options={bootcampArray}
                             name="bootcamps"
                             placeholder="Select bootcamp"
-                        />
+                        /> */}
                     </Form.Group>
                     <Form.Group as={Col} controlId="formGridGraduationStatus">
+                    <Form.Label>Graduation Status</Form.Label>
                         {['radio'].map((type) => (
                             <div key={`default-${type}`} className="mb-3">
                             <Form.Check
                                 inline
+                                name="grad"
                                 label="Enrolled"
+                                value='enrolled'
                                 type={type}
                                 id={`default-${type}-1`}
+                               
                             />
                             <Form.Check
                                 inline
+                                name="grad"
+                                value='graduated'
                                 label="Graduated"
                                 type={type}
                                 id={`default-${type}-2`}
+                               
                             />
                             </div>
                         ))}
                     </Form.Group>
-                    {/* make this a dropdown with years */}
+                    
                     <Form.Group as={Col} controlId="formGridYearGraduated">
                         <Form.Label>Year Graduated</Form.Label>
-                        <YearPicker defaultValue={'select year'} start={2000} reverse/>
-                        {/* <Form.Control placeholder="enter year" /> */}
+                        {/* <YearPicker defaultValue={'select year'} start={2000} reverse/> */}
+                        <Form.Control placeholder="enter year" />
                     </Form.Group>
                 </Row>
-                <Form.Select controlId="formGridRoleSelect" onChange={handleChangePro}>
+                <Form.Select controlId="formGridRoleSelect" >
                     {/* value 1 means isProfessional=True, value 2 means False */}
                     <option>Select Role Type</option>
                     <option value="true">Mentor/Professional</option> 
