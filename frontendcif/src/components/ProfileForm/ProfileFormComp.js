@@ -23,10 +23,10 @@ const ProfileFormComp = (props) => {
     const { user } = props
 
     const navigate = useNavigate()
-
+    let token = localStorage.getItem("auth-user")
     //useEffect
     useEffect(() => {
-        let token = localStorage.getItem("auth-user")
+        // let token = localStorage.getItem("auth-user")
 
         const getBootcamps = async () => {
             let data = await  BootcampAPI.getAllBootcamps(token);
@@ -35,22 +35,17 @@ const ProfileFormComp = (props) => {
         getBootcamps()
     }, [])
     
-    const bootcampArray = bootcamps.map((bootcamp) => {
-        return bootcamp.name
-    }) 
+    // const bootcampArray = bootcamps.map((bootcamp) => {
+    //     return bootcamp.name
+    // }) 
     
     //handlers
-    // const handleChangePro = (event) => {
-    //     const newValue = event.target.value
-    //     // console.log('select value',event.target.value)
-    //     setPro(newValue)   
-    // }
 
-    const handleBootcampChange = (event) => {
-        const newArray = event.target.value
-        console.log('select value', event.target.value)
-        setSelectedBootcamps(newArray)
-    }
+    // const handleBootcampChange = (event) => {
+    //     const newArray = event.target.value
+    //     console.log('select value', event.target.value)
+    //     setSelectedBootcamps(newArray)
+    // }
 
     const handleFormSubmit = async (event) => {
         event.preventDefault()
@@ -65,46 +60,58 @@ const ProfileFormComp = (props) => {
 
 
 
-        const profileObj = {
-            user: {
-                username: user.username, 
-                first_name: event.target.elements[0].value,
-                last_name: event.target.elements[1].value,
-                email: event.target.elements[69].value,
-            },
-            education: event.target.elements[2].value,
-            is_professional: pro,
-            phone_number: event.target.elements[68].value,
-            linkedin_url: event.target.elements[13].value,
-            github_url: event.target.elements[14].value,
-            img_url: '',
-            about_me: event.target.elements[67].value,
-            enrollment: [{
-                bootcamp: {
-                    name: selectedBootcamps.toString()      
-                },
-                graduation_year: event.target.elements[11].value,
-                graduation_status: gradStatus
-            }],
-            skills: [{
-                name: 'Javascript',
-                type: 'language'
-            }],
-            industries: [{
-                name: 'Pharma',
-                size: 'Big'
-            }]
+        // const profileObj = {
+        //     user: {
+        //         username: user.username, 
+        //         first_name: event.target.elements[0].value,
+        //         last_name: event.target.elements[1].value,
+        //         email: event.target.elements[69].value,
+        //     },
+        //     education: event.target.elements[2].value,
+        //     is_professional: pro,
+        //     phone_number: event.target.elements[68].value,
+        //     linkedin_url: event.target.elements[13].value,
+        //     github_url: event.target.elements[14].value,
+        //     img_url: '',
+        //     about_me: event.target.elements[67].value,
+        //     enrollment: [],
+        //     // [{
+        //     //     bootcamp: {
+        //     //         name: selectedBootcamps.toString()      
+        //     //     },
+        //     //     graduation_year: event.target.elements[11].value,
+        //     //     graduation_status: gradStatus
+        //     // }],
+        //     skills: [],
+        //     industries: []
              
+        // }
+
+        let profileObj = {
+            user: {
+                username: "newUser",
+                first_name: "",
+                last_name: "",
+                email: ""
+            },
+            education: "ucla",
+            is_professional: true,
+            phone_number: "1234567890",
+            linkedin_url: "newuser",
+            github_url: "newuser",
+            img_url: "",
+            about_me: "blah",
+            enrollment: [],
+            skills: [],
+            industries: []
         }
 
         console.log('profileObj', profileObj)
-
-        console.log('selected bootcamps', selectedBootcamps)
-        
-        const data = await ProfileAPI.addProfile(profileObj)
+       
+        const data = await ProfileAPI.addProfile(token, profileObj)
         if (data) {
-            console.log('data', data)
-            // navigate( `/trips/${data.id}/`)
+            console.log('add profile api data', data)
+            navigate( `dashboard/`)
         }
     }
 

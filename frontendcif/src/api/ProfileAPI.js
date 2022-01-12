@@ -30,7 +30,8 @@ const getProfileByID = async (token, profile_id) => {
 }
 
 const addProfile = async (token, profileObj) => {
-  const url = baseAPI.BASE_URL + PROFILE_URL + '/'
+  const url = baseAPI.BASE_URL + PROFILE_URL
+  console.log('url', url)
   const data = {
     method: "POST",
     headers: {
@@ -42,6 +43,16 @@ const addProfile = async (token, profileObj) => {
   return await baseAPI.tryCatchFetch(url, data)
 }
 
+// const addProfile = (profileObj) => {
+//   return fetch('http://localhost:8000/core/profiles/', {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json"
+//       // 'Authorization': `JWT ${token}`
+//     },
+//     body: JSON.stringify(profileObj)
+//   }).then(res=>res)
+// };
 
 const ProfileAPI = {
   getAllProfiles,
