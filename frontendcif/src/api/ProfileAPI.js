@@ -93,7 +93,7 @@ const addProfile = async (token, profileObj) => {
 const ProfileAPI = {
   getAllProfiles,
   getProfileByID,
-  addProfile
+  addProfile,
   deleteProfile,
   updateProfile,
   getFilteredProfiles

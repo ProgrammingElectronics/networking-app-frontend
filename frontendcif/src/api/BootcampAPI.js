@@ -27,7 +27,7 @@ const addBootcamp = async (token, bootcampObj) => {
   return await baseAPI.tryCatchFetch(url, data)
 }
 
-const updateBootcamp = (token, bootcampObj, bootcampID) => {
+const updateBootcamp = async (token, bootcampObj, bootcampID) => {
   const url = baseAPI.BASE_URL + BOOTCAMP_URL + bootcampID + '/'
   const data = {
     method: "PATCH",
@@ -40,7 +40,7 @@ const updateBootcamp = (token, bootcampObj, bootcampID) => {
   return await baseAPI.tryCatchFetch(url, data)
 }
 
-const deleteBootcamp = (token, bootcampID) => {
+const deleteBootcamp = async (token, bootcampID) => {
   const url = baseAPI.BASE_URL + BOOTCAMP_URL + bootcampID + '/'
   const data = {
     method: "DELETE",
