@@ -1,4 +1,14 @@
 .navbar {
     margin-left: -22px;
     margin-right: -22px;
+    padding-left: 35px;
+}
+
+.codeslash-icon {
+    color: #ade990;
+    background-color: #102a43;
+    padding: 2px;
+    margin: 2px;
+    font-size: larger;
+    border-radius: 5px;
 }

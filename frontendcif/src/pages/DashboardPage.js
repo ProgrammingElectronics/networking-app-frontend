@@ -13,10 +13,12 @@ import ProfileAPI from '../api/ProfileAPI'
 import "../static/DashboardPageStyles.css"
 
 //bootstrap
-import Container from "react-bootstrap/Container";
+import { Container, Col, Row } from "react-bootstrap";
 
 // context
 import UserContext from "../contexts/UserContext";
+import NewsContainerComp from '../components/HackerNews/NewsContainerComp';
+
 
 
 const DashboardPage = () => {
@@ -24,6 +26,7 @@ const DashboardPage = () => {
     // states
     const [ profile, setProfile ] = useState(null)
     const [ connections, setConnections ] = useState(null)
+    
 
     // setting the user by context
     const userContext = useContext(UserContext);
@@ -53,7 +56,7 @@ const DashboardPage = () => {
         }
         getConnections()
         getProfile()
-      }, [])
+    }, [])
     //getProfile
     //pass array of connections as props to ConnectionsContainerComp
 
@@ -64,30 +67,38 @@ const DashboardPage = () => {
 
     return (
         <div>
-            <Container>
+            <Container fluid>
                 <NavbarComp />
             </Container>
-            <div className="dashboardPageContainer">
-                <div>
+            <Container fluid className="dashboardPageContainer">
+             
+                <Col xs={5}>
                     {
                     profile
                     ?
                     <ProfileContainerComp profile={profile}/>
                     :
-                    <></>
+                    <>
+                    </>
                     }
-                </div>
-                <div>
+                </Col>
+                <Col className='right-col' xs={6}>   
                     {
                     connections
-                    ?
-                    <ConnectionsContainerComp connections={connections}/>
+                    ? 
+                    <Row>         
+                        <ConnectionsContainerComp connections={connections}/>        
+                    </Row>
                     :
-                    <></>
+                    <>      
+                    </>
                     }
-                    
-                </div>
-            </div>
+                    <Row>
+                        <NewsContainerComp/>
+                    </Row>
+                </Col>
+                
+            </Container>
         </div>
     
     )

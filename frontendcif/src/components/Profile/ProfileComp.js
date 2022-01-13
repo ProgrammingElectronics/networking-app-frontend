@@ -9,7 +9,7 @@ const ProfileComp = (props) => {
 
     //props
     const { profile } = props
-    console.log('profilecomp | profile', profile)
+    // console.log('profilecomp | profile', profile)
 
     const renderProfile = () => {
 
@@ -23,9 +23,6 @@ const ProfileComp = (props) => {
                     <h3>{profile['user']['first_name']} {profile['user']['last_name']}</h3>
                     {/* Role | Bootcamp */}
                     <h5>{profile['enrollment'][0]['bootcamp']['name']} | {profile['enrollment'][0]['graduation_year']}</h5>
-                    <MDBBtn tag='a' color='none' className='m-1' style={{ color: '#ac2bac' }}>
-                        <MDBIcon fab icon='instagram' size='lg' />
-                    </MDBBtn>
                     <p>Github: link | LinkedIn: link</p>
                 </div>
                 <div className="aboutMe">
@@ -46,14 +43,14 @@ const ProfileComp = (props) => {
                     </div>
                     <div className="skills">
                        <h5>Skills</h5>
-                       <h6>Languages:</h6>
+                       {/* <h6>Languages:</h6> */}
                        <ul>
                        {profile['skills'].filter(skills => skills.type === 'language').map((language, index) =>
                             <li key={index}>{language.name}</li>
                        )}
                        </ul>
                         {/* refactor later to pull in skills['types'] instead of hardcoding */}
-                        <h6>Web Development:</h6>
+                        {/* <h6>Web Development:</h6> */}
                         <ul>
                             {profile['skills'].filter(skills => skills.type === 'Web Development').map((framework, index) =>
                                     <li key={index}>{framework.name}</li>

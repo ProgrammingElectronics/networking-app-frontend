@@ -3,7 +3,8 @@ import Container from "react-bootstrap/Container";
 import Image from "react-bootstrap/Image";
 // css
 import './ImageOverlayComp.css';
-import myVideo from "./Connect.mp4";
+import myVideo from "./HelloWorld.mp4";
+import img1 from './laptop_man.jpg'
 
 
 const ImageOverlayComp = () => {
@@ -16,9 +17,12 @@ const ImageOverlayComp = () => {
       <Image className="small-image image-middle" src={img2Url}></Image>
       <Image className="small-image image-bottom" src={img3Url}></Image> */}
       {/* playing around with videos */}
-      <video width="100%" autoPlay loop muted>
-          <source src={myVideo} type="video/mp4"></source>
-        </video>
+      
+          {/* <video className='small-image image-middle' width="100%" autoPlay loop muted>
+            <source src={myVideo} type="video/mp4"></source>
+          </video> */}
+          <Image className="small-image image-top" src={img1} alt=''></Image>
+        
     </Container>
   )
 }

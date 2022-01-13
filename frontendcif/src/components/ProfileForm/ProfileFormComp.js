@@ -1,74 +1,202 @@
-import { React, useState } from 'react'
+import { React, useState, useEffect } from 'react'
 import { Form, Row, Button, Col, InputGroup, FormControl } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import { YearPicker } from 'react-dropdown-date';
+import { Link, useNavigate } from 'react-router-dom'
 import DropdownMultiselect from 'react-multiselect-dropdown-bootstrap'
+
+import ProfileAPI from '../../api/ProfileAPI'
+import BootcampAPI from '../../api/BootcampAPI'
 
 //style
 import "./ProfileFormStyels.css"
 
-const ProfileFormComp = () => {
-    //need a useState array for each selection field (i.e. industries, languages, etc.) to pass to database
-    //add required=True for model fields that can't be blank
-    //handleFormSubmit that takes element values and puts it in profile object
-        //if data then navigate to dashboard with all info in profile
+const ProfileFormComp = (props) => {
+
+    //states
+    const [pro, setPro] = useState('false')
+    const [bootcamps, setBootcamps] = useState([])
+    const [selectedBootcamps, setSelectedBootcamps] = useState([])
+    const [selectedGradStatus, setSelectedGradStatus] = useState('')
+    const [selectedLanguages, setSelectedLanguages] = useState([])
+
+    //set user
+    const { user } = props
+
+    const navigate = useNavigate()
+    let token = localStorage.getItem("auth-user")
+    //useEffect
+    useEffect(() => {
+        // let token = localStorage.getItem("auth-user")
+
+        const getBootcamps = async () => {
+            let data = await  BootcampAPI.getAllBootcamps(token);
+            setBootcamps(data)   
+        }
+        getBootcamps()
+    }, [])
+    
+    // const bootcampArray = bootcamps.map((bootcamp) => {
+    //     return bootcamp.name
+    // }) 
+    
+    //handlers
+
+    // const handleBootcampChange = (event) => {
+    //     const newArray = event.target.value
+    //     console.log('select value', event.target.value)
+    //     setSelectedBootcamps(newArray)
+    // }
+
+    const handleFormSubmit = async (event) => {
+        event.preventDefault()
+        console.log('form elements', event.target.elements)
+
+        let gradStatus = ''
+        if (event.target.elements[9].checked === 'true') {
+            gradStatus = event.target.elements[9].value
+        } else {
+            gradStatus = event.target.elements[10].value
+        }
+
+
+
+        // const profileObj = {
+        //     user: {
+        //         username: user.username, 
+        //         first_name: event.target.elements[0].value,
+        //         last_name: event.target.elements[1].value,
+        //         email: event.target.elements[69].value,
+        //     },
+        //     education: event.target.elements[2].value,
+        //     is_professional: pro,
+        //     phone_number: event.target.elements[68].value,
+        //     linkedin_url: event.target.elements[13].value,
+        //     github_url: event.target.elements[14].value,
+        //     img_url: '',
+        //     about_me: event.target.elements[67].value,
+        //     enrollment: [],
+        //     // [{
+        //     //     bootcamp: {
+        //     //         name: selectedBootcamps.toString()      
+        //     //     },
+        //     //     graduation_year: event.target.elements[11].value,
+        //     //     graduation_status: gradStatus
+        //     // }],
+        //     skills: [],
+        //     industries: []
+             
+        // }
+
+        let profileObj = {
+            user: {
+                username: "newUser",
+                first_name: "",
+                last_name: "",
+                email: ""
+            },
+            education: "ucla",
+            is_professional: true,
+            phone_number: "1234567890",
+            linkedin_url: "newuser",
+            github_url: "newuser",
+            img_url: "",
+            about_me: "blah",
+            enrollment: [],
+            skills: [],
+            industries: []
+        }
+
+        console.log('profileObj', profileObj)
+       
+        const data = await ProfileAPI.addProfile(token, profileObj)
+        if (data) {
+            console.log('add profile api data', data)
+            navigate( `dashboard/`)
+        }
+    }
 
     return (
         <div className="profile-form-display">
-            <Form>
+            <Form onSubmit={handleFormSubmit}>
                 <Row className="mb-3">
                     <Form.Group as={Col} controlId="formGridFirstName">
                         <Form.Label>First Name</Form.Label>
                         <Form.Control placeholder="first name" />
                     </Form.Group>
-
                     <Form.Group as={Col} controlId="formGridLastName">
                         <Form.Label>Last Name</Form.Label>
                         <Form.Control placeholder="last name" />
                     </Form.Group>
                 </Row>
-            
+                <Form.Group as={Col} controlId="formGridEducation">
+                        <Form.Label>Education</Form.Label>
+                        <Form.Control placeholder="Enter any schools of higher education" />
+                </Form.Group>                  
                 <Row className="mb-3">
-                    <Form.Group as={Col} xs={7} controlId="formGridBootcampName">
-                        <Form.Label>Bootcamp Name</Form.Label>
-                        <Form.Control placeholder="e.g. Code Platoon, Hack Reactor, etc." />
+                    <Form.Group as={Col} controlId="my_multiselect_field">
+                        <Form.Label>Bootcamp</Form.Label>
+                        <Form.Group as={Col} controlId="my_multiselect_field">
+                        <DropdownMultiselect
+                            options={["Code Platoon", "Parris Island", "Galvanize", "Hack Reactor"]}
+                            name="bootcamps"
+                            placeholder="Select Bootcamp"
+                            handleOnChange={(selected) => {
+                                setSelectedBootcamps(selected)
+                            }}
+                        />
+                        </Form.Group>
+                        {/* Couldn't figure out how to dynamically populate dropdown values
+                        
+                        <DropdownMultiselect
+                            options={bootcampArray}
+                            name="bootcamps"
+                            placeholder="Select bootcamp"
+                        /> */}
                     </Form.Group>
                     <Form.Group as={Col} controlId="formGridGraduationStatus">
+                    <Form.Label>Graduation Status</Form.Label>
                         {['radio'].map((type) => (
                             <div key={`default-${type}`} className="mb-3">
                             <Form.Check
                                 inline
+                                name="grad"
                                 label="Enrolled"
+                                value='enrolled'
                                 type={type}
                                 id={`default-${type}-1`}
+                               
                             />
                             <Form.Check
                                 inline
+                                name="grad"
+                                value='graduated'
                                 label="Graduated"
                                 type={type}
                                 id={`default-${type}-2`}
+                               
                             />
                             </div>
                         ))}
                     </Form.Group>
-                    {/* make this a dropdown with years */}
+                    
                     <Form.Group as={Col} controlId="formGridYearGraduated">
                         <Form.Label>Year Graduated</Form.Label>
+                        {/* <YearPicker defaultValue={'select year'} start={2000} reverse/> */}
                         <Form.Control placeholder="enter year" />
                     </Form.Group>
                 </Row>
-                <Form.Select controlId="formGridRoleSelect">
-                    {/* value 1 means isProfessional=True, value 2 means False */}
+                <Form.Select controlId="formGridRoleSelect" onChange={(selected) => {
+                                setPro(selected.target.value)
+                            }}>
                     <option>Select Role Type</option>
-                    <option value="1">Mentor/Professional</option> 
-                    <option value="2">Mentee/Recent Grad</option>
+                    <option value="true">Mentor/Professional</option> 
+                    <option value="false">Mentee/Newcomer</option>
                 </Form.Select>
-   
-
                 <Row className="mb-3">
                     <Form.Group as={Col}>
-                    <Form.Label htmlFor="basic-url">LinkedIn URL</Form.Label>
+                    <Form.Label htmlFor="linkedin-url">LinkedIn URL</Form.Label>
                         <InputGroup className="mb-3">
-                            <InputGroup.Text id="basic-addon3">
+                            <InputGroup.Text id="linkedin">
                             https://linkedin.com/in/
                             </InputGroup.Text>
                             <FormControl id="basic-url" aria-describedby="basic-addon3" />
@@ -76,9 +204,9 @@ const ProfileFormComp = () => {
                     </Form.Group>
 
                     <Form.Group as={Col}>
-                    <Form.Label htmlFor="basic-url">Github URL</Form.Label>
+                    <Form.Label htmlFor="github-url">Github URL</Form.Label>
                         <InputGroup className="mb-3">
-                            <InputGroup.Text id="basic-addon3">
+                            <InputGroup.Text id="github">
                             https://github.com/
                             </InputGroup.Text>
                             <FormControl id="basic-url" aria-describedby="basic-addon3" />

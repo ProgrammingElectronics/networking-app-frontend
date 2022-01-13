@@ -1,14 +1,22 @@
 .connectionsContainer {
-    background-color:  rgba(255, 255, 255, .1);
+    /* background-color:  rgba(255, 255, 255, .4); */
+    background-color: rgba(34, 87, 122, 0.2);
     border-radius: 10px;
     padding: 10px;
-    width: 600px;
-    height: 500px;
-    
+    width: 550px!important;
+    height: 460px;
+    float: left;
+    margin-bottom: 50px;
+    margin-left: 10px!important;
+
 }
 
 .tab-content {
     overflow: auto;
-    height: 420px;
-    border-radius: 5px;
+    height: 370px;
+    background-color: rgba(34, 87, 122, 0.4);
+}
+
+.pending-tab {
+    background-color: rgba(255, 255, 255, 0.8)!important;
 }

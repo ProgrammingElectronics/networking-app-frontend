@@ -5,7 +5,7 @@ import ProfileAPI from '../../api/ProfileAPI'
 import "./MiniCardStyles.css"
 
 const MiniCardComp = (props) => {
-    const [fromProfile, setFromProfile] = useState(null)
+    // const [fromProfile, setFromProfile] = useState(null)
     const [toProfile, setToProfile] = useState(null)
 
     // props
@@ -17,18 +17,7 @@ const MiniCardComp = (props) => {
     let toProfileID = connection['to_profile']
 
     let token = localStorage.getItem("auth-user")
-
-    const getFromProfile = async () => {
-        try {
-            if (connection) {
-                let data = await  ProfileAPI.getProfileByID(token, fromProfileID);
-                setFromProfile(data)
-            }
-        } catch(e) {
-            console.error(e)
-        }
-       
-    }
+    
     const getToProfile = async () => {
         if (connection) {
             let data = await  ProfileAPI.getProfileByID(token, toProfileID);
@@ -36,7 +25,7 @@ const MiniCardComp = (props) => {
         }
     }
     useEffect(() => {
-        getFromProfile()
+        // getFromProfile()
         getToProfile()
       }, [])
 
@@ -50,13 +39,13 @@ const MiniCardComp = (props) => {
                 {toProfile
                 ?
                 <>
-              <MDBCard className="mdb-minicard" style={{ maxWidth: '540px' }}>
+              <MDBCard className="mdb-minicard">
                 <MDBRow className='g-0'>
-                    <MDBCol md='3'>
-                        <MDBCardImage className="minicard-pic" style={{ maxHeight: '148px'}} src={toProfile['img_url']} alt='profile picture' fluid='true' />
+                    <MDBCol className='img-col' md='3'>
+                        <MDBCardImage className="minicard-pic" src={toProfile['img_url']} alt='profile picture' fluid='true' />
                     </MDBCol>
 
-                    <MDBCol md='6'>
+                    <MDBCol >
                     
                         <MDBCardBody>
                             <MDBCardTitle>{toProfile['user']['first_name']} {toProfile['user']['last_name']}</MDBCardTitle>
@@ -75,8 +64,8 @@ const MiniCardComp = (props) => {
                    
                     </MDBCol>
                     
-                    <MDBCol className="btn-col">
-                        <MDBBtn className="btn btn-info btn-sm" href='#'>Details</MDBBtn>
+                    <MDBCol md='2' className="btn-col">
+                        <button className="btn btn-rounded" href='#'>Details</button>
                     </MDBCol>
                 </MDBRow>
 
