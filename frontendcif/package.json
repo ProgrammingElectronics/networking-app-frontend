@@ -17,6 +17,9 @@
     "react-multiselect-dropdown-bootstrap": "^1.1.0",
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",
+    "stream-chat": "^5.1.1",
+    "stream-chat-react": "^6.12.2",
+    "talkjs": "^0.15.1",
     "web-vitals": "^2.1.2"
   },
   "scripts": {

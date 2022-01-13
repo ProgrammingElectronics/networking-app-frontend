@@ -11,6 +11,7 @@ import HomePage from './pages/HomePage';
 import DashboardPage from './pages/DashboardPage';
 import SearchPage from './pages/SearchPage';
 import CompleteProfilePage from './pages/CompleteProfilePage'
+import MessagingPage from './pages/MessagingPage.js';
 
 function App() {
   // states
@@ -75,6 +76,8 @@ function App() {
     console.log(data)
   }
 
+  
+
   return (
     <div className="App">
       <BrowserRouter>
@@ -86,10 +89,10 @@ function App() {
             <Route path="/" element={<HomePage/>}/>
           </Routes>
         </UserContext.Provider>
-      </BrowserRouter>
+      </BrowserRouter> 
 
     </div>
   );
 }
-
+ 
 export default App;
