@@ -71,33 +71,34 @@ const DashboardPage = () => {
                 <NavbarComp />
             </Container>
             <Container fluid className="dashboardPageContainer">
-             
-                <Col xs={5}>
-                    {
-                    profile
-                    ?
-                    <ProfileContainerComp profile={profile}/>
-                    :
-                    <>
-                    </>
-                    }
-                </Col>
-                <Col className='right-col' xs={6}>   
-                    {
-                    connections
-                    ? 
-                    <Row>         
-                        <ConnectionsContainerComp connections={connections}/>        
-                    </Row>
-                    :
-                    <>      
-                    </>
-                    }
-                    <Row>
+                <Row>
+                    <Col className='left-col' >
+                        {
+                        profile
+                        ?
+                        <>
+                        <ProfileContainerComp profile={profile}/>
                         <NewsContainerComp/>
-                    </Row>
-                </Col>
-                
+                        </>
+                        :
+                        <>
+                        </>
+                        }
+                    </Col>
+                    <Col className='right-col' xs={6}>   
+                        {
+                        connections
+                        ? 
+                        <Row>         
+                            <ConnectionsContainerComp connections={connections}/>        
+                        </Row>
+                        :
+                        <>      
+                        </>
+                        }
+                      
+                    </Col>
+                </Row>
             </Container>
         </div>
     

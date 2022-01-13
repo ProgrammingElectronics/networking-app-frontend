@@ -2,13 +2,20 @@
   position: absolute;
   left: 0;
   right: 0;
+  
 }
 
 .top {
   padding: 50px;
   margin-bottom: 100px;
+  background: rgb(82,222,151);
+  background: linear-gradient(8deg, rgba(217, 114, 255, .5) 0%, rgba(34,40,49,1) 46%); 
 }
 
 .middle {
   margin-bottom: 100px;
+}
+
+.app-name {
+  color: #52DE97
 }

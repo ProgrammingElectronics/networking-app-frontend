@@ -6,6 +6,7 @@ import BootcampFilterComp from '../components/SearchComps/FilterControlComps/Boo
 import ProfileCardListComp from '../components/SearchComps/ProfileCardComps/ProfileCardListComp'
 import NavbarComp from '../components/Navbar/NavbarComp'
 import { MDBAccordion, MDBAccordionItem } from 'mdb-react-ui-kit';
+import {Container} from 'react-bootstrap'
 
 import { useState } from 'react'
 
@@ -28,7 +29,7 @@ const SearchPage = () => {
     return (
         <div id="search-page">
             <NavbarComp/>
-            <div id="search-page-content-area">
+            <Container fluid id="search-page-content-area">
                 <div id="filter-controls">
                     <MDBAccordion>
                         <MDBAccordionItem collapseId='panelsStayOpen-collapse1' headerTitle='Filter by Industries'>
@@ -45,7 +46,7 @@ const SearchPage = () => {
                 <div id="profile-card-list">
                     <ProfileCardListComp industryFilter={industryFilter} skillFilter={skillFilter} bootcampFilter={bootcampFilter}/>
                 </div>
-            </div>
+            </Container>
         </div>
     )
 }

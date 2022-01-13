@@ -26,8 +26,8 @@ const ProfileCardComp = (props) => {
             
         </div>
         <div id="profileCard-right-column-bottom">
-          <PropertyDisplayComp name="Skills" data={props.profile.skills} colorClass="badge bg-dark"/>
-          <PropertyDisplayComp name="Industries" data={props.profile.industries} colorClass="badge bg-secondary"/>
+          <PropertyDisplayComp name="Skills" data={props.profile.skills} colorClass="badge bg-secondary"/>
+          <PropertyDisplayComp name="Industries" data={props.profile.industries} colorClass="badge bg-info text-dark"/>
         </div>
       </div>
     </div>

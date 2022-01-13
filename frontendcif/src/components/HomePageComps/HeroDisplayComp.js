@@ -3,6 +3,7 @@ import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 import Image from "react-bootstrap/Image";
 import Col from "react-bootstrap/Col";
+import LogoComp from "../Navbar/LogoComp";
 // css
 import './HeroDisplayCompStyle.css';
 import myVideo from "./HelloWorld.mp4";
@@ -14,7 +15,7 @@ const HeroDisplayComp = () => {
     <Container className="attention-getter">
       <Row>
         <Col className='hero-text'> 
-          <h2 className="attention-title">Expand your network with codeForward</h2>
+          <h2 className="attention-title">Expand your network with <span className='app-name'>codeForward</span></h2>
           {/* <h4 className="attention-end">Waste no time you filthy animal. Join today.</h4> */}
           <h3 className="attention-end">Connect with fellow coding bootcamp grads.</h3>
           {/* <video width="100%" autoPlay loop muted>
