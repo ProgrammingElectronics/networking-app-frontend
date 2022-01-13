@@ -12,11 +12,6 @@ import { useState } from 'react'
 
 const SearchPage = () => {
 
-    /*
-      TODO This page need to import context for the user token,
-      or read the token from local storage on the browser. 
-    */
-    
     /**
      These "filter" states will be used to make the API call
      that will filter profiles. The profiles will get passed into the component that will display all the relevant profiles for the filter states.
@@ -25,7 +20,7 @@ const SearchPage = () => {
     const [industryFilter, setIndustryFilter] = useState([])
     const [skillFilter, setSkillFilter] = useState([])
     const [bootcampFilter, setBootcampFilter] = useState([])
-
+    
     return (
         <div id="search-page">
             <NavbarComp/>

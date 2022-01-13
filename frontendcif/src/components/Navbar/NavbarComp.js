@@ -22,6 +22,7 @@ const NavbarComp = () => {
   // context
   const userContext = useContext(UserContext);
   const { user } = userContext;
+  // console.log("User:", user)
   
 
   return (
