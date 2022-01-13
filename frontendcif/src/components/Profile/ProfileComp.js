@@ -6,6 +6,7 @@ import ProfilePicComp from './ProfilePicComp'
 import EditProfileButtonComp from './EditProfileButtonComp'
 //styles 
 import "./ProfileStyles.css"
+import ProfileDetailsModalComp from '../ModalComps/ProfileDetailsModalComp';
 const ProfileComp = (props) => {
 
     //props
@@ -20,6 +21,7 @@ const ProfileComp = (props) => {
 
         return (
             <Container className="profileInfoContainer">
+                <ProfileDetailsModalComp/>
                 <Row>
                     <div className="introInfo">
                         <h3>{profile['user']['first_name']} {profile['user']['last_name']}</h3>
