@@ -87,7 +87,7 @@ const ConnectionsContainerComp = (props) => {
                         </MDBTabsLink>
                     </MDBTabsItem>
                     <MDBTabsItem>
-                        <MDBTabsLink onClick={() => handleBasicClick('tab2')} active={basicActive === 'tab2'}>
+                        <MDBTabsLink  className='pending-tab' onClick={() => handleBasicClick('tab2')} active={basicActive === 'tab2'}>
                         Pending
                         </MDBTabsLink>
                     </MDBTabsItem>

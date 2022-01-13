@@ -1,18 +1,16 @@
 .miniCard {
     margin-bottom: 10px;
     width: 100%!important;
-    color: white;
- 
     
 }
 
 .mdb-minicard {
-    background-color: rgba(255, 255, 255, 0.6)!important;
+    background-color: rgba(255, 255, 255, 0.8)!important;
     height: 150px;
+    color: black;
 }
 
 .minicard-pic {
-    border-radius: 8px;
     float: left;
     width: 200px!important;
     height: 147px!important;

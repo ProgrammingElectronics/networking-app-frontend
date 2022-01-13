@@ -13,7 +13,7 @@ import ProfileAPI from '../api/ProfileAPI'
 import "../static/DashboardPageStyles.css"
 
 //bootstrap
-import { Container, Col } from "react-bootstrap";
+import { Container, Col, Row } from "react-bootstrap";
 
 // context
 import UserContext from "../contexts/UserContext";
@@ -82,19 +82,22 @@ const DashboardPage = () => {
                     </>
                     }
                 </Col>
-                <Col className='right-col' xs={6}>
-                    <NewsContainerComp/>
+                <Col className='right-col' xs={6}>   
                     {
                     connections
-                    ?
-                    
-                    <ConnectionsContainerComp connections={connections}/>
+                    ? 
+                    <Row>         
+                        <ConnectionsContainerComp connections={connections}/>        
+                    </Row>
                     :
                     <>      
                     </>
                     }
-                    
+                    <Row>
+                        <NewsContainerComp/>
+                    </Row>
                 </Col>
+                
             </Container>
         </div>
     

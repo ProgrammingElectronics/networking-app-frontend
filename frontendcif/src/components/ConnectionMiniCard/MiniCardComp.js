@@ -39,7 +39,7 @@ const MiniCardComp = (props) => {
                 {toProfile
                 ?
                 <>
-              <MDBCard className="mdb-minicard" style={{ maxWidth: '540px' }}>
+              <MDBCard className="mdb-minicard">
                 <MDBRow className='g-0'>
                     <MDBCol className='img-col' md='3'>
                         <MDBCardImage className="minicard-pic" src={toProfile['img_url']} alt='profile picture' fluid='true' />

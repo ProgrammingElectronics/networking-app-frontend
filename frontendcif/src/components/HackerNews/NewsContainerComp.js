@@ -17,11 +17,13 @@ const NewsContainerComp = () => {
     // <p>{JSON.stringify(props.news)}</p>
     return (
         <div>
-            <h3>Top Hacker News Stories</h3>
-            <Container className="hack-container"> 
-                {storyIds.slice(0, 50).map(storyId => (
-                <StoryComp key={storyId} storyId={storyId} />
-                ))}
+            <Container className="hacker-container"> 
+                <h3>Top Hacker News Stories</h3>
+                <div className='hacker-content'>
+                    {storyIds.slice(0, 50).map(storyId => (
+                    <StoryComp key={storyId} storyId={storyId} />
+                    ))}
+                </div>
             </Container>
         </div>
        
