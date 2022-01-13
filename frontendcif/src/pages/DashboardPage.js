@@ -97,7 +97,7 @@ const DashboardPage = () => {
                         <>      
                         </>
                         }
-                      
+                        <MessagingPage userToMessage={userToMessage}/>
                     </Col>
                 </Row>
 
