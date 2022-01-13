@@ -21,6 +21,11 @@
   width: 200px;
 }
 
+#profileCard-left-column #status {
+  margin-top: 10px;
+  width: 200px;
+}
+
 #profileCard-left-column img {
   border-radius: 8px;
   float: left;

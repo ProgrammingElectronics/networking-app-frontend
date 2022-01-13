@@ -3,7 +3,7 @@ import NoResultsProfileCardComp from "./NoResultsProfileCardComp"
 import profileAPI from '../../../api/ProfileAPI'
 import { useEffect, useState, useContext } from "react"
 import UserContext from "../../../contexts/UserContext"
-
+import ConnectionRequestAPI from "../../../api/ConnectionRequestAPI"
 
 const ProfileCardListComp = (props) => {
   
@@ -15,8 +15,9 @@ const ProfileCardListComp = (props) => {
   const userInfo = user
 
   // states
-  const [profiles, setProfiles] = useState([])
-  
+  const [ profiles, setProfiles ] = useState([])
+  const [ connections, setConnections ] = useState(null)
+
   /**
    * This functions composes the URL for hitting the API and
    * getting filtered results. 
@@ -40,11 +41,20 @@ const ProfileCardListComp = (props) => {
     return filters
   }
   
+  useEffect(() => {
+    const getConnections = async () => {
+      let data = await ConnectionRequestAPI.fetchConnections(token);
+      setConnections(data)
+      console.log('ProfileCardComp | useEffect | allConnections', data)
+    }
+    getConnections()
+  }, [])
+
   /**
    * This useEffect updates the profile list based on the selected filters.
    */
   useEffect(() => {
-
+    
     const getProfiles = async () => {
         const filter = buildFilters()
         const data = await profileAPI.getFilteredProfiles(token, filter)
@@ -64,6 +74,7 @@ const ProfileCardListComp = (props) => {
 
   const profileCards = profiles.map((profile, idx) =>
       <ProfileCardComp
+        connections={connections}
         key={idx}
         profile={profile}
       />
