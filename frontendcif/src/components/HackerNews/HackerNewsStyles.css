@@ -1,4 +1,14 @@
 .hack-container {
-    border-radius: 10px;
-    background-color: rgba(255, 255, 255, .1);
+    border: 1px solid white;
+    border-radius: 1px;
+    /* background-color: rgba(255, 255, 255, 0.1); */
+    overflow: auto;
+    height: 200px;
+    text-align: left;
 }
+
+a:link {
+    color: white;
+    background-color: transparent;
+    text-decoration: none;
+  }
