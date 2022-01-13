@@ -6,7 +6,7 @@
 }
 
 .mdb-minicard {
-    background-color: rgba(255, 255, 255, .25)!important;
+    background-color: rgba(35, 115, 168, 0.25)!important;
     height: 150px;
 }
 
@@ -20,8 +20,13 @@
 
 
 .btn-col {
-   display: flex;
+   display: flex; 
    justify-content: center;
-   align-items: center;
+   align-items: center; 
+}
+
+.btn {
+    background-color:#ade990!important;
+    color: black!important;
 }
 

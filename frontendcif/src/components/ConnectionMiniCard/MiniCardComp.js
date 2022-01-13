@@ -65,7 +65,7 @@ const MiniCardComp = (props) => {
                     </MDBCol>
                     
                     <MDBCol md='2' className="btn-col">
-                        <MDBBtn className="btn btn-info btn-sm" href='#'>Details</MDBBtn>
+                        <button className="btn btn-rounded" href='#'>Details</button>
                     </MDBCol>
                 </MDBRow>
 

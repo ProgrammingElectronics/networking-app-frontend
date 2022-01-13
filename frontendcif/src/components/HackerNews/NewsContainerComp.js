@@ -2,14 +2,17 @@ import React from 'react'
 import { Container } from 'react-bootstrap'
 
 //style
-import './HackReactorStyles.css'
+import './HackerNewsStyles.css'
 
-const HackReactorComp = () => {
+const NewsContainerComp = (props) => {
+
+    
+
     return (
         <Container className="hack-container">
-            <h3>Hack Reactor news here</h3>
+            <p>{JSON.stringify(props.news)}</p>
         </Container>
     )
 }
 
-export default HackReactorComp
+export default NewsContainerComp

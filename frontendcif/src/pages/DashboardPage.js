@@ -8,6 +8,7 @@ import ProfileContainerComp from '../components/ProfileContainer/ProfileContaine
 
 import ConnectionRequestAPI from '../api/ConnectionRequestAPI'
 import ProfileAPI from '../api/ProfileAPI'
+import getStories from '../api/HackerNewsAPI'
 
 //styles
 import "../static/DashboardPageStyles.css"
@@ -17,7 +18,8 @@ import { Container, Col } from "react-bootstrap";
 
 // context
 import UserContext from "../contexts/UserContext";
-import HackReactorComp from '../components/HackReactor/HackReactorComp';
+import HackerNewsComp from '../components/HackerNews/NewsContainerComp';
+import getStoriesAPI from '../api/HackerNewsAPI';
 
 
 const DashboardPage = () => {
@@ -25,6 +27,7 @@ const DashboardPage = () => {
     // states
     const [ profile, setProfile ] = useState(null)
     const [ connections, setConnections ] = useState(null)
+    const [ news, setNews ] = useState([])
 
     // setting the user by context
     const userContext = useContext(UserContext);
@@ -36,7 +39,9 @@ const DashboardPage = () => {
     // const profile_id = user.profile
     // console.log("Dashboard | profile_id", profile_id)
 
-    
+    useEffect (() => {
+        getStoriesAPI().then(data => data && setNews(data))
+    }, [])
 
     //useEffect to setProfile and setConnections
     useEffect(() => {
@@ -80,8 +85,8 @@ const DashboardPage = () => {
                     </>
                     }
                 </Col>
-                <Col xs={6}>
-                    <HackReactorComp/>
+                <Col className='right-col' xs={6}>
+                    <HackerNewsComp news={news}/>
                     {
                     connections
                     ?
