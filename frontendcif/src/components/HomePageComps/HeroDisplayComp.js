@@ -12,18 +12,18 @@ const HeroDisplayComp = () => {
   return (
     <Container className="attention-getter">
       <Row>
-        {/* <Col> */}
+         <Col> 
         {/* testing out putting a looped video as a background; will edit this later */}
-        <video width="100%" autoPlay loop muted>
+        {/* <video width="100%" autoPlay loop muted>
           <source src={myVideo} type="video/mp4"></source>
-        </video>
-          {/* <h2 className="attention-title">Connect with people like you...</h2>
+        </video> */}
+          <h2 className="attention-title">Connect with people like you...</h2>
           <p className="attention-para">Life is hard as a new developer. It can sometimes feel like you are lost in an ocean with nowhere to go. Bootcamps are pumping out hundreds of new graduates a day. Soon there will be billions upon billions of software gradutes. Far too many to count. Whole will make it stop? Exponential growth must be curtailed. We strive to make a central location where people can make sense of the madness or help others succeed.</p>
           <h4 className="attention-end">Waste no time you filthy animal. Join today.</h4>
         </Col>
         <Col>
         <Image className="standard-photo" src={image_url} ></Image>
-        </Col> */}
+        </Col>
       </Row>
     </Container>
   )

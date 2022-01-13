@@ -14,15 +14,19 @@ const ProfileCardComp = (props) => {
       <div id="profileCard-right-column" className="card-body">
         <div id="profileCard-right-column-top">
           {/* had to add this logic to see search results because some profiles had no bootcamp */}
-          {props.profile.enrollment[0] && <h3 className="card-title">
-            {props.profile.user.first_name} {props.profile.user.last_name}, {props.profile.enrollment[0].bootcamp.name} 
-          </h3> }
-          <p className="card-text">
-            {props.profile.about_me}
-          </p>
+          <h3 className="card-title">
+            {props.profile.user.first_name} {props.profile.user.last_name} 
+          </h3> 
+          {props.profile.enrollment[0] && <h4 className='bootcamp-text'>{props.profile.enrollment[0].bootcamp.name}</h4>}
+            <div className="card-text">
+              <p >
+                {props.profile.about_me}
+              </p>
+            </div>
+            
         </div>
         <div id="profileCard-right-column-bottom">
-          <PropertyDisplayComp name="Skills" data={props.profile.skills} colorClass="badge bg-info"/>
+          <PropertyDisplayComp name="Skills" data={props.profile.skills} colorClass="badge bg-dark"/>
           <PropertyDisplayComp name="Industries" data={props.profile.industries} colorClass="badge bg-secondary"/>
         </div>
       </div>
