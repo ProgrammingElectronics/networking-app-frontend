@@ -9,7 +9,7 @@ const ProfileComp = (props) => {
 
     //props
     const { profile } = props
-    console.log('profilecomp | profile', profile)
+    // console.log('profilecomp | profile', profile)
 
     const renderProfile = () => {
 

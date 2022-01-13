@@ -11,12 +11,14 @@ import HomePage from './pages/HomePage';
 import DashboardPage from './pages/DashboardPage';
 import SearchPage from './pages/SearchPage';
 import CompleteProfilePage from './pages/CompleteProfilePage'
+import MessagingPage from './pages/MessagingPage.js';
 
 function App() {
   // states
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser ] = useState(null);
   const [error, setError] = useState(null);
+  
   // effects
   useEffect(() => {
     const getUser = async () => {
@@ -26,7 +28,7 @@ function App() {
         if (data.username) {
           setIsLoggedIn(true);
           setUser(data);
-          // console.log("user", data)
+          console.log("user", data)
         }
       }
     }
@@ -74,6 +76,8 @@ function App() {
     console.log(data)
   }
 
+  
+
   return (
     <div className="App">
       <BrowserRouter>
@@ -85,10 +89,10 @@ function App() {
             <Route path="/" element={<HomePage/>}/>
           </Routes>
         </UserContext.Provider>
-      </BrowserRouter>
+      </BrowserRouter> 
 
     </div>
   );
 }
-
+ 
 export default App;

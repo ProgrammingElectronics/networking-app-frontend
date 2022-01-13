@@ -38,7 +38,7 @@ const HomePage = () => {
             </Container>
             <Container >
                 <HeroDisplayComp />
-            </Container>
+            </Container> 
             <Container >
                 <Row>
                     <Col>

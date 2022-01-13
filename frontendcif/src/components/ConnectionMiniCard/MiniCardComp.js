@@ -18,6 +18,7 @@ const MiniCardComp = (props) => {
 
     let token = localStorage.getItem("auth-user")
 
+    
     const getFromProfile = async () => {
         try {
             if (connection) {
@@ -42,7 +43,6 @@ const MiniCardComp = (props) => {
 
     //card variables
     let status = connection['status']
-
     const renderMiniCard = () => {
 
         return (
@@ -77,7 +77,9 @@ const MiniCardComp = (props) => {
                     
                     <MDBCol className="btn-col">
                         <MDBBtn className="btn btn-info btn-sm" href='#'>Details</MDBBtn>
+                        <MDBBtn className="btn btn-info btn-sm" onClick={()=>{props.setUserToMessage(toProfile)}}>Message</MDBBtn>
                     </MDBCol>
+                    
                 </MDBRow>
 
               </MDBCard>

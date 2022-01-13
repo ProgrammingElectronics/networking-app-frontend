@@ -20,6 +20,7 @@ const NavbarComp = () => {
   // context
   const userContext = useContext(UserContext);
   const { user } = userContext;
+  // console.log("User:", user)
   
 
   return (
@@ -40,10 +41,12 @@ const NavbarComp = () => {
             </>
             :
             <>
-
+            <Nav>
               <Nav.Link href="/dashboard">Dashboard</Nav.Link>
               <Nav.Link href="/search">Connect</Nav.Link>
-              <LogoutModalComp />
+              {/* <Nav.Link href="/messages">Messages</Nav.Link> */}
+            </Nav>
+            <LogoutModalComp />
 
             </>
             }

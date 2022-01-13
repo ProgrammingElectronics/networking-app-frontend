@@ -70,7 +70,7 @@ const ConnectionsContainerComp = (props) => {
     // helper functions
     const renderMiniCardComps = (connectionsList) => {
         let newMiniCardList = connectionsList.map((connection)=>{
-            return <MiniCardComp key={connection.id} connection={connection}/>
+            return <MiniCardComp key={connection.id} connection={connection} setUserToMessage={props.setUserToMessage}/>
         })
         return newMiniCardList
     }

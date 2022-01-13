@@ -5,7 +5,7 @@ import { Navigate } from 'react-router-dom';
 import ConnectionsContainerComp from '../components/ConnectionsContainer/ConnectionsContainerComp'
 import NavbarComp from '../components/Navbar/NavbarComp'
 import ProfileContainerComp from '../components/ProfileContainer/ProfileContainerComp'
-
+import MessagingPage from './MessagingPage';
 import ConnectionRequestAPI from '../api/ConnectionRequestAPI'
 import ProfileAPI from '../api/ProfileAPI'
 
@@ -24,6 +24,7 @@ const DashboardPage = () => {
     // states
     const [ profile, setProfile ] = useState(null)
     const [ connections, setConnections ] = useState(null)
+    const [ userToMessage, setUserToMessage ] = useState(null);
 
     // setting the user by context
     const userContext = useContext(UserContext);
@@ -61,18 +62,16 @@ const DashboardPage = () => {
     if (!user) {
         return <Navigate to="/"/>
     }
-
+    console.log(userToMessage)
     return (
         <div>
-            <Container>
-                <NavbarComp />
-            </Container>
+        <NavbarComp />
             <div className="dashboardPageContainer">
                 <div>
                     {
                     profile
                     ?
-                    <ProfileContainerComp profile={profile}/>
+                    <ProfileContainerComp profile={profile} />
                     :
                     <></>
                     }
@@ -81,13 +80,14 @@ const DashboardPage = () => {
                     {
                     connections
                     ?
-                    <ConnectionsContainerComp connections={connections}/>
+                    <ConnectionsContainerComp setUserToMessage={setUserToMessage} connections={connections}/>
                     :
                     <></>
                     }
                     
                 </div>
             </div>
+        <MessagingPage userToMessage={userToMessage}/>
         </div>
     
     )
