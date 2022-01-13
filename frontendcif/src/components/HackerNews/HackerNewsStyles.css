@@ -1,0 +1,19 @@
+.hacker-container {
+    border-radius: 10px;
+    background-color: rgba(34, 87, 122, 0.2);
+   
+}
+
+.hacker-content {
+    overflow: auto;
+    height: 200px;
+    text-align: left;
+    background-color: rgba(34, 87, 122, 0.4);
+    padding: 5px;
+}
+
+a:link {
+    color: white;
+    background-color: transparent;
+    text-decoration: none;
+  }

@@ -19,6 +19,7 @@ import NavbarComp from '../components/Navbar/NavbarComp';
 
 // context
 import UserContext from "../contexts/UserContext";
+import StatsComp from "../components/HomePageComps/StatsComp";
 
 const HomePage = () => {
 
@@ -36,10 +37,10 @@ const HomePage = () => {
             <Container fluid>
                 <NavbarComp />
             </Container>
-            <Container >
+            <Container className='top' fluid>
                 <HeroDisplayComp />
-            </Container> 
-            <Container >
+            </Container>
+            <Container className='middle'>
                 <Row>
                     <Col>
                         <ImageOverlayComp />
@@ -48,6 +49,9 @@ const HomePage = () => {
                         <HookDisplayComp />
                     </Col>
                 </Row>
+            </Container>
+            <Container className='bottom'>
+                <StatsComp/>
             </Container>
         </Container>
     )

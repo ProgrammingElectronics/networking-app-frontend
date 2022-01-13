@@ -1,28 +1,33 @@
 .attention-getter {
-  /* border: solid black 2px;
-  margin-top: 50px;
   margin-bottom: 50px;
-  background-color: rgb(162,196,201);
-  border-radius: 30px;
-  height: 400px;
-  display: flex;
-  justify-content: center;
-  align-items: center; */
+  height: 400px; 
+  width: 100vw!important;
+  
+}
+
+.hero-img {
+  width: 600px;
+}
+
+.hero-text {
+  padding-top: 120px;
+  align-items: center;
 }
 
 .attention-title {
-  border: solid black 2px;
+  /* border: solid black 2px; */
+  font-size: 50px;
 }
 
 .attention-para {
-  border: solid black 2px;
+  /* border: solid black 2px; */
 }
 
 .attention-end {
-  border: solid black 2px;
+  /* border: solid black 2px; */
 }
 
 .standard-photo {
-  border: solid black 2px;
+  /* border: solid black 2px; */
   height: 300px;
 }

@@ -28,7 +28,7 @@ function App() {
         if (data.username) {
           setIsLoggedIn(true);
           setUser(data);
-          console.log("user", data)
+          console.log("App.js | useEffect | user", data)
         }
       }
     }

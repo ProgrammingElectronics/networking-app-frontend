@@ -26,6 +26,35 @@ const createConnection = async (token, connectionObj) => {
   return await baseAPI.tryCatchFetch(url, data)
 }
 
+const updateConnection = async (token, connectionObj, connectionID) => {
+  const url = baseAPI.BASE_URL + CONNECT_URL + connectionID + '/'
+  const data = {
+    method: "PATCH",
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `JWT ${token}`
+    },
+    body : JSON.stringify(connectionObj)
+  }
+  return await baseAPI.tryCatchFetch(url, data)
+}
+
+const deleteConnection = async (token, connectionID) => {
+  const url = baseAPI.BASE_URL + CONNECT_URL + connectionID + '/'
+  const data = {
+    method: "DELETE",
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `JWT ${token}`
+    }
+  }
+  return await baseAPI.tryCatchFetch(url, data)
+}
+
+
+
+
+
 // use this for button submits
 // const handleCreateConnection = async () => {
 //   // assign all needed variables
@@ -44,7 +73,9 @@ const createConnection = async (token, connectionObj) => {
 
 const ConnectionRequestAPI = {
   fetchConnections,
-  createConnection
+  createConnection,
+  deleteConnection,
+  updateConnection
 }
 
 export default ConnectionRequestAPI

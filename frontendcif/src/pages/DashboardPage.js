@@ -13,10 +13,12 @@ import ProfileAPI from '../api/ProfileAPI'
 import "../static/DashboardPageStyles.css"
 
 //bootstrap
-import Container from "react-bootstrap/Container";
+import { Container, Col, Row } from "react-bootstrap";
 
 // context
 import UserContext from "../contexts/UserContext";
+import NewsContainerComp from '../components/HackerNews/NewsContainerComp';
+
 
 
 const DashboardPage = () => {
@@ -25,6 +27,7 @@ const DashboardPage = () => {
     const [ profile, setProfile ] = useState(null)
     const [ connections, setConnections ] = useState(null)
     const [ userToMessage, setUserToMessage ] = useState(null);
+
 
     // setting the user by context
     const userContext = useContext(UserContext);
@@ -54,7 +57,7 @@ const DashboardPage = () => {
         }
         getConnections()
         getProfile()
-      }, [])
+    }, [])
     //getProfile
     //pass array of connections as props to ConnectionsContainerComp
 
@@ -65,29 +68,36 @@ const DashboardPage = () => {
     console.log(userToMessage)
     return (
         <div>
-        <NavbarComp />
-            <div className="dashboardPageContainer">
-                <div>
+            <Container fluid>
+                <NavbarComp />
+            </Container>
+            <Container fluid className="dashboardPageContainer">
+             
+                <Col xs={5}>
                     {
                     profile
                     ?
                     <ProfileContainerComp profile={profile} />
                     :
-                    <></>
+                    <>
+                    </>
                     }
-                </div>
-                <div>
+                </Col>
+                <Col className='right-col' xs={6}>   
                     {
                     connections
                     ?
                     <ConnectionsContainerComp setUserToMessage={setUserToMessage} connections={connections}/>
                     :
-                    <></>
+                    <>      
+                    </>
                     }
-                    
-                </div>
-            </div>
-        <MessagingPage userToMessage={userToMessage}/>
+                    <MessagingPage userToMessage={userToMessage}/>
+                    <Row>
+                        <NewsContainerComp/>
+                    </Row>
+                </Col>               
+            </Container>
         </div>
     
     )
