@@ -3,7 +3,7 @@ import { MDBBtn, MDBIcon } from 'mdb-react-ui-kit';
 import { Container, Col, Row} from 'react-bootstrap';
 //components
 import ProfilePicComp from './ProfilePicComp'
-import EditProfileButtonComp from './EditProfileButtonComp'
+
 //styles 
 import "./ProfileStyles.css"
 import ProfileDetailsModalComp from '../ModalComps/ProfileDetailsModalComp';
@@ -30,7 +30,6 @@ const ProfileComp = (props) => {
                             <h5>{profile['enrollment'][0]['bootcamp']['name']} | {profile['enrollment'][0]['graduation_year']}</h5>
                         </div>
                     }
-                   
                 </Row>
                 <ProfileDetailsModalComp profile={profile}/>
             </Container>

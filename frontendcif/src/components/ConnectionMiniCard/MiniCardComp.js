@@ -3,6 +3,8 @@ import { MDBCard, MDBCardTitle, MDBCardText, MDBCardBody, MDBCardImage, MDBRow, 
 import ProfileAPI from '../../api/ProfileAPI'
 //styles
 import "./MiniCardStyles.css"
+import ProfileDetailsModalComp from '../ModalComps/ProfileDetailsModalComp';
+import ViewProfileButtonComp from '../Profile/ViewProfileButtonComp';
 
 const MiniCardComp = (props) => {
     // const [fromProfile, setFromProfile] = useState(null)
@@ -63,15 +65,15 @@ const MiniCardComp = (props) => {
                             <MDBCardText>
                                 <small>Status: {status}</small>
                             </MDBCardText>
+                            <MDBRow>
+                                <MDBCol className="btn-col">
+                                    <ProfileDetailsModalComp profile={toProfile}/>
+                                    <MDBBtn className="btn btn-info btn-sm" onClick={()=>{props.setUserToMessage(toProfile)}}>Message</MDBBtn>
+                                </MDBCol>
+                            </MDBRow>
                         </MDBCardBody>                   
-                    </MDBCol>                   
-                    <MDBCol  md='2' className="btn-col">
-                        <MDBBtn className="btn btn-info btn-sm" href='#'>Details</MDBBtn>
-                        <MDBBtn className="btn btn-info btn-sm" onClick={()=>{props.setUserToMessage(toProfile)}}>Message</MDBBtn>
-                    </MDBCol>
-                    
+                    </MDBCol>                               
                 </MDBRow>
-
               </MDBCard>
             </div>
         );
