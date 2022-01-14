@@ -7,11 +7,12 @@ import ProfilePicComp from './ProfilePicComp'
 //styles 
 import "./ProfileStyles.css"
 import ProfileDetailsModalComp from '../ModalComps/ProfileDetailsModalComp';
+import ProfileFormComp from '../ProfileForm/ProfileFormComp';
 const ProfileComp = (props) => {
 
     //props
     const { profile } = props
-    // console.log('profilecomp | profile', profile)
+    console.log('profilecomp | profile', profile)
 
     const renderProfile = () => {
 
@@ -23,6 +24,7 @@ const ProfileComp = (props) => {
             <Container className="profileInfoContainer">
                 <Row>
                     <h3>Welcome back, {profile['user']['first_name']}!</h3>
+                    <ProfilePicComp profile={profile}/>
                 </Row>
                 <Row>
                     { profile['enrollment'] [0] &&
@@ -38,6 +40,7 @@ const ProfileComp = (props) => {
 
     return (
         <div>
+            
             {renderProfile()}
         </div>
     )

@@ -71,8 +71,8 @@ const DashboardPage = () => {
             <Container fluid>
                 <NavbarComp />
             </Container>
-            <Container fluid className="dashboardPageContainer">
-                <Row>
+            <Container fluid className='all-content'>
+                <Row className="dashboardPageContainer">
                     <Col className='left-col' >
                         {
                         profile

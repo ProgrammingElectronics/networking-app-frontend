@@ -9,8 +9,8 @@
 } */
 
 .profileImgContainer img {
-    border-radius: 8px;
-    width: 200px;
-    height: 200px;
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
     object-fit: cover;
   }

@@ -86,9 +86,9 @@ const ProfileFormComp = (props) => {
         // }
 
         let userObj = {
-            first_name: "tommy",
-            last_name: "P",
-            email: ""
+            first_name: "Tom",
+            last_name: "Prete",
+            email: "email@email.com"
         }
 
         let profileObj = {
@@ -97,7 +97,7 @@ const ProfileFormComp = (props) => {
             phone_number: "1234567890",
             linkedin_url: "newuser",
             github_url: "newuser",
-            img_url: "",
+            img_url: "https://static.generated.photos/vue-static/face-generator/landing/wall/14.jpg",
             about_me: "blah",
             enrollment: [],
             skills: [],
