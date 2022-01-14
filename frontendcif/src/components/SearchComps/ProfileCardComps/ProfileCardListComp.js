@@ -45,7 +45,7 @@ const ProfileCardListComp = (props) => {
     const getConnections = async () => {
       let data = await ConnectionRequestAPI.fetchConnections(token);
       setConnections(data)
-      console.log('ProfileCardComp | useEffect | allConnections', data)
+      // console.log('ProfileCardComp | useEffect | allConnections', data)
     }
     getConnections()
   }, [])
@@ -58,7 +58,7 @@ const ProfileCardListComp = (props) => {
     const getProfiles = async () => {
         const filter = buildFilters()
         const data = await profileAPI.getFilteredProfiles(token, filter)
-        console.log("ProfileCardListComp | useEffect | getProfiles | data ", data)
+        // console.log("ProfileCardListComp | useEffect | getProfiles | data ", data)
         
         // filter out the logged in user from results
         if(data && userInfo) {

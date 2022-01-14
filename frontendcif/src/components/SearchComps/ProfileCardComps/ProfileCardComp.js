@@ -27,7 +27,7 @@ const ProfileCardComp = (props) => {
       })
   
       if(connectStatus[0]) {
-        console.log('ProfileCardComp | useEffect | connectStatus', connectStatus[0].status)
+        // console.log('ProfileCardComp | useEffect | connectStatus', connectStatus[0].status)
         setStatus(connectStatus[0].status)
         
         if(connectStatus[0].status === "accepted"){
@@ -42,7 +42,7 @@ const ProfileCardComp = (props) => {
 
   const connectionHandler = async () => {
     
-    console.log("ProfileCardComp | connectionHandler | e.target", props.profile.id)
+    // console.log("ProfileCardComp | connectionHandler | e.target", props.profile.id)
     const userToken = localStorage['auth-user']
 
     const connectionObj = {

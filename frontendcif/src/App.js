@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import UserContext from './contexts/UserContext.js'
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
+import { LinkedInCallback } from 'react-linkedin-login-oauth2';
 
 // API
 import UserAPI from './api/UserAPI.js';
@@ -87,10 +88,10 @@ function App() {
             <Route path="/search" element={<SearchPage/>}/>
             <Route path="/dashboard" element={<DashboardPage/>}/>
             <Route path="/" element={<HomePage/>}/>
+            <Route exact path="/linkedin" component={LinkedInCallback}/> 
           </Routes>
         </UserContext.Provider>
       </BrowserRouter> 
-
     </div>
   );
 }
