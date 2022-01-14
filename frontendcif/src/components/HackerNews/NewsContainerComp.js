@@ -10,7 +10,7 @@ const NewsContainerComp = () => {
     const [ storyIds, setStoryIds ] = useState([])
     
     useEffect (() => {
-        HackerNewsAPI.getStoriesAPI().then(data => data && setStoryIds(data))
+        HackerNewsAPI.getStories().then(data => data && setStoryIds(data))
         // console.log('data', data)
     }, [])  
 

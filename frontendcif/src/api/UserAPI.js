@@ -69,4 +69,17 @@ const signupUser = (userObject) => {
 };
 
 
- export default { login, getLoggedInUser, signupUser }
+const updateUser = (token, userObject, userID) => {
+  
+  return fetch('http://localhost:8000/core/update-users/' + userID + '/', {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `JWT ${token}`
+    },
+    body: JSON.stringify(userObject)
+  }).then(res => res)
+};
+
+
+export default { login, getLoggedInUser, signupUser, updateUser }

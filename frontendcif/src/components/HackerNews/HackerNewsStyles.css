@@ -1,7 +1,7 @@
 .hacker-container {
     border-radius: 10px;
     background-color: rgba(54, 119, 161, 0.2);
-   
+    padding: 10px;
 }
 
 .hacker-content {
@@ -17,4 +17,8 @@ a:link {
     color: white;
     background-color: transparent;
     text-decoration: none;
-  }
+}
+
+.by-line {
+    color: #2bd9fe;
+}
