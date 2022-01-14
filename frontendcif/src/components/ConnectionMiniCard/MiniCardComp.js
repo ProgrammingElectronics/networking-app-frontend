@@ -13,31 +13,32 @@ const MiniCardComp = (props) => {
     // console.log('minicardcomp | connection', connection)
 
     //helper variables
-    let fromProfileID = connection['from_profile']
     let toProfileID = connection['to_profile']
 
     let token = localStorage.getItem("auth-user")
 
-    const getToProfile = async () => {
-        if (connection) {
-            let data = await  ProfileAPI.getProfileByID(token, toProfileID);
-            setToProfile(data)
-        }
-    }
+    
     useEffect(() => {
-        // getFromProfile()
+        const getToProfile = async () => {
+            if (connection) {
+                let data = await  ProfileAPI.getProfileByID(token, toProfileID);
+                setToProfile(data)
+            }
+        }   
         getToProfile()
-      }, [])
+    }, [])
 
     //card variables
     let status = connection['status']
+
     const renderMiniCard = () => {
+       
+        // const bootcampName = toProfile['enrollment'][0]['bootcamp']['name'];
+        // const graduationYear = toProfile['enrollment'][0]['graduation_year'];
+        // const isPro = toProfile['is_professional']
 
         return (
             <div>
-                {toProfile
-                ?
-                <>
               <MDBCard className="mdb-minicard">
                 <MDBRow className='g-0'>
                     <MDBCol className='img-col' md='3'>
@@ -49,12 +50,15 @@ const MiniCardComp = (props) => {
                         <MDBCardBody>
                             <MDBCardTitle>{toProfile['user']['first_name']} {toProfile['user']['last_name']}</MDBCardTitle>
                             <MDBCol>
-                                {!toProfile['is_professional'] &&
-                                    <MDBCardText>Student: {toProfile['enrollment'][0]['bootcamp']['name']} <small>{toProfile['enrollment'][0]['graduation_year']}</small></MDBCardText>
-                                }
-                                {toProfile['is_professional'] && 
-                                    <MDBCardText>Professional: {toProfile['enrollment'][0]['bootcamp']['name']} <small>{toProfile['enrollment'][0]['graduation_year']}</small></MDBCardText>
-                                }
+                            {toProfile['enrollment'][0] ?
+                            <>
+                            <MDBCardText>{toProfile['enrollment'][0]['bootcamp']['name']} <small>{toProfile['enrollment'][0]['graduation_year']}</small></MDBCardText>
+                            </>
+                            :
+                            <>
+                            {null}
+                            </>
+                            }                                
                             </MDBCol>
                             <MDBCardText>
                                 <small>Status: {status}</small>
@@ -69,19 +73,13 @@ const MiniCardComp = (props) => {
                 </MDBRow>
 
               </MDBCard>
-              </>
-              :
-              <>
-              {null}
-              </>
-                }
             </div>
         );
     }
 
     return (
         <div className="miniCard">
-            {renderMiniCard()}
+            {toProfile && renderMiniCard()}
         </div>
     )
 }

@@ -2,12 +2,13 @@ import React from 'react'
 import { Button } from 'react-bootstrap'
 
 
-const EditProfileButtonComp = () => {
+const EditProfileButtonComp = (props) => {
     //include logic for displaying edit profile modal onClick
+    const { handleShowProfile } = props
 
     return (
         <div>
-            <Button className="editButton" size="sm">Edit Profile</Button>
+            <Button onClick={handleShowProfile} className="editButton" size="sm">Edit Profile</Button>
         </div>
     )
 }
