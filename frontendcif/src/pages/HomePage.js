@@ -19,7 +19,7 @@ import NavbarComp from '../components/Navbar/NavbarComp';
 
 // context
 import UserContext from "../contexts/UserContext";
-import StatsComp from "../components/HomePageComps/StatsComp";
+import CTAComp from "../components/HomePageComps/CTAComp";
 
 const HomePage = () => {
 
@@ -51,7 +51,7 @@ const HomePage = () => {
                 </Row>
             </Container>
             <Container fluid className='bottom'>
-                <StatsComp/>
+                <CTAComp/>
             </Container>
         </Container>
     )
