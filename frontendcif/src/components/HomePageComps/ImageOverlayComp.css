@@ -1,15 +1,12 @@
 .small-image {
-
+  width: 600px;
+  opacity: 90%;
 }
 
-.image-top {
-  width: 500px;
+.graph-img {
+  width: 600px;
 }
 
-#image-middle {
-
-}
-
-#image-bottom {
-
+.chevron {
+  color: #d972ff;
 }

@@ -6,9 +6,7 @@ import Col from "react-bootstrap/Col";
 import LogoComp from "../Navbar/LogoComp";
 // css
 import './HeroDisplayCompStyle.css';
-import myVideo from "./HelloWorld.mp4";
-import myImg from './startup2.jpg'
-
+//images
 import img1 from '../../static/images/dark-room1.jpg'
 import img2 from '../../static/images/dark-room2.jpg'
 
@@ -44,8 +42,8 @@ const HeroDisplayComp = () => {
         
       </div>
       <div className='app-intro'>
-          <h1>Expand your network with <span className='app-name'>codeForward</span></h1>
-          <h3 className="attention-end">Connect with fellow coding bootcamp grads.</h3>
+          <h1>Expand your network with <span className='app-name'>codeForward</span>.</h1>
+          <h3 className="attention-end">Connect with coding bootcamp grads like you.</h3>
         </div>
     </div>
   

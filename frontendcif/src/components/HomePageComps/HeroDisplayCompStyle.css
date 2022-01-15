@@ -55,10 +55,10 @@
 }
 
 .app-intro {
-  width: 700px;
+  width: 600px;
   position: absolute;
-  top: 500px;
-  left: 28%;
+  top: 450px;
+  left: 31%;
   background-color: white;
   z-index: 10;
   color: black;
