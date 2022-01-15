@@ -48,63 +48,59 @@ const ProfileFormComp = (props) => {
         event.preventDefault()
         console.log('form elements', event.target.elements)
 
-        // let gradStatus = ''
-        // if (event.target.elements[9].checked === 'true') {
-        //     gradStatus = event.target.elements[9].value
-        // } else {
-        //     gradStatus = event.target.elements[10].value
-        // }
+        let gradStatus = ''
+        if (event.target.elements[9].checked === 'true') {
+            gradStatus = event.target.elements[9].value
+        } else {
+            gradStatus = event.target.elements[10].value
+        }
 
         const profileID = user['profile']
         console.log('profile id', profileID)
 
-        // const profileObj = {
-        //     user: {
-        //         username: user.username, 
-        //         first_name: event.target.elements[0].value,
-        //         last_name: event.target.elements[1].value,
-        //         email: event.target.elements[69].value,
-        //     },
-        //     education: event.target.elements[2].value,
-        //     is_professional: pro,
-        //     phone_number: event.target.elements[68].value,
-        //     linkedin_url: event.target.elements[13].value,
-        //     github_url: event.target.elements[14].value,
-        //     img_url: '',
-        //     about_me: event.target.elements[67].value,
-        //     enrollment:
-        //         [{
-        //             bootcamp: {
-        //                 name: selectedBootcamps.toString()      
-        //             },
-        //             graduation_year: event.target.elements[11].value,
-        //             graduation_status: gradStatus
-        //         }],
-        //     skills: [],
-        //     industries: []
-             
-        // }
-
-        let userObj = {
-            first_name: "Tom",
-            last_name: "Prete",
-            email: "email@email.com"
-        }
-
-        let profileObj = {
-            education: "ucla",
-            is_professional: true,
-            phone_number: "1234567890",
-            linkedin_url: "newuser",
-            github_url: "newuser",
-            img_url: "https://static.generated.photos/vue-static/face-generator/landing/wall/14.jpg",
-            about_me: "blah",
-            enrollment: [],
+        const profileObj = {
+            education: event.target.elements[2].value,
+            is_professional: pro,
+            phone_number: event.target.elements[68].value,
+            linkedin_url: event.target.elements[13].value,
+            github_url: event.target.elements[14].value,
+            img_url: '',
+            about_me: event.target.elements[67].value,
+            enrollment:
+                [{
+                    bootcamp: {
+                        name: selectedBootcamps.toString()      
+                    },
+                    graduation_year: event.target.elements[11].value,
+                    graduation_status: gradStatus
+                }],
             skills: [],
             industries: []
+             
         }
 
+        let userObj = {
+            first_name: event.target.elements[0].value,
+            last_name: event.target.elements[1].value,
+            email: event.target.elements[69].value,
+            
+        }
+
+        // let profileObj = {
+        //     education: "ucla",
+        //     is_professional: true,
+        //     phone_number: "1234567890",
+        //     linkedin_url: "newuser",
+        //     github_url: "newuser",
+        //     img_url: "https://static.generated.photos/vue-static/face-generator/landing/wall/14.jpg",
+        //     about_me: "blah",
+        //     enrollment: [],
+        //     skills: [],
+        //     industries: []
+        // }
+
         console.log('profileObj', profileObj)
+        console.log('userObj', userObj)
        
         const profileData = await ProfileAPI.updateProfile(token, profileObj, profileID)
         if (profileData) {
