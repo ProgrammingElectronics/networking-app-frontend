@@ -6,14 +6,26 @@
 }
 
 .top {
-  padding: 50px;
+  padding: 0px!important;
   margin-bottom: 100px;
-  background: rgb(82,222,151);
-  background: linear-gradient(8deg, rgba(217, 114, 255, .5) 0%, rgba(34,40,49,1) 46%); 
 }
 
 .middle {
+  margin-top: 300px;
   margin-bottom: 100px;
+  height: 500px;
+  width: 100vw;
+  background: linear-gradient(1deg, rgba(82, 222, 151, .3) 0%, rgba(255,255,255,1) 46%);
+  border-radius: 10px;
+}
+
+.bottom {
+  margin-top: 300px;
+  margin-bottom: 100px;
+  height: 500px;
+  width: 100vw;
+  background: linear-gradient(8deg, rgba(82, 222, 151, .5) 0%, rgba(255,255,255,1) 46%);
+  border-radius: 10px;
 }
 
 .app-name {

@@ -1,11 +1,11 @@
 .App {
   text-align: center;
   font-family: 'Epilogue', sans-serif;
-  color: white;
+  /* color: white; */
 }
 
 body {
-  background-color: #222831!important;
+  /* background-color: #222831!important; */
 }
 
 .App-logo {

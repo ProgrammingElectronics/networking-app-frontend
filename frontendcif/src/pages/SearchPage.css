@@ -9,7 +9,7 @@
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  background: linear-gradient(344deg, rgba(34,40,49,1) 60%, rgba(217, 114, 255, .4)100%);
+  /* background: linear-gradient(344deg, rgba(34,40,49,1) 60%, rgba(217, 114, 255, .4)100%); */
 }
 
 #filter-controls {

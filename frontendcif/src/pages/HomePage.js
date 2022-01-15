@@ -40,7 +40,7 @@ const HomePage = () => {
             <Container className='top' fluid>
                 <HeroDisplayComp />
             </Container>
-            <Container className='middle'>
+            <Container fluid className='middle'>
                 <Row>
                     <Col>
                         <ImageOverlayComp />
@@ -50,7 +50,7 @@ const HomePage = () => {
                     </Col>
                 </Row>
             </Container>
-            <Container className='bottom'>
+            <Container fluid className='bottom'>
                 <StatsComp/>
             </Container>
         </Container>
