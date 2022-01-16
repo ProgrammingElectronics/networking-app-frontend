@@ -1,12 +1,15 @@
 import { React, useState, useEffect } from 'react'
 import { Form, Row, Button, Col, InputGroup, FormControl } from 'react-bootstrap'
 import { YearPicker } from 'react-dropdown-date';
-import { Link, useNavigate } from 'react-router-dom'
-import DropdownMultiselect from 'react-multiselect-dropdown-bootstrap'
+import { Link, useNavigate } from 'react-router-dom';
+import DropdownMultiselect from 'react-multiselect-dropdown-bootstrap';
 
-import ProfileAPI from '../../api/ProfileAPI'
+import ProfileAPI from '../../api/ProfileAPI';
 import UserAPI from '../../api/UserAPI';
-import BootcampAPI from '../../api/BootcampAPI'
+import BootcampAPI from '../../api/BootcampAPI';
+import EnrollmentAPI from '../../api/EnrollmentAPI';
+import SkillAPI from '../../api/SkillAPI';
+import IndustryAPI from '../../api/IndustryAPI';
 
 //style
 import "./ProfileFormStyels.css"
@@ -16,7 +19,11 @@ const ProfileFormComp = (props) => {
     //states
     const [pro, setPro] = useState(false)
     const [bootcamps, setBootcamps] = useState([])
+    const [enrollments, setEnrollments] = useState([])
+    const [profileEnrollment, setProfileEnrollment] = useState(null)
     const [selectedBootcamps, setSelectedBootcamps] = useState([])
+    const [skills, setSkills] = useState([])
+    const [industries, setIndustries] = useState([])
     const [selectedGradStatus, setSelectedGradStatus] = useState('')
     const [selectedLanguages, setSelectedLanguages] = useState([])
 
@@ -43,6 +50,26 @@ const ProfileFormComp = (props) => {
     // });
     // console.log('final arr', optionsArray)
     
+    useEffect(() => {  
+        const getEnrollments = async () => {
+            let data = await EnrollmentAPI.getAllEnrollments(token);
+            setEnrollments(data)
+            console.log('enrollment data', data)
+        }  
+        const getSkills = async () => {
+            let data = await SkillAPI.getAllSkills(token);
+            setSkills(data)
+            console.log('skills data', data)
+        }   
+        const getIndustries = async () => {
+            let data = await IndustryAPI.getAllIndustries(token);
+            setIndustries(data)
+            console.log('industry data', data)
+        }  
+        getEnrollments()
+        getSkills()
+        getIndustries()
+    }, [])
 
     const handleFormSubmit = async (event) => {
         event.preventDefault()
@@ -58,70 +85,85 @@ const ProfileFormComp = (props) => {
         const profileID = user['profile']
         console.log('profile id', profileID)
 
+        for (let i = 0; i < enrollments.length; i++) {
+            if(enrollments[i]['profile']===profileID){
+                setProfileEnrollment(enrollments[i].id)
+                console.log('enrollment id', enrollments[i].id)
+            }
+        }
+
         const profileObj = {
             education: event.target.elements[2].value,
             is_professional: pro,
-            phone_number: event.target.elements[68].value,
+            phone_number: event.target.elements[62].value,
             linkedin_url: event.target.elements[13].value,
             github_url: event.target.elements[14].value,
             img_url: '',
-            about_me: event.target.elements[67].value,
-            enrollment:
-                [{
-                    bootcamp: {
-                        name: selectedBootcamps.toString()      
-                    },
-                    graduation_year: event.target.elements[11].value,
-                    graduation_status: gradStatus
-                }],
+            about_me: event.target.elements[61].value,
             skills: [],
             industries: []
-             
         }
 
         let userObj = {
             first_name: event.target.elements[0].value,
             last_name: event.target.elements[1].value,
-            email: event.target.elements[69].value,
+            email: event.target.elements[63].value,
             
         }
 
-        // let profileObj = {
-        //     education: "ucla",
-        //     is_professional: true,
-        //     phone_number: "1234567890",
-        //     linkedin_url: "newuser",
-        //     github_url: "newuser",
-        //     img_url: "https://static.generated.photos/vue-static/face-generator/landing/wall/14.jpg",
-        //     about_me: "blah",
-        //     enrollment: [],
-        //     skills: [],
-        //     industries: []
-        // }
+        let enrollmentObj = {
+            bootcamp: {
+                name: selectedBootcamps 
+            },
+            graduation_year: event.target.elements[11].value,
+            graduation_status: gradStatus
+        }
+
+        let industryObj = {
+            profile: []
+        }
+
+        let skillObj = {
+            profile: [],
+        }
 
         console.log('profileObj', profileObj)
         console.log('userObj', userObj)
+        console.log('enrollmentObj', enrollmentObj)
        
         const profileData = await ProfileAPI.updateProfile(token, profileObj, profileID)
         if (profileData) {
-            console.log('add profile api data', profileData)
+            console.log('profile api data', profileData)
             
         }
 
         const userData = await UserAPI.updateUser(token, userObj, user.id)
         if (userData) {
-            console.log('add user api data', userData)
+            console.log('user api data', userData)
+            
+        }
+
+        const enrollmentData = await EnrollmentAPI.updateEnrollment(token, enrollmentObj, profileEnrollment)
+        if (enrollmentData) {
+            console.log('enrollment api data', enrollmentData)
             
         }
     }
 
     //had to hard code dropdown options 
     const bootcampOptions = [
-        {key: '1', label: 'Code Platoon'}, 
-        {key: '2', label: 'Parris Island'}, 
-        {key: '3', label: 'Galvanize'}, 
-        {key: '4', label: 'Hack Reactor'},
+        'Code Platoon', 
+        'Parris Island', 
+        'Galvanize', 
+        'Hack Reactor'
     ];
+
+    const handleChange = (e) => {
+        console.log('grad value', e.target.value);
+        setSelectedGradStatus(e.target.value);
+    }
+
+    console.log('bootcamp', selectedBootcamps)
 
     return (
         <div className="profile-form-display">
@@ -165,7 +207,7 @@ const ProfileFormComp = (props) => {
                                 value='enrolled'
                                 type={type}
                                 id={`default-${type}-1`}
-                               
+                                onChange={handleChange}
                             />
                             <Form.Check
                                 inline
@@ -174,7 +216,7 @@ const ProfileFormComp = (props) => {
                                 label="Graduated"
                                 type={type}
                                 id={`default-${type}-2`}
-                               
+                                onChange={handleChange}
                             />
                             </div>
                         ))}
@@ -223,20 +265,20 @@ const ProfileFormComp = (props) => {
                             placeholder="Select Industries"
                         />
                     </Form.Group>
-                    <Form.Group as={Col} controlId="my_multiselect_field">
+                    {/* <Form.Group as={Col} controlId="my_multiselect_field">
                         <DropdownMultiselect
                             options={["Big", "Medium", "Small", "Startup"]}
                             name="size of companies"
                             placeholder="Select sizes of companies you've worked for"
-                        />
-                    </Form.Group>
+                        />        
+                    </Form.Group> */}
                 </Row>
                 <Form.Label>Skills</Form.Label>
                 <Row>
                     <Form.Group as={Col} controlId="my_multiselect_field">
                         <Form.Label>Languages</Form.Label>
                         <DropdownMultiselect
-                            options={["C++", "C#", "Java", "JavaScript", "Python", "Ruby"]}
+                            options={["Python", "Javascript", "C++", "C", "Java", "Ruby", "PHP"]}
                             name="languages"
                             placeholder="Select Languages"
                         />
