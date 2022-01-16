@@ -154,7 +154,7 @@ const ProfileFormComp = (props) => {
         {key: 4, label:'Hack Reactor'}
     ];
 
-    const handleChange = (e) => {
+    const handleGradStatusChange = (e) => {
         console.log('grad value', e.target.value);
         setSelectedGradStatus(e.target.value);
     }
@@ -203,7 +203,7 @@ const ProfileFormComp = (props) => {
                                 value='enrolled'
                                 type={type}
                                 id={`default-${type}-1`}
-                                onChange={handleChange}
+                                onChange={handleGradStatusChange}
                             />
                             <Form.Check
                                 inline
@@ -212,7 +212,7 @@ const ProfileFormComp = (props) => {
                                 label="Graduated"
                                 type={type}
                                 id={`default-${type}-2`}
-                                onChange={handleChange}
+                                onChange={handleGradStatusChange}
                             />
                             </div>
                         ))}
