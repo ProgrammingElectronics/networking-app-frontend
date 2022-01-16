@@ -95,26 +95,22 @@ const ProfileFormComp = (props) => {
         const profileObj = {
             education: event.target.elements[2].value,
             is_professional: pro,
-            phone_number: event.target.elements[62].value,
+            phone_number: event.target.elements[63].value,
             linkedin_url: event.target.elements[13].value,
             github_url: event.target.elements[14].value,
-            img_url: '',
-            about_me: event.target.elements[61].value,
-            skills: [],
-            industries: []
+            img_url: 'https://militaryhealthinstitute.org/wp-content/uploads/sites/37/2021/08/blank-profile-picture-png.png',
+            about_me: event.target.elements[62].value
         }
 
         let userObj = {
             first_name: event.target.elements[0].value,
             last_name: event.target.elements[1].value,
-            email: event.target.elements[63].value,
+            email: event.target.elements[64].value,
             
         }
 
         let enrollmentObj = {
-            bootcamp: {
-                name: selectedBootcamps 
-            },
+            bootcamp: selectedBootcamps,
             graduation_year: event.target.elements[11].value,
             graduation_status: gradStatus
         }
@@ -150,12 +146,12 @@ const ProfileFormComp = (props) => {
         }
     }
 
-    //had to hard code dropdown options 
+    //had to hard code dropdown options; the key needs to match id of bootcamp which might be problematic 
     const bootcampOptions = [
-        'Code Platoon', 
-        'Parris Island', 
-        'Galvanize', 
-        'Hack Reactor'
+        {key: 1, label: 'Code Platoon'}, 
+        {key: 2, label:'Parris Island'}, 
+        {key: 3, label:'Galvanize'}, 
+        {key: 4, label:'Hack Reactor'}
     ];
 
     const handleChange = (e) => {
