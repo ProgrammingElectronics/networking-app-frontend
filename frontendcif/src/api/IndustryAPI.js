@@ -30,7 +30,7 @@ const addIndustry = async (token, industryObj) => {
 const updateIndustry = async (token, industryObj, industryID) => {
   const url = baseAPI.BASE_URL + INDUSTRY_URL + industryID + '/'
   const data = {
-    method: "POST",
+    method: "PATCH",
     headers: {
       "Content-Type": "application/json",
       'Authorization': `JWT ${token}`
