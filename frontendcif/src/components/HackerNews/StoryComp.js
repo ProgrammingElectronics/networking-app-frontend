@@ -11,8 +11,8 @@ const StoryComp = (props) => {
 
     return (
         <div>
-            <a href={story.url}><p>{story.title}</p></a>
-            <p className='by-line'>By: {story.by}</p>
+            <a href={story.url} target='_blank'><p>{story.title}</p></a>
+            {story.by && <p className='by-line'>By: {story.by}</p>}
         </div>
     )
 }

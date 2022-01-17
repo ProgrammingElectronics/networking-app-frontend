@@ -19,7 +19,7 @@ import NavbarComp from '../components/Navbar/NavbarComp';
 
 // context
 import UserContext from "../contexts/UserContext";
-import StatsComp from "../components/HomePageComps/StatsComp";
+import CTAComp from "../components/HomePageComps/CTAComp";
 
 const HomePage = () => {
 
@@ -40,7 +40,7 @@ const HomePage = () => {
             <Container className='top' fluid>
                 <HeroDisplayComp />
             </Container>
-            <Container className='middle'>
+            <Container fluid className='middle'>
                 <Row>
                     <Col>
                         <ImageOverlayComp />
@@ -50,8 +50,8 @@ const HomePage = () => {
                     </Col>
                 </Row>
             </Container>
-            <Container className='bottom'>
-                <StatsComp/>
+            <Container fluid className='bottom'>
+                <CTAComp/>
             </Container>
         </Container>
     )

@@ -18,9 +18,9 @@ const NewsContainerComp = () => {
     return (
         <div>
             <Container className="hacker-container"> 
-                <h3>Top Hacker News Stories</h3>
+                <h4>Top Hacker News Stories</h4>
                 <div className='hacker-content'>
-                    {storyIds.slice(0, 50).map(storyId => (
+                    {storyIds.slice(0, 20).map(storyId => (
                     <StoryComp key={storyId} storyId={storyId} />
                     ))}
                 </div>

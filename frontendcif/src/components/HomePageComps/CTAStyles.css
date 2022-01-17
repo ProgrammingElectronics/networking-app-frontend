@@ -1,0 +1,25 @@
+.cta-container {
+    background-color: 217, 114, 255;
+}
+
+.transition-statement {
+    width: 800px;
+    position: absolute;
+    top: 1220px;
+    left: 23%;
+    background-color: white;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.bottom-img {
+    width: 550px;
+}
+
+.cta-users {
+    color: #222831
+}
+
+.cta-chevron {
+  color: #52DE97;
+}
