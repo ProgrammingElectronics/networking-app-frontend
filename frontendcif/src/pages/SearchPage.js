@@ -8,7 +8,6 @@ import NavbarComp from '../components/Navbar/NavbarComp'
 import { MDBAccordion, MDBAccordionItem } from 'mdb-react-ui-kit';
 import {Container} from 'react-bootstrap'
 import { useState } from 'react'
-import LinkedInComp from '../components/LinkedIn/LinkedInComp'
 
 const SearchPage = () => {
 
@@ -42,7 +41,6 @@ const SearchPage = () => {
                     <ProfileCardListComp industryFilter={industryFilter} skillFilter={skillFilter} bootcampFilter={bootcampFilter}/>
                 </div>
             </Container>
-            <LinkedInComp></LinkedInComp>
         </div>
     )
 }

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import UserContext from './contexts/UserContext.js'
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
-import { LinkedInCallback } from 'react-linkedin-login-oauth2';
 
 // API
 import UserAPI from './api/UserAPI.js';
@@ -13,6 +12,7 @@ import DashboardPage from './pages/DashboardPage';
 import SearchPage from './pages/SearchPage';
 import CompleteProfilePage from './pages/CompleteProfilePage'
 import MessagingPage from './pages/MessagingPage.js';
+import LinkedInPage from './pages/LinkedInPage.js';
 
 function App() {
   // states
@@ -77,18 +77,28 @@ function App() {
     console.log(data)
   }
 
-  
+  // LinkedIn SignUp
+  const handleSignupLinkedIn = async (linkedID) => {
+    let userObject = {
+      'username': linkedID,
+      'password': ""
+    }
+    console.log("App.js | handleSignupLinkedIn | data", userObject)
+    let response = await UserAPI.signupUser(userObject);
+    let data = await response.json();
+    console.log("App.js | handleSignupLinkedIn | data",data)
+  }
 
   return (
     <div className="App">
       <BrowserRouter>
-        <UserContext.Provider value={{ user: user, setUserLogin: handleLogin, setUserLogout: handleLogout, setUserSignup: handleSignup, error: error }}>
+        <UserContext.Provider value={{ user: user, setUserLogin: handleLogin, setUserLogout: handleLogout, setUserSignup: handleSignup, setLinkenInSignup: handleSignupLinkedIn, error: error }}>
           <Routes>
             <Route path="/profile" element={<CompleteProfilePage/>}/>
             <Route path="/search" element={<SearchPage/>}/>
             <Route path="/dashboard" element={<DashboardPage/>}/>
             <Route path="/" element={<HomePage/>}/>
-            <Route exact path="/linkedin" component={LinkedInCallback}/> 
+            <Route path="/linkedin" element={<LinkedInPage/>}/> 
           </Routes>
         </UserContext.Provider>
       </BrowserRouter> 

@@ -1,36 +1,42 @@
-import { useContext, useEffect} from "react";
-import LinkedInAPI from "../../api/LinkedInApi/LinkedInAPI";
-import UserContext from "../../contexts/UserContext";
+import { useContext, useEffect, useState } from "react";
+import LinkedInAPI from "../api/LinkedInApi/LinkedInAPI";
+import ProfileAPI from '../api/ProfileAPI'
+import UserContext from "../contexts/UserContext";
 
-const LinkedInComp = () => {
-  
-    // context
-    const userContext = useContext(UserContext);
-    const { setUserSignup, setLinkenInSignup } = userContext;
+const lD = {
+  clientId: '7795z7b1o288ud',
+  redirectUrl: 'http://localhost:3000/linkedin',
+  oauthUrl: 'https://www.linkedin.com/oauth/v2/authorization?response_type=code',
+  scope: 'r_liteprofile%20r_emailaddress',
+  state: '897be90Arandstringfork130facts'
+};
 
-  const lD = {
-    clientId: '7795z7b1o288ud',
-    redirectUrl: 'http://localhost:3000/linkedin',
-    oauthUrl: 'https://www.linkedin.com/oauth/v2/authorization?response_type=code',
-    scope: 'r_liteprofile%20r_emailaddress',
-    state: '897be90Arandstringfork130facts'
-  };
-  
+const LinkedInPage = () => {
+
+  // setting the user by context
+  //const userContext = useContext(UserContext);
+  // const { user } = userContext;
+
   // User Auth
   const token = localStorage.getItem("auth-user");
+  const profile_id = localStorage.getItem("user_profile");
   
-  const handleGetLinkedInID = async (event) => {
+  const handlePostMessage = async (event) => {
     
     if (event.data.type === 'code') {
     
       const { code } = event.data;
-      console.log("LinkedInComp | handleGetLinkedID | I got this code from the pop-up window", code)
+      console.log("LinkedInPage | handlePostMessage | I got this code from the pop-up window", code)
     
-      const linkedInID = await LinkedInAPI.getLinkedInID(code);
-      console.log('LinkedInPage | handlePostMessage | linkedInID', linkedInID)
+      const linkedInProfileData = await LinkedInAPI.requestLinkedInAuthCode(token, code);
+      console.log('LinkedInPage | handlePostMessage | linkedInProfileData', linkedInProfileData)
       
-      setLinkenInSignup(linkedInID)
+      const data = {
+        "img_url":  linkedInProfileData.profile_pic_linkedIn
+      }
 
+      // Update Profile
+      await ProfileAPI.updateProfile(token, data, profile_id)
     }
   };
 
@@ -47,7 +53,7 @@ const LinkedInComp = () => {
       window.opener.postMessage({'type': 'code', 'code': code}, '*')
       window.close();
     }
-      window.addEventListener('message', handleGetLinkedInID);
+      window.addEventListener('message', handlePostMessage);
   },[])
   
   const showPopup = () => {
@@ -80,4 +86,4 @@ const LinkedInComp = () => {
   )
 }
 
-export default LinkedInComp
+export default LinkedInPage
