@@ -17,38 +17,33 @@ import "./ProfileFormStyels.css"
 const ProfileFormComp = (props) => {
 
     //states
+    //isProfessional
     const [pro, setPro] = useState(false)
+    //bootcamps
     const [bootcamps, setBootcamps] = useState([])
+    const [selectedBootcamps, setSelectedBootcamps] = useState([])
+    //enrollments
     const [enrollments, setEnrollments] = useState([])
     const [profileEnrollment, setProfileEnrollment] = useState(null)
-    const [selectedBootcamps, setSelectedBootcamps] = useState([])
+    //skills
     const [skills, setSkills] = useState([])
+    const [selectedSkills, setSelectedSkills] = useState([])
+    //industries
     const [industries, setIndustries] = useState([])
+    const [selectedIndustries, setSelectedIndustries] = useState([])
+    //graduationStatus
     const [selectedGradStatus, setSelectedGradStatus] = useState('')
-    const [selectedLanguages, setSelectedLanguages] = useState([])
 
     //set user
     const { user } = props
     console.log('user', user)
 
     const navigate = useNavigate()
+
+    //helper variables
     let token = localStorage.getItem("auth-user")
+
     
-    //was trying to dynamically add bootcamp names from backend to dropdown options but failed
-    // useEffect(() => {  
-    //     const getBootcamps = async () => {
-    //         let data = await BootcampAPI.getAllBootcamps(token);
-    //         setBootcamps(data)
-    //         console.log('bootcamp data', data) 
-    //     }    
-    //     getBootcamps()
-    // }, [])
-    // console.log('bootcamps',bootcamps)
-    
-    // let optionsArray = bootcamps.map(function (obj) {
-    //     return (obj.name);
-    // });
-    // console.log('final arr', optionsArray)
     
     useEffect(() => {  
         const getEnrollments = async () => {
@@ -75,6 +70,9 @@ const ProfileFormComp = (props) => {
         event.preventDefault()
         console.log('form elements', event.target.elements)
 
+        const profileID = user['profile']
+        console.log('profile id', profileID)
+
         let gradStatus = ''
         if (event.target.elements[9].checked === 'true') {
             gradStatus = event.target.elements[9].value
@@ -82,13 +80,20 @@ const ProfileFormComp = (props) => {
             gradStatus = event.target.elements[10].value
         }
 
-        const profileID = user['profile']
-        console.log('profile id', profileID)
+        //setting graduation status
+        if (event.target.elements[9].checked === 'true') {
+            setSelectedGradStatus(event.target.elements[9].value)
+        } else {
+            setSelectedGradStatus(event.target.elements[10].value)
+        }
+        
+        console.log('selected industries', selectedIndustries)
 
+        //setting enrollment id for update enrollment (doesn')
         for (let i = 0; i < enrollments.length; i++) {
             if(enrollments[i]['profile']===profileID){
-                setProfileEnrollment(enrollments[i].id)
-                console.log('enrollment id', enrollments[i].id)
+                setProfileEnrollment(enrollments[i]['id'])
+                console.log('enrollment id', enrollments[i]['id'])
             }
         }
 
@@ -110,7 +115,8 @@ const ProfileFormComp = (props) => {
         }
 
         let enrollmentObj = {
-            bootcamp: selectedBootcamps,
+            profile: profileID,
+            bootcamp: selectedBootcamps[0],
             graduation_year: event.target.elements[11].value,
             graduation_status: gradStatus
         }
@@ -139,9 +145,21 @@ const ProfileFormComp = (props) => {
             
         }
 
-        const enrollmentData = await EnrollmentAPI.updateEnrollment(token, enrollmentObj, profileEnrollment)
+        const enrollmentData = await EnrollmentAPI.addEnrollment(token, enrollmentObj)
         if (enrollmentData) {
             console.log('enrollment api data', enrollmentData)
+            
+        }
+
+        const industryData = await IndustryAPI.updateIndustry(token, industryObj)
+        if (industryData) {
+            console.log('industry api data', industryData)
+            
+        }
+
+        const skillData = await SkillAPI.updateSkill(token, skillObj)
+        if (skillData) {
+            console.log('skill api data', skillData)
             
         }
     }
@@ -154,12 +172,24 @@ const ProfileFormComp = (props) => {
         {key: 4, label:'Hack Reactor'}
     ];
 
+    const industryOptions = [
+        {key: 1, label: 'Pharma'}, 
+        {key: 2, label: 'Medical'}, 
+        {key: 3, label: 'Entertainment'}, 
+        {key: 4, label: 'Education'},
+        {key: 5, label: 'Marketing'},
+        {key: 6, label: 'Retail'},
+        {key: 7, label: 'Government'},
+        {key: 8, label: 'Environmental/Sustainability'},
+    ];
+
     const handleGradStatusChange = (e) => {
         console.log('grad value', e.target.value);
         setSelectedGradStatus(e.target.value);
     }
 
     console.log('bootcamp', selectedBootcamps)
+    
 
     return (
         <div className="profile-form-display">
@@ -256,9 +286,12 @@ const ProfileFormComp = (props) => {
                 <Row>
                     <Form.Group as={Col} controlId="my_multiselect_field">
                         <DropdownMultiselect
-                            options={["Finance", "Education", "Entertainment", "Medical", "Pharma", "Marketing", "Retail", "Government", "Environmental/Sustainability"]}
+                            options={industryOptions}
                             name="industries"
                             placeholder="Select Industries"
+                            handleOnChange={(selected) => {
+                                setSelectedIndustries(selected)
+                            }}
                         />
                     </Form.Group>
                     {/* <Form.Group as={Col} controlId="my_multiselect_field">
