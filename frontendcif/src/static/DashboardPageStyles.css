@@ -2,9 +2,8 @@
     display: flex;
     justify-content: space-around;
     /* color: white; */
-    margin-top: 50px;
-    /* background: rgb(82,222,151);
-    background: linear-gradient(10deg, rgba(217, 114, 255, .5) 0%, rgba(34,40,49,1) 46%);  */
+    padding-top: 50px;
+    
     
 }
 
@@ -12,7 +11,8 @@
     max-width: 650px!important;
 }
 
-.all-content {
-    margin-top: 45px;
+.gutters {
+    margin-left: 100px;
+    margin-right: 100px;
 }
 
