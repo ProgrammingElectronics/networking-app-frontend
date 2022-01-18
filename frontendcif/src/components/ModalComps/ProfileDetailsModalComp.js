@@ -32,7 +32,8 @@ const ProfileDetailsModalComp = (props) => {
                             <h5>{profile['enrollment'][0]['bootcamp']['name']} | {profile['enrollment'][0]['graduation_year']}</h5>
                             </>
                         }
-                        <p>Github: link | LinkedIn: link</p>
+                        {/* want to change these to hyperlinks */}
+                        <p>Github: https://github.com/{profile['github_url']} | LinkedIn: https://linkedin.com/in/{profile['linkedin_url']}</p>
                         <Col className="aboutMe">
                             <h6>About Me:</h6>
                             <p>{profile['about_me']}</p>
@@ -51,19 +52,41 @@ const ProfileDetailsModalComp = (props) => {
                                 </ul>
                             </div>
                             <div className="skills">
-                            <h5>Skills</h5>
-                            {/* <h6>Languages:</h6> Skill type subheadings*/}
-                                <ul>
-                                    {profile['skills'].filter(skills => skills.type === 'language').map((language, index) =>
-                                            <li key={index}>{language.name}</li>
-                                    )}
-                                </ul>
-                            {/* <h6>Web Development:</h6> */}
-                                <ul>
-                                    {profile['skills'].filter(skills => skills.type === 'Web Development').map((framework, index) =>
+                                <h5>Skills</h5>
+                            
+                                
+                                <h6>Languages:</h6>
+                                    <ul>
+                                        {profile['skills'].filter(skills => skills.type === 'language').map((language, index) =>
+                                                <li key={index}>{language.name}</li>
+                                        )}
+                                    </ul>
+                                
+                            
+                            
+                                <h6>Web Development:</h6>
+                                    <ul>
+                                        {profile['skills'].filter(skills => skills.type === 'web development').map((framework, index) =>
+                                                <li key={index}>{framework.name}</li>
+                                        )}
+                                    </ul>
+                            
+                            
+                                <h6>Mobile Apps:</h6>
+                                    <ul>
+                                        {profile['skills'].filter(skills => skills.type === 'mobile app').map((framework, index) =>
+                                                <li key={index}>{framework.name}</li>
+                                        )}
+                                    </ul>
+                            
+                            
+                                
+                                <h6>Database/Ops:</h6>
+                                    <ul>
+                                        {profile['skills'].filter(skills => skills.type === 'database/ops').map((framework, index) =>
                                             <li key={index}>{framework.name}</li>
-                                    )}
-                                </ul>
+                                        )}
+                                    </ul>
                             </div>
                         </Col>
                     </Row>
@@ -77,6 +100,7 @@ const ProfileDetailsModalComp = (props) => {
     return (
         <div>
             <ViewProfileButtonComp handleShowProfile={handleShowProfile}/>
+            
             {renderModal()}
         </div>
     )

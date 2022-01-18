@@ -1,6 +1,7 @@
 import React from 'react'
 import { MDBBtn, MDBIcon } from 'mdb-react-ui-kit';
-import { Container, Col, Row} from 'react-bootstrap';
+import { Container, Col, Row, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom'
 //components
 import ProfilePicComp from './ProfilePicComp'
 
@@ -33,7 +34,8 @@ const ProfileComp = (props) => {
                         </div>
                     }
                 </Row>
-                <ProfileDetailsModalComp profile={profile}/>
+                    <ProfileDetailsModalComp profile={profile}/>
+                    <Link to='/profile'><Button>Edit Profile</Button></Link>
             </Container>
         )
     }

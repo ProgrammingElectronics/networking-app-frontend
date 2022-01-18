@@ -97,7 +97,7 @@ const ProfileFormComp = (props) => {
         let userObj = {
             first_name: event.target.elements[0].value,
             last_name: event.target.elements[1].value,
-            email: event.target.elements[64].value,  
+            email: event.target.elements[59].value,  
         }
 
         const userData = await UserAPI.updateUser(token, userObj, user.id)
@@ -106,18 +106,18 @@ const ProfileFormComp = (props) => {
         }
 
         const profileObj = {
-            education: event.target.elements[2].value,
+            education: event.target.elements[3].value,
             is_professional: pro,
-            phone_number: event.target.elements[63].value,
-            linkedin_url: event.target.elements[13].value,
-            github_url: event.target.elements[14].value,
-            img_url: 'https://militaryhealthinstitute.org/wp-content/uploads/sites/37/2021/08/blank-profile-picture-png.png',
-            about_me: event.target.elements[62].value
+            phone_number: event.target.elements[58].value,
+            linkedin_url: event.target.elements[14].value,
+            github_url: event.target.elements[15].value,
+            img_url: event.target.elements[2].value,
+            about_me: event.target.elements[57].value
         }
 
         const profileData = await ProfileAPI.updateProfile(token, profileObj, profileID)
         if (profileData) {
-            console.log('profile api data', profileData)   
+            console.log('profile api data', profileData)  
         }
 
         // Add current user profile ID to the industry 
@@ -156,7 +156,7 @@ const ProfileFormComp = (props) => {
         let enrollmentObj = {
             profile: profileID,
             bootcamp: selectedBootcamps[0],
-            graduation_year: event.target.elements[11].value,
+            graduation_year: event.target.elements[12].value,
             graduation_status: selectedGradStatus
         }
 
@@ -166,39 +166,23 @@ const ProfileFormComp = (props) => {
         if (enrollmentData) {
                 console.log('enrollment api data', enrollmentData)
         }
-        // const currentSelectedSkills = [...selectedSkills]
-        // const flatSelectedSkills = [].concat.apply([], currentSelectedSkills) 
-        // console.log('flattened skills', flatSelectedSkills)
-
-        const flatten = function(arr, result = []) {
-            for (let i = 0, length = arr.length; i < length; i++) {
-              const value = arr[i];
-              if (Array.isArray(value)) {
-                flatten(value, result);
-              } else {
-                result.push(value);
-              }
-            }
-            return result;
-        };
-
-        console.log('flatten function', flatten(selectedSkills))
+        
 
         // Add current user profile ID to each skill 
         for (let i = 0; i < selectedSkills.length; i++) {
                     
             //Get existing profiles in the industry
             const currentSkills = [...skills]
-            const existingSkillsProfiles = currentSkills.filter((skill) => skill.id == selectedSkills[i])[0]['profiles']
+            const existingProfiles = currentSkills.filter((skill) => skill.id == selectedSkills[i])[0]['profiles']
             // Add current profile to the profile list for that industry
-            existingSkillsProfiles.push(profileID)
+            existingProfiles.push(profileID)
             
             // console.log('ProfileFormComp | SubmitForm | newProfiles', newProfiles)
-            console.log('ProfileFormComp | SubmitForm | existingProfilesSkills', existingSkillsProfiles)
+            console.log('ProfileFormComp | SubmitForm | existingProfilesSkills', existingProfiles)
             
             // add the updated list of profiles to the skill object
             let skillObj = {
-                profiles: existingSkillsProfiles
+                profiles: existingProfiles
             }
 
             // make API call to update each industry
@@ -246,7 +230,6 @@ const ProfileFormComp = (props) => {
 
 
     const skillOptions = [
-        {key: 'label', label: 'Languages', disabled: true}, 
         {key: 1, label: 'Python'}, 
         {key: 2, label: 'Javascript'}, 
         {key: 3, label: 'C++'}, 

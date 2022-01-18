@@ -14,11 +14,11 @@
 }
 
 a:link {
-    /* color: white; */
+    color: black;
     background-color: transparent;
     text-decoration: none;
 }
 
 .by-line {
-    color: #2bd9fe;
+    color: #5D3FD3;
 }
