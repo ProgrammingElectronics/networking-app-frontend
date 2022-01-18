@@ -96,15 +96,17 @@ const DashboardPage = () => {
                             connections
                             ? 
                             <Row>         
-                                <ConnectionsContainerComp setUserToMessage={setUserToMessage} connections={connections}/>        
+                                <ConnectionsContainerComp setUserToMessage={setUserToMessage} connections={connections}/>   
+                                     
                             </Row>
                             :
                             <>      
                             </>
                             }
-                            <Row>
-                                <MessagingPage userToMessage={userToMessage}/>
-                            </Row>
+                            
+                            <Row>   
+                            <MessagingPage userToMessage={userToMessage} profile={profile}/>
+                            </Row> 
                         </Col>
                     </Row>           
                 </div>

@@ -1,7 +1,8 @@
 import React, { useContext, useState, useEffect, useRef } from 'react';
 import Talk from 'talkjs';
-import NavbarComp from '../components/Navbar/NavbarComp';
 import UserContext from '../contexts/UserContext';
+import Container from 'react-bootstrap/Container'
+
 
 
 const MessagingPage = (props) => {
@@ -11,6 +12,7 @@ const MessagingPage = (props) => {
   // context
   const userContext = useContext(UserContext);
   const { user } = userContext;
+
     
     useEffect(() => {
         // Promise can be `then`ed multiple times
@@ -21,12 +23,8 @@ const MessagingPage = (props) => {
                 const me = new Talk.User({
                     id: user.id,
                     name: user.username,
-                    email: null,
-                    // id: "1",
-                    // name: "Tom",
-                    // email: "tommy@gmail.com",
-                    photoUrl: "https://talkjs.com/docs/img/george.jpg",
-                    welcomeMessage: "Hey there! How are you? :-)"
+                    email: user.email,
+                    photoUrl: props.profile.img_url,
                 });
 
                 if (!window.talkSession) {
@@ -39,13 +37,9 @@ const MessagingPage = (props) => {
                 const other = new Talk.User({
                     id: props.userToMessage.user.id,
                     name: props.userToMessage.user.username,
-                    // id: "5",
-                    // name: "Django",
-                    email: null,
-                    photoUrl: "https://talkjs.com/docs/img/ronald.jpg",
-                    welcomeMessage: "Hey there! Love to chat :-)"
+                    email: props.userToMessage.user.email,
+                    photoUrl: props.userToMessage.img_url
                 });
-              
 
                 // You control the ID of a conversation. oneOnOneId is a helper method that generates
                 // a unique conversation ID for a given pair of users. 
@@ -83,7 +77,7 @@ const MessagingPage = (props) => {
       
         
         <span>{ user &&
-            <div style={{height: '500px', width: '420px'}} ref={talkjsContainer}>Loading...</div>
+            <div style={{height: '500px', width: '100%'}} ref={talkjsContainer}></div>
         }
         </span>
     </>
