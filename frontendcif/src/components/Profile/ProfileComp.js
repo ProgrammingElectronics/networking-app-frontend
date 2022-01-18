@@ -35,6 +35,7 @@ const ProfileComp = (props) => {
                     }
                 </Row>
                     <ProfileDetailsModalComp profile={profile}/>
+                    <br/>
                     <Link to='/profile'><Button size='sm'>Edit Profile</Button></Link>
             </Container>
         )
