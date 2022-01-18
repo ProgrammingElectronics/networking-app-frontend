@@ -97,7 +97,7 @@ const ProfileFormComp = (props) => {
         let userObj = {
             first_name: event.target.elements[0].value,
             last_name: event.target.elements[1].value,
-            email: event.target.elements[58].value,  
+            email: event.target.elements[62].value,  
         }
 
         const userData = await UserAPI.updateUser(token, userObj, user.id)
@@ -108,11 +108,11 @@ const ProfileFormComp = (props) => {
         const profileObj = {
             education: event.target.elements[3].value,
             is_professional: pro,
-            phone_number: event.target.elements[57].value,
-            linkedin_url: event.target.elements[14].value,
-            github_url: event.target.elements[15].value,
+            phone_number: event.target.elements[61].value,
+            linkedin_url: event.target.elements[18].value,
+            github_url: event.target.elements[19].value,
             img_url: event.target.elements[2].value,
-            about_me: event.target.elements[56].value
+            about_me: event.target.elements[60].value
         }
 
         const profileData = await ProfileAPI.updateProfile(token, profileObj, profileID)
@@ -158,7 +158,7 @@ const ProfileFormComp = (props) => {
         let enrollmentObj = {
             profile: profileID,
             bootcamp: selectedBootcamps[0],
-            graduation_year: event.target.elements[12].value,
+            graduation_year: event.target.elements[16].value,
             graduation_status: selectedGradStatus
         }
 
@@ -207,7 +207,11 @@ const ProfileFormComp = (props) => {
         {key: 1, label: 'Code Platoon'}, 
         {key: 2, label:'Parris Island'}, 
         {key: 3, label:'Galvanize'}, 
-        {key: 4, label:'Hack Reactor'}
+        {key: 4, label:'Hack Reactor'},
+        {key: 5, label: 'Flat Iron School'},
+        {key: 6, label: 'Coding Dojo'},
+        {key: 7, label: 'Code Fellows'},
+        {key: 8, label: 'Digital Crafts'},
     ];
 
     const industryOptions = [

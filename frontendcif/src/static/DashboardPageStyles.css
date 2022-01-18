@@ -1,9 +1,9 @@
 .dashboardPageContainer {
     display: flex;
     justify-content: space-around;
-    /* color: white; */
     padding-top: 50px;
-    
+    padding-left: 150px;
+    padding-right: 150px;
     
 }
 
@@ -11,8 +11,5 @@
     max-width: 650px!important;
 }
 
-.gutters {
-    margin-left: 100px;
-    margin-right: 100px;
-}
+
 

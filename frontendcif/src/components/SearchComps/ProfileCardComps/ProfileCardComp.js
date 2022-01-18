@@ -27,7 +27,7 @@ const ProfileCardComp = (props) => {
         console.log("HERE!!!!",connection)
         return connection.to_profile === props.profile.id
       })
-  
+      // console.log('connection status', connectStatus)
       if(connectStatus[0]) {
         console.log('ProfileCardComp | useEffect | connectStatus', connectStatus[0].status)
         setStatus(connectStatus[0].status)

@@ -1,6 +1,7 @@
 .profileInfoContainer {
     padding: 10px;
     margin-bottom: 25px;
+    
 }
 
 .aboutMe {
@@ -8,13 +9,13 @@
     display: inline-block;
     border-radius: 10px;
     margin-bottom: 20px;
-    background-color: rgba(255, 255, 255, .1);
+    background-color: rgba(255, 255, 255, 1);
     padding: 10px;
 }
 
 .experiences {
     border-radius: 10px;
-    background-color: rgba(255, 255, 255, .1);
+    background-color: rgba(255, 255, 255, 1);
     text-align: left;
     padding: 10px;
 }
