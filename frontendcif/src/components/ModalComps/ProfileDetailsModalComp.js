@@ -55,8 +55,7 @@ const ProfileDetailsModalComp = (props) => {
                         <Col>
                             <div className="skills">
                                 <h5>Skills</h5>
-                            
-                                
+                        
                                 <h6>Languages:</h6>
                                     <ul>
                                         {profile['skills'].filter(skills => skills.type === 'language').map((language, index) =>

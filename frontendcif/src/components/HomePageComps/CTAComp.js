@@ -33,7 +33,9 @@ const CTAComp = () => {
                         <h5><ChevronRight className='cta-chevron'/>be a mentor in any capacity you wish</h5>
                 </Col>
             </Row>
-           
+            <div className='cta-bottom'>
+                
+            </div>
         </Container>
     )
 }

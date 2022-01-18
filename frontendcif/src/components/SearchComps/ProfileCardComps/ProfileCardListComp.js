@@ -61,10 +61,14 @@ const ProfileCardListComp = (props) => {
         console.log("ProfileCardListComp | useEffect | getProfiles | data ", data)
         
         // filter out the logged in user from results
-        if(data && userInfo) {
-          const filteredData = data.filter(obj => { return obj.id !== userInfo.profile})
-          setProfiles(filteredData)
-        } else if (data) {
+        // if(data && userInfo) {
+        //   const filteredData = data.filter(obj => { return obj.id !== userInfo.profile})
+        //   console.log('data',data)
+        //   setProfiles(filteredData)
+        // } else if (data) {
+        //   setProfiles(data)
+        // }  
+        if (data) {
           setProfiles(data)
         }
     }
