@@ -20,15 +20,6 @@
   font-size: 50px;
 }
 
-.attention-para {
-  /* border: solid black 2px; */
-}
-
-.attention-end {
-  /* border: solid black 2px; */
- 
-}
-
 .standard-photo {
   /* border: solid black 2px; */
   height: 300px;
@@ -57,8 +48,8 @@
 .app-intro {
   width: 600px;
   position: absolute;
-  top: 450px;
-  left: 31%;
+  top: 470px;
+  left: 34%;
   background-color: white;
   z-index: 10;
   color: black;

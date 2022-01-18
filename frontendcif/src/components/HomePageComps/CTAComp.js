@@ -25,7 +25,7 @@ const CTAComp = () => {
                     <Image className='bottom-img' src={img}></Image>
                 </Col>
                 <Col>
-                    <h3 className='cta-users'>Professionals:</h3>
+                    <h3 className='cta-users'>Professionals</h3>
                     <br/>
                     <h4>Use <span className='app-name'>codeForward</span> to:</h4>
                         <h5><ChevronRight className='cta-chevron'/>offer your expertise to newcomers navigating the job market</h5> 
@@ -33,6 +33,7 @@ const CTAComp = () => {
                         <h5><ChevronRight className='cta-chevron'/>be a mentor in any capacity you wish</h5>
                 </Col>
             </Row>
+           
         </Container>
     )
 }

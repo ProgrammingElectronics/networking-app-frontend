@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from 'react'
-import { Form, Row, Button, Col, InputGroup, FormControl } from 'react-bootstrap'
+import { Form, Row, Button, Col, InputGroup, FormControl, Dropdown, DropdownButton } from 'react-bootstrap'
 import { YearPicker } from 'react-dropdown-date';
 import { Link, useNavigate } from 'react-router-dom';
 import DropdownMultiselect from 'react-multiselect-dropdown-bootstrap';
@@ -21,32 +21,33 @@ const ProfileFormComp = (props) => {
     const [pro, setPro] = useState(false)
     //bootcamps
     const [bootcamps, setBootcamps] = useState([])
-    const [selectedBootcamps, setSelectedBootcamps] = useState([])
+    const [selectedBootcamps, setSelectedBootcamps] = useState(null)
     //enrollments
     const [enrollments, setEnrollments] = useState([])
     const [profileEnrollment, setProfileEnrollment] = useState(null)
     //skills
     const [skills, setSkills] = useState([])
     const [selectedSkills, setSelectedSkills] = useState([])
+    const [tempSelectedSkills, setTempSelectedSkills] = useState([])
     //industries
     const [industries, setIndustries] = useState([])
     const [selectedIndustries, setSelectedIndustries] = useState([])
-    const [industryProfilesArr, setIndustryProfilesArr] = useState([])
-    const [industryId, setIndustryId] = useState(null)
+    // const [industryProfilesArr, setIndustryProfilesArr] = useState([])
+    // const [industryId, setIndustryId] = useState(null)
     //graduationStatus
     const [selectedGradStatus, setSelectedGradStatus] = useState('')
 
     //set user
     const { user } = props
-    console.log('user', user)
+    // console.log('user', user)
 
     const navigate = useNavigate()
 
     //helper variables
     let token = localStorage.getItem("auth-user")
 
-    
-    
+    console.log('selected skills', selectedSkills)
+
     useEffect(() => {  
         const getEnrollments = async () => {
             let data = await EnrollmentAPI.getAllEnrollments(token);
@@ -70,12 +71,6 @@ const ProfileFormComp = (props) => {
         getIndustries()
     }, [])
 
-    useEffect(() => {
-        console.log('selected industries', selectedIndustries) 
-    }, [selectedIndustries])
-
-    
-
     const handleFormSubmit = async (event) => {
         
         event.preventDefault()
@@ -98,14 +93,33 @@ const ProfileFormComp = (props) => {
             setSelectedGradStatus(event.target.elements[10].value)
         }
 
-        //for each industry selected, add profileID to profiles array at that industry ID
-        // industries && industries.forEach((index) => {
-        //     console.log('industry profiles',industries[index])
-        // }) 
 
+        let userObj = {
+            first_name: event.target.elements[0].value,
+            last_name: event.target.elements[1].value,
+            email: event.target.elements[58].value,  
+        }
 
+        const userData = await UserAPI.updateUser(token, userObj, user.id)
+        if (userData) {
+            console.log('user api data', userData)
+        }
 
+        const profileObj = {
+            education: event.target.elements[3].value,
+            is_professional: pro,
+            phone_number: event.target.elements[57].value,
+            linkedin_url: event.target.elements[14].value,
+            github_url: event.target.elements[15].value,
+            img_url: event.target.elements[2].value,
+            about_me: event.target.elements[56].value
+        }
 
+        const profileData = await ProfileAPI.updateProfile(token, profileObj, profileID)
+        if (profileData) {
+            console.log('profile api data', profileData)  
+            navigate('/dashboard')
+        }
 
         // Add current user profile ID to the industry 
         for (let i = 0; i < selectedIndustries.length; i++) {
@@ -123,6 +137,7 @@ const ProfileFormComp = (props) => {
             let industryObj = {
                 profiles: existingProfiles
             }
+            console.log('industryObj', industryObj)
 
             // make API call to update each industry
             const industryData = await IndustryAPI.updateIndustry(token, industryObj, selectedIndustries[i])
@@ -139,28 +154,11 @@ const ProfileFormComp = (props) => {
             }
         }
 
-        const profileObj = {
-            education: event.target.elements[2].value,
-            is_professional: pro,
-            phone_number: event.target.elements[63].value,
-            linkedin_url: event.target.elements[13].value,
-            github_url: event.target.elements[14].value,
-            img_url: 'https://militaryhealthinstitute.org/wp-content/uploads/sites/37/2021/08/blank-profile-picture-png.png',
-            about_me: event.target.elements[62].value
-        }
-
-        let userObj = {
-            first_name: event.target.elements[0].value,
-            last_name: event.target.elements[1].value,
-            email: event.target.elements[64].value,
-            
-        }
-
         // Form the enrollment Object
         let enrollmentObj = {
             profile: profileID,
             bootcamp: selectedBootcamps[0],
-            graduation_year: event.target.elements[11].value,
+            graduation_year: event.target.elements[12].value,
             graduation_status: selectedGradStatus
         }
 
@@ -168,44 +166,40 @@ const ProfileFormComp = (props) => {
         const enrollmentData = await EnrollmentAPI.addEnrollment(token, enrollmentObj)
         
         if (enrollmentData) {
-                console.log('enrollment api data', enrollmentData)
+            console.log('enrollment api data', enrollmentData)
+        }
+        
+
+        // Add current user profile ID to each skill 
+        for (let i = 0; i < selectedSkills.length; i++) {
+                    
+            //Get existing profiles in the industry
+            const currentSkills = [...skills]
+            const existingProfiles = currentSkills.filter((skill) => skill.id == selectedSkills[i])[0]['profiles']
+            // Add current profile to the profile list for that industry
+            existingProfiles.push(profileID)
+            
+            // console.log('ProfileFormComp | SubmitForm | newProfiles', newProfiles)
+            console.log('ProfileFormComp | SubmitForm | existingProfilesSkills', existingProfiles)
+            
+            // add the updated list of profiles to the skill object
+            let skillObj = {
+                profiles: existingProfiles
+            }
+
+            // make API call to update each industry
+            const skillData = await SkillAPI.updateSkill(token, skillObj, selectedSkills[i])
+            if (skillData) {
+                console.log('skill api data', skillData)
+            }
         }
 
-        let industryObj = {
-            profile: []
-        }
-       
-
-        // let skillObj = {
-        //     profile: [],
-        // }
-
+        //console log for all objects
         console.log('profileObj', profileObj)
         console.log('userObj', userObj)
         console.log('enrollmentObj', enrollmentObj)
-        // console.log('industryObj', industryObj)
-       
-        const profileData = await ProfileAPI.updateProfile(token, profileObj, profileID)
-        if (profileData) {
-            console.log('profile api data', profileData)
-            
-        }
+      
 
-        const userData = await UserAPI.updateUser(token, userObj, user.id)
-        if (userData) {
-            console.log('user api data', userData)
-            
-        }
-
-
-
-        
-
-        // const skillData = await SkillAPI.updateSkill(token, skillObj)
-        // if (skillData) {
-        //     console.log('skill api data', skillData)
-            
-        // }
     }
 
     //had to hard code dropdown options; the key needs to match id of bootcamp which might be problematic 
@@ -227,14 +221,84 @@ const ProfileFormComp = (props) => {
         {key: 8, label: 'Environmental/Sustainability'},
     ];
 
+
+    const skillOptions = [
+        {key: 1, label: 'Python'}, 
+        {key: 2, label: 'Javascript'}, 
+        {key: 3, label: 'C++'}, 
+        {key: 4, label: 'C'},
+        {key: 5, label: 'Java'},
+        {key: 6, label: 'Ruby'},
+        {key: 7, label: 'PHP'},
+        {key: 8, label: 'Angular'},
+        {key: 9, label: 'Django'}, 
+        {key: 10, label: 'Express'}, 
+        {key: 11, label: 'HTML/CSS'}, 
+        {key: 12, label: 'jQuery'},
+        {key: 13, label: 'Node.js'},
+        {key: 14, label: 'React'},
+        {key: 15, label: 'Redux'},
+        {key: 16, label: 'Android'},
+        {key: 17, label: 'iOS'}, 
+        {key: 18, label: 'Kotlin'}, 
+        {key: 19, label: 'Swift'}, 
+        {key: 20, label: 'Xcode'},
+        {key: 21, label: 'React Native'},
+        {key: 22, label: 'AWS'},
+        {key: 23, label: 'Heroku'}, 
+        {key: 24, label: 'Linux'}, 
+        {key: 25, label: 'MongoDB'}, 
+        {key: 26, label: 'MySQL'},
+        {key: 27, label: 'Postgres'},
+        {key: 28, label: 'SQL'}
+    ]
+    // const languageOptions = [
+    //     {key: 1, label: 'Python'}, 
+    //     {key: 2, label: 'Javascript'}, 
+    //     {key: 3, label: 'C++'}, 
+    //     {key: 4, label: 'C'},
+    //     {key: 5, label: 'Java'},
+    //     {key: 6, label: 'Ruby'},
+    //     {key: 7, label: 'PHP'}
+    // ]
+
+    // const webDevOptions = [
+    //     {key: 8, label: 'Angular'},
+    //     {key: 9, label: 'Django'}, 
+    //     {key: 10, label: 'Express'}, 
+    //     {key: 11, label: 'HTML/CSS'}, 
+    //     {key: 12, label: 'jQuery'},
+    //     {key: 13, label: 'Node.js'},
+    //     {key: 14, label: 'React'},
+    //     {key: 15, label: 'Redux'}
+    // ]
+
+    // const mobileAppOptions = [
+    //     {key: 16, label: 'Android'},
+    //     {key: 17, label: 'iOS'}, 
+    //     {key: 18, label: 'Kotlin'}, 
+    //     {key: 19, label: 'Swift'}, 
+    //     {key: 20, label: 'Xcode'},
+    //     {key: 21, label: 'React Native'}
+    // ]
+
+    // const databaseOptions = [
+    //     {key: 22, label: 'AWS'},
+    //     {key: 23, label: 'Heroku'}, 
+    //     {key: 24, label: 'Linux'}, 
+    //     {key: 25, label: 'MongoDB'}, 
+    //     {key: 26, label: 'MySQL'},
+    //     {key: 27, label: 'Postgres'},
+    //     {key: 28, label: 'SQL'}
+    // ]
+
+
+
     const handleGradStatusChange = (e) => {
         console.log('grad value', e.target.value);
         setSelectedGradStatus(e.target.value);
     }
-
-    console.log('bootcamp', selectedBootcamps)
     
-
     return (
         <div className="profile-form-display">
             <Form onSubmit={handleFormSubmit}>
@@ -248,6 +312,10 @@ const ProfileFormComp = (props) => {
                         <Form.Control placeholder="last name" />
                     </Form.Group>
                 </Row>
+                <Form.Group as={Col} controlId="formGridPicture">
+                    <Form.Label>Profile Picture</Form.Label>
+                    <Form.Control placeholder="Enter the url of an image to use as a profile picture" />
+                </Form.Group>
                 <Form.Group as={Col} controlId="formGridEducation">
                         <Form.Label>Education</Form.Label>
                         <Form.Control placeholder="Enter any schools of higher education" />
@@ -264,6 +332,18 @@ const ProfileFormComp = (props) => {
                                 setSelectedBootcamps(selected)
                             }}
                         />
+                        {/* tried the single select dropdown and caused an infinite loop...not sure why */}
+                          {/* <DropdownButton
+                            alignRight
+                            title="Select Bootcamp"
+                            id="dropdown-menu-align-right">
+                            {bootcampOptions.map((option) => {
+                                return (
+                                    <Dropdown.Item eventKey={option.key} onClick={setSelectedBootcamps(option.key)}>{option.label}</Dropdown.Item>
+                                )
+                            }
+                            )}
+                            </DropdownButton> */}
                         </Form.Group>
                     </Form.Group>
                     <Form.Group as={Col} controlId="formGridGraduationStatus">
@@ -335,52 +415,57 @@ const ProfileFormComp = (props) => {
                             placeholder="Select Industries"
                             handleOnChange={(selected) => {
                                 setSelectedIndustries(selected)
+                                console.log('industry select',selected)
                             }}
                         />
                     </Form.Group>
-                    {/* <Form.Group as={Col} controlId="my_multiselect_field">
-                        <DropdownMultiselect
-                            options={["Big", "Medium", "Small", "Startup"]}
-                            name="size of companies"
-                            placeholder="Select sizes of companies you've worked for"
-                        />        
-                    </Form.Group> */}
                 </Row>
                 <Form.Label>Skills</Form.Label>
                 <Row>
                     <Form.Group as={Col} controlId="my_multiselect_field">
-                        <Form.Label>Languages</Form.Label>
+                        <Form.Label>All Skills</Form.Label>
                         <DropdownMultiselect
-                            options={["Python", "Javascript", "C++", "C", "Java", "Ruby", "PHP"]}
-                            name="languages"
-                            placeholder="Select Languages"
+                            options={skillOptions}
+                            name="allSkills"
+                            placeholder="Select Skills"
+                            handleOnChange={(selected) => {
+                                setSelectedSkills(selected)
+                            }}
                         />
                     </Form.Group>
-                    {/* add in these skill types later */}
-                    <Form.Group as={Col} controlId="my_multiselect_field">
+                    {/* <Form.Group as={Col} controlId="my_multiselect_field">
                         <Form.Label>Web Development</Form.Label>
                         <DropdownMultiselect
-                            options={["Angular", "Django", "Express", "HTML/CSS", "jQuery", "Node.js", "React", "Redux"]}
-                            name="web dev"
+                            options={webDevOptions}
+                            name="skills"
                             placeholder="Select Frameworks"
+                            handleOnChange={(selected) => {
+                                setSelectedSkills(selectedSkills => [...selectedSkills, ...selected])
+                            }}
                         />
                     </Form.Group>
                     <Form.Group as={Col} controlId="my_multiselect_field">
                         <Form.Label>Mobile App Development</Form.Label>
                         <DropdownMultiselect
-                            options={["Android", "iOS", "Kotlin", "Swift", "Xcode", "React Native"]}
-                            name="mobile app"
+                            options={mobileAppOptions}
+                            name="skills"
                             placeholder="Select Frameworks"
+                            handleOnChange={(selected) => {
+                                setSelectedSkills(selectedSkills => [...selectedSkills, ...selected])
+                            }}
                         />
                     </Form.Group>
                     <Form.Group as={Col} controlId="my_multiselect_field">
                         <Form.Label>Database/Operations</Form.Label>
                         <DropdownMultiselect
-                            options={["AWS", "Heroku", "Linux", "MongoDB", "MySQL", "Postgres", "SQL"]}
-                            name="database/operations"
+                            options={databaseOptions}
+                            name="skills"
                             placeholder="Select database/ops"
+                            handleOnChange={(selected) => {
+                                setSelectedSkills(selectedSkills => [...selectedSkills, selected])
+                            }}
                         />
-                    </Form.Group>
+                    </Form.Group> */}
                 </Row>
                 <Form.Group className="mb-3" id="formGridAbout">
                     <Form.Label>About Me</Form.Label>
