@@ -66,6 +66,10 @@ const MessagingPage = (props) => {
                 inbox.mount(talkjsContainer.current);
 
 
+              } else {
+                let inbox = window.talkSession.createInbox();
+
+                inbox.mount(talkjsContainer.current);
               }
 
             })
@@ -79,7 +83,7 @@ const MessagingPage = (props) => {
       
         
         <span>{ user &&
-            <div style={{height: '500px'}} ref={talkjsContainer}>Loading...</div>
+            <div style={{height: '500px', width: '420px'}} ref={talkjsContainer}>Loading...</div>
         }
         </span>
     </>

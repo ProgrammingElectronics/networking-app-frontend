@@ -2,6 +2,7 @@ import { useState, React, useEffect } from 'react'
 
 //components
 import MiniCardComp from '../ConnectionMiniCard/MiniCardComp'
+import RequestMiniCardComp from '../ConnectionMiniCard/RequestMiniCardComp'
 
 //styles
 import "./ConnectionsContainerStyles.css"
@@ -21,6 +22,7 @@ const ConnectionsContainerComp = (props) => {
     const [ pendingConnections, setPendingConnections ] = useState([])
     const [ activeConnections, setActiveConnections ] = useState([])
     const [ deniedConnections, setDeniedConnections ] = useState([])
+    const [ requestedConnections, setRequestedConnections ] = useState([])
 
     // localStorage
     const userProfileID = localStorage.getItem('user_profile')
@@ -31,7 +33,7 @@ const ConnectionsContainerComp = (props) => {
     // helpers
     // write filter here that filters connection based on type of connections(pending, active, denied)
     const checkPending = (connection) => {
-        let isCurrentUserProfile = connection.from_profile.id == userProfileID
+        let isCurrentUserProfile = connection.from_profile == userProfileID
         return connection.status === 'pending' && !isCurrentUserProfile
     }
    
@@ -45,17 +47,28 @@ const ConnectionsContainerComp = (props) => {
         return connection.status === 'rejected' && !isCurrentUserProfile
     }
 
+    const checkRequested = (connection) => {
+        let isCurrentUserProfile = connection.to_profile.id == userProfileID
+        return connection.status === 'pending' && !isCurrentUserProfile
+    }
+
+
+
     // effects
     useEffect(()=>{
       if (connections) {
-          let newPendingList = connections.filter(checkPending)
+          let newPendingList = connections.filter((item)=>(item.from_profile == userProfileID && item.status == 'pending'))
         //   console.log("PENDING:",newPendingList)
           setPendingConnections(newPendingList)
-          let newActiveList = connections.filter(checkActive)
+          let newActiveList = connections.filter((item)=>(item.from_profile == userProfileID && item.status == 'accepted') || (item.to_profile == userProfileID && item.status == 'accepted'))
         //   console.log("APPROVED:", newActiveList)
           setActiveConnections(newActiveList)
           let newDeniedList = connections.filter(checkDenied)
           setDeniedConnections(newDeniedList)
+
+          let newRequestedList = connections.filter((item)=>(item.to_profile == userProfileID && item.status == 'pending'))
+          console.log("Request List:", newRequestedList)
+          setRequestedConnections(newRequestedList)
       }  
     },[connections])
 
@@ -76,6 +89,13 @@ const ConnectionsContainerComp = (props) => {
         return newMiniCardList
     }
 
+    const renderRequestMiniCardComps = (connectionsList) => {
+        let newMiniCardList = connectionsList.map((connection)=>{
+            return <RequestMiniCardComp key={connection.id} connection={connection} setUserToMessage={props.setUserToMessage}/>
+        })
+        return newMiniCardList
+    }
+
     return (
         <Container className="connectionsContainer">
            {/* This contains all the approved and pending connections */}
@@ -91,6 +111,11 @@ const ConnectionsContainerComp = (props) => {
                         Pending
                         </MDBTabsLink>
                     </MDBTabsItem>
+                    <MDBTabsItem>
+                        <MDBTabsLink onClick={() => handleBasicClick('tab3')} active={basicActive === 'tab3'}>
+                        Connection Requests
+                        </MDBTabsLink>
+                    </MDBTabsItem>
                 </MDBTabs>
                 <div className="tab-content">
                     <MDBTabsContent>
@@ -100,6 +125,9 @@ const ConnectionsContainerComp = (props) => {
                         <MDBTabsPane show={basicActive === 'tab2'}>
                             {/* <PendingMiniCardComp/> */}
                             {pendingConnections ? renderMiniCardComps(pendingConnections) : <></>}
+                            </MDBTabsPane>
+                        <MDBTabsPane show={basicActive === 'tab3'}>
+                            {requestedConnections ? renderRequestMiniCardComps(requestedConnections) : <></>}
                             </MDBTabsPane>
                     </MDBTabsContent>
                 </div>

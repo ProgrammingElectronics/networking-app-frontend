@@ -50,14 +50,16 @@ const DashboardPage = () => {
             setConnections(data)
         }
         const getProfile = async () => {
+            if (user) {
             let data = await  ProfileAPI.getProfileByID(token, user.profile);
-            // console.log('profile data', data)
+            console.log('profile data', data)
             setProfile(data)
+            }
             
         }
         getConnections()
         getProfile()
-    }, [])
+    }, [user])
     //getProfile
     //pass array of connections as props to ConnectionsContainerComp
 
@@ -65,7 +67,6 @@ const DashboardPage = () => {
     if (!user) {
         return <Navigate to="/"/>
     }
-    console.log(userToMessage)
     return (
         <div>
             <Container fluid>
@@ -74,9 +75,9 @@ const DashboardPage = () => {
             <Container fluid className='all-content'>
                 <Row className="dashboardPageContainer">
                     <Col className='left-col' >
-                        {
-                        profile
+                        { profile
                         ?
+                        
                         <>
                         <ProfileContainerComp profile={profile}/>
                         <NewsContainerComp/>
@@ -85,6 +86,9 @@ const DashboardPage = () => {
                         <>
                         </>
                         }
+                        <br/>
+                        <br/>
+                        <MessagingPage userToMessage={userToMessage}/>
                     </Col>
                     <Col className='right-col' xs={6}>   
                         {
@@ -97,7 +101,7 @@ const DashboardPage = () => {
                         <>      
                         </>
                         }
-                        <MessagingPage userToMessage={userToMessage}/>
+                        
                     </Col>
                 </Row>
 
