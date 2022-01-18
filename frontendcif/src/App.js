@@ -12,6 +12,7 @@ import DashboardPage from './pages/DashboardPage';
 import SearchPage from './pages/SearchPage';
 import CompleteProfilePage from './pages/CompleteProfilePage'
 import MessagingPage from './pages/MessagingPage.js';
+import EditProfilePage from './pages/EditProfilePage.js';
 
 function App() {
   // states
@@ -84,6 +85,7 @@ function App() {
         <UserContext.Provider value={{ user: user, setUserLogin: handleLogin, setUserLogout: handleLogout, setUserSignup: handleSignup, error: error }}>
           <Routes>
             <Route path="/profile" element={<CompleteProfilePage/>}/>
+            <Route path="/edit-profile" element={<EditProfilePage/>}/>
             <Route path="/search" element={<SearchPage/>}/>
             <Route path="/dashboard" element={<DashboardPage/>}/>
             <Route path="/" element={<HomePage/>}/>

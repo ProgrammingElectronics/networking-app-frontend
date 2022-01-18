@@ -27,7 +27,7 @@ const ProfileComp = (props) => {
                     <ProfilePicComp profile={profile}/>
                 </Row>
                 <Row>
-                    { profile['enrollment'] [0] &&
+                    { profile['enrollment'][0] &&
                         <div className="introInfo">
                             <h5>{profile['enrollment'][0]['bootcamp']['name']} | {profile['enrollment'][0]['graduation_year']}</h5>
                         </div>

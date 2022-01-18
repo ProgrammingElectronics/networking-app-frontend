@@ -24,6 +24,7 @@ const ProfileFormComp = (props) => {
     const [selectedBootcamps, setSelectedBootcamps] = useState([])
     const [skills, setSkills] = useState([])
     const [industries, setIndustries] = useState([])
+    const [selectedIndustries, setSelectedIndustries] = useState([])
     const [selectedGradStatus, setSelectedGradStatus] = useState('')
     const [selectedLanguages, setSelectedLanguages] = useState([])
 
@@ -90,6 +91,13 @@ const ProfileFormComp = (props) => {
                 setProfileEnrollment(enrollments[i].id)
                 console.log('enrollment id', enrollments[i].id)
             }
+        }
+
+        // Add current user profile ID to the industry
+        for (let i = 0; i < selectedIndustries.length; i++) {
+            // console.log('each industry',selectedIndustries[i]['profiles'])
+            // industries[i]['profiles']
+            console.log('each industry',industries[i])
         }
 
         const profileObj = {
