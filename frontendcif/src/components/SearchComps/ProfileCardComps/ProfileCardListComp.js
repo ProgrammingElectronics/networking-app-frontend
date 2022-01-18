@@ -18,6 +18,12 @@ const ProfileCardListComp = (props) => {
   const [ profiles, setProfiles ] = useState([])
   const [ connections, setConnections ] = useState(null)
 
+  // // update connection status
+  // const [ updated, setUpdated ] = useState(false)
+
+  // const updateConnectionStatus = (updated) => {
+  //   return setUpdated((updated) => !updated)
+  // }
   /**
    * This functions composes the URL for hitting the API and
    * getting filtered results. 
@@ -50,6 +56,12 @@ const ProfileCardListComp = (props) => {
     getConnections()
   }, [])
 
+  useEffect(() => {
+    console.log("YOU PRESSED THE BUTTON!!")
+  }, 
+  [])
+
+
   /**
    * This useEffect updates the profile list based on the selected filters.
    */
@@ -77,6 +89,8 @@ const ProfileCardListComp = (props) => {
         connections={connections}
         key={idx}
         profile={profile}
+        // setUpdated={updateConnectionStatus}
+        // updated={updated}
       />
   )
    

@@ -42,17 +42,20 @@ const ProfileCardComp = (props) => {
 
   const connectionHandler = async () => {
     
+    
     console.log("ProfileCardComp | connectionHandler | e.target", props.profile.id)
     const userToken = localStorage['auth-user']
-
+    
     const connectionObj = {
       "from_profile": userInfo.profile,
       "to_profile": props.profile.id,
       "status": "pending"
     }
-
+    
     await ConnectionRequestAPI.createConnection(userToken, connectionObj)
-
+    
+    //This should update the useEffect on the ProfileCardCompList
+    // props.setUpdated(props.updated)
   }
 
   return (
