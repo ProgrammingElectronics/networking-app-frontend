@@ -10,26 +10,34 @@ const MiniCardComp = (props) => {
     
     const [toProfile, setToProfile] = useState(null)
     
-
     // props
     const { connection } = props
-    
-    // console.log('minicardcomp | connection', connection)
+    console.log("rendering connection", connection)
 
     //helper variables
     let toProfileID = connection['to_profile']
-    
+    let fromProfileID = connection['from_profile']
     let token = localStorage.getItem("auth-user")
-    const userProfileID = localStorage.getItem('user_profile')
-
+    let userProfileID = localStorage.getItem("user_profile")
     
     useEffect(() => {
+        
+        console.log("This is the current user",userProfileID)
+        console.log("This who did not make the request",toProfileID)
+        console.log("This is who made the request",fromProfileID)
+        
+        let renderProfileID;
+
+        if (userProfileID != toProfileID) {
+            renderProfileID = toProfileID
+        } else {
+            renderProfileID = fromProfileID
+        };
+
         const getToProfile = async () => {
             if (connection) {
-                let data = await  ProfileAPI.getProfileByID(token, toProfileID);
-                
+                let data = await  ProfileAPI.getProfileByID(token, renderProfileID);
                 setToProfile(data)
-                
             }
         }   
         getToProfile()
@@ -39,15 +47,6 @@ const MiniCardComp = (props) => {
     let status = connection['status']
 
     const renderMiniCard = () => {
-       
-        // const bootcampName = toProfile['enrollment'][0]['bootcamp']['name'];
-        // const graduationYear = toProfile['enrollment'][0]['graduation_year'];
-        // const isPro = toProfile['is_professional']
-        // ######################################################################################
-        // This case displays the connection where the user was requested.  
-        // So it should show the FROM_PROFILE info
-        // ###################################################################################
-        
         return (
             <div>
               <MDBCard className="mdb-minicard">

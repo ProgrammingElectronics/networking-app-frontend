@@ -3,6 +3,7 @@ import { useState, React, useEffect } from 'react'
 //components
 import MiniCardComp from '../ConnectionMiniCard/MiniCardComp'
 import RequestMiniCardComp from '../ConnectionMiniCard/RequestMiniCardComp'
+import PendingMiniCardComp from '../ConnectionMiniCard/PendingMiniCardComp'
 
 //styles
 import "./ConnectionsContainerStyles.css"
@@ -96,6 +97,13 @@ const ConnectionsContainerComp = (props) => {
         return newMiniCardList
     }
 
+    const renderPendingMiniCardComps = (connectionsList) => {
+        let newMiniCardList = connectionsList.map((connection)=>{
+            return <PendingMiniCardComp key={connection.id} connection={connection}/>
+        })
+        return newMiniCardList
+    }
+
     return (
         <Container className="connectionsContainer">
            {/* This contains all the approved and pending connections */}
@@ -107,7 +115,7 @@ const ConnectionsContainerComp = (props) => {
                         </MDBTabsLink>
                     </MDBTabsItem>
                     <MDBTabsItem>
-                        <MDBTabsLink  className='pending-tab' onClick={() => handleBasicClick('tab2')} active={basicActive === 'tab2'}>
+                        <MDBTabsLink onClick={() => handleBasicClick('tab2')} active={basicActive === 'tab2'}>
                         Pending
                         </MDBTabsLink>
                     </MDBTabsItem>
@@ -124,7 +132,7 @@ const ConnectionsContainerComp = (props) => {
                             </MDBTabsPane>
                         <MDBTabsPane show={basicActive === 'tab2'}>
                             {/* <PendingMiniCardComp/> */}
-                            {pendingConnections ? renderMiniCardComps(pendingConnections) : <></>}
+                            {pendingConnections ? renderPendingMiniCardComps(pendingConnections) : <></>}
                             </MDBTabsPane>
                         <MDBTabsPane show={basicActive === 'tab3'}>
                             {requestedConnections ? renderRequestMiniCardComps(requestedConnections) : <></>}

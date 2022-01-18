@@ -18,11 +18,13 @@ const ProfileCardComp = (props) => {
   const userInfo = user
   const [status, setStatus] = useState(false)
   const [color, setColor] = useState("warning")
+  
 
 
   useEffect(() => {
     if(props.connections){
       const connectStatus = props.connections.filter((connection) => {
+        console.log("HERE!!!!",connection)
         return connection.to_profile === props.profile.id
       })
       // console.log('connection status', connectStatus)
@@ -52,10 +54,11 @@ const ProfileCardComp = (props) => {
     }
 
     await ConnectionRequestAPI.createConnection(userToken, connectionObj)
-
+    
   }
 
   return (
+    userInfo.profile !== props.profile.id ?
     <div id="profileCard" className="card">
       <div id="profileCard-left-column">
           <img src={props.profile.img_url} width="150"
@@ -85,7 +88,8 @@ const ProfileCardComp = (props) => {
           <PropertyDisplayComp name="Industries" data={props.profile.industries} colorClass="badge bg-info text-dark"/>
         </div>
       </div>
-    </div>
+    </div>:
+    <></> 
   )
 }
 
