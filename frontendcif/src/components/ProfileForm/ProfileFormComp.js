@@ -97,7 +97,7 @@ const ProfileFormComp = (props) => {
         let userObj = {
             first_name: event.target.elements[0].value,
             last_name: event.target.elements[1].value,
-            email: event.target.elements[59].value,  
+            email: event.target.elements[58].value,  
         }
 
         const userData = await UserAPI.updateUser(token, userObj, user.id)
@@ -108,16 +108,17 @@ const ProfileFormComp = (props) => {
         const profileObj = {
             education: event.target.elements[3].value,
             is_professional: pro,
-            phone_number: event.target.elements[58].value,
+            phone_number: event.target.elements[57].value,
             linkedin_url: event.target.elements[14].value,
             github_url: event.target.elements[15].value,
             img_url: event.target.elements[2].value,
-            about_me: event.target.elements[57].value
+            about_me: event.target.elements[56].value
         }
 
         const profileData = await ProfileAPI.updateProfile(token, profileObj, profileID)
         if (profileData) {
             console.log('profile api data', profileData)  
+            navigate('/dashboard')
         }
 
         // Add current user profile ID to the industry 
@@ -136,6 +137,7 @@ const ProfileFormComp = (props) => {
             let industryObj = {
                 profiles: existingProfiles
             }
+            console.log('industryObj', industryObj)
 
             // make API call to update each industry
             const industryData = await IndustryAPI.updateIndustry(token, industryObj, selectedIndustries[i])
@@ -164,7 +166,7 @@ const ProfileFormComp = (props) => {
         const enrollmentData = await EnrollmentAPI.addEnrollment(token, enrollmentObj)
         
         if (enrollmentData) {
-                console.log('enrollment api data', enrollmentData)
+            console.log('enrollment api data', enrollmentData)
         }
         
 
@@ -190,22 +192,13 @@ const ProfileFormComp = (props) => {
             if (skillData) {
                 console.log('skill api data', skillData)
             }
-
-
-        // const skillData = await SkillAPI.updateSkill(token, skillObj)
-        // if (skillData) {
-        //     console.log('skill api data', skillData)
-            
-        // }
         }
 
         //console log for all objects
         console.log('profileObj', profileObj)
         console.log('userObj', userObj)
         console.log('enrollmentObj', enrollmentObj)
-        // console.log('industryObj', industryObj)
-       
-
+      
 
     }
 
@@ -426,13 +419,6 @@ const ProfileFormComp = (props) => {
                             }}
                         />
                     </Form.Group>
-                    {/* <Form.Group as={Col} controlId="my_multiselect_field">
-                        <DropdownMultiselect
-                            options={["Big", "Medium", "Small", "Startup"]}
-                            name="size of companies"
-                            placeholder="Select sizes of companies you've worked for"
-                        />        
-                    </Form.Group> */}
                 </Row>
                 <Form.Label>Skills</Form.Label>
                 <Row>

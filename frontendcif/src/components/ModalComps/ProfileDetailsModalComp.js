@@ -51,6 +51,8 @@ const ProfileDetailsModalComp = (props) => {
                                 )}
                                 </ul>
                             </div>
+                        </Col>
+                        <Col>
                             <div className="skills">
                                 <h5>Skills</h5>
                             

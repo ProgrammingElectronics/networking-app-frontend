@@ -72,35 +72,41 @@ const DashboardPage = () => {
                 <NavbarComp />
             </Container>
             <Container fluid className='all-content'>
-                <Row className="dashboardPageContainer">
-                    <Col className='left-col' >
-                        {
-                        profile
-                        ?
-                        <>
-                        <ProfileContainerComp profile={profile}/>
-                        <NewsContainerComp/>
-                        </>
-                        :
-                        <>
-                        </>
-                        }
-                    </Col>
-                    <Col className='right-col' xs={6}>   
-                        {
-                        connections
-                        ? 
-                        <Row>         
-                            <ConnectionsContainerComp setUserToMessage={setUserToMessage} connections={connections}/>        
-                        </Row>
-                        :
-                        <>      
-                        </>
-                        }
-                        <MessagingPage userToMessage={userToMessage}/>
-                    </Col>
-                </Row>
-
+                <div className='gutters'>&nbsp;
+                
+                    <Row className="dashboardPageContainer">
+                        
+                        <Col className='left-col' >
+                            {
+                            profile
+                            ?
+                            <>
+                            <ProfileContainerComp profile={profile}/>
+                            <NewsContainerComp/>
+                            </>
+                            :
+                            <>
+                            </>
+                            }
+                        </Col>
+                        <Col className='right-col' xs={6}>   
+                            {
+                            connections
+                            ? 
+                            <Row>         
+                                <ConnectionsContainerComp setUserToMessage={setUserToMessage} connections={connections}/>        
+                            </Row>
+                            :
+                            <>      
+                            </>
+                            }
+                            <Row>
+                                <MessagingPage userToMessage={userToMessage}/>
+                            </Row>
+                        </Col>
+                    </Row>
+                
+                </div>
             </Container>
         </div>
     )

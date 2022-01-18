@@ -42,7 +42,6 @@ const ProfileComp = (props) => {
 
     return (
         <div>
-            
             {renderProfile()}
         </div>
     )
