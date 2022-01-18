@@ -17,7 +17,7 @@ const ProfileCardListComp = (props) => {
   // states
   const [ profiles, setProfiles ] = useState([])
   const [ connections, setConnections ] = useState(null)
-
+  
   /**
    * This functions composes the URL for hitting the API and
    * getting filtered results. 
@@ -41,19 +41,17 @@ const ProfileCardListComp = (props) => {
     return filters
   }
   
-  useEffect(() => {
-    const getConnections = async () => {
-      let data = await ConnectionRequestAPI.fetchConnections(token);
-      setConnections(data)
-      console.log('ProfileCardComp | useEffect | allConnections', data)
-    }
-    getConnections()
-  }, [])
 
   /**
    * This useEffect updates the profile list based on the selected filters.
    */
   useEffect(() => {
+    
+    const getConnections = async () => {
+      let data = await ConnectionRequestAPI.fetchConnections(token);
+      setConnections(data)
+      console.log('ProfileCardComp | useEffect | allConnections', data)
+    }
     
     const getProfiles = async () => {
         const filter = buildFilters()
@@ -65,6 +63,7 @@ const ProfileCardListComp = (props) => {
         }
     }
     getProfiles()
+    getConnections()
   }, [props.industryFilter, props.skillFilter, props.bootcampFilter, userInfo])
 
 
