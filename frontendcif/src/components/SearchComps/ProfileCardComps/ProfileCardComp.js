@@ -23,6 +23,7 @@ const ProfileCardComp = (props) => {
   useEffect(() => {
     if(props.connections){
       const connectStatus = props.connections.filter((connection) => {
+        console.log("HERE!!!!",connection)
         return connection.to_profile === props.profile.id
       })
   

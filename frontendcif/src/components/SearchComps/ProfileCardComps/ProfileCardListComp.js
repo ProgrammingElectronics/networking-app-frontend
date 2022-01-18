@@ -60,11 +60,7 @@ const ProfileCardListComp = (props) => {
         const data = await profileAPI.getFilteredProfiles(token, filter)
         console.log("ProfileCardListComp | useEffect | getProfiles | data ", data)
         
-        // filter out the logged in user from results
-        if(data && userInfo) {
-          const filteredData = data.filter(obj => { return obj.id !== userInfo.profile})
-          setProfiles(filteredData)
-        } else if (data) {
+        if (data) {
           setProfiles(data)
         }
     }
