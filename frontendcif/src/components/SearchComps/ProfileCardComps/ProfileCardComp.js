@@ -17,30 +17,49 @@ const ProfileCardComp = (props) => {
   const { user } = useContext(UserContext)
   const userInfo = user
   const [status, setStatus] = useState(false)
+  const [display, setDisplay] = useState(true)
   const [color, setColor] = useState("warning")
   
 
 
   useEffect(() => {
+    
     if(props.connections){
-      const connectStatus = props.connections.filter((connection) => {
-        console.log("HERE!!!!",connection)
-        return connection.to_profile === props.profile.id
-      })
+      // const connectStatus = props.connections.filter((connection) => {
+      //   console.log("HERE!!!!",connection)
+      //   console.log("This profile ID",props.profile.id)
+      //   return connection.to_profile === props.profile.id
+      // })
       // console.log('connection status', connectStatus)
-      if(connectStatus[0]) {
-        console.log('ProfileCardComp | useEffect | connectStatus', connectStatus[0].status)
-        setStatus(connectStatus[0].status)
+      // if(connectStatus[0]) {
+      //   console.log('ProfileCardComp | useEffect | connectStatus', connectStatus[0].status)
+      //   setStatus(connectStatus[0].status)
         
-        if(connectStatus[0].status === "accepted"){
+      //   if(connectStatus[0].status === "accepted"){
+      //     setColor("success")
+      //   } else if (connectStatus[0].status === "rejected") {
+      //     setColor("danger")
+      //   }
+      // }
+        console.log('ProfileCardComp | useEffect | connectStatus', props.connections[0].status)
+        console.log('ProfileCardComp | useEffect | toProfile', props.connections[0].to_profile)
+        console.log('ProfileCardComp | useEffect | thisProfile-ID', props.profile.id)
+        console.log('ProfileCardComp | useEffect | allConnections', props.connections)
+        if(props.connections.filter( e => e.to_profile === props.profile.id).length > 0) {
+          console.log("I AMM BIGGGGERRRRRRRRRRRRRRRR")
+          setDisplay(false)
+        }
+
+        //setStatus(props.connections[0].status)
+        
+        if(props.connections[0].status === "accepted"){
           setColor("success")
-        } else if (connectStatus[0].status === "rejected") {
+        } else if (props.connections[0].status === "rejected") {
           setColor("danger")
         }
-      }
-      
+
     }
-  }, [])
+  }, [props.connections])
 
   const connectionHandler = async () => {
     
@@ -58,7 +77,7 @@ const ProfileCardComp = (props) => {
   }
 
   return (
-    userInfo.profile !== props.profile.id ?
+    (userInfo.profile !== props.profile.id) && display ?
     <div id="profileCard" className="card">
       <div id="profileCard-left-column">
           <img src={props.profile.img_url} width="150"

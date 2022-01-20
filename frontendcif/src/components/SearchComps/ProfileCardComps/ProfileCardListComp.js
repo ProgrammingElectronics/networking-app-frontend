@@ -69,7 +69,7 @@ const ProfileCardListComp = (props) => {
 
   const profileCards = profiles.map((profile, idx) =>
       <ProfileCardComp
-        connections={connections}
+        connections={connections.filter((connection) => { return connection.to_profile === profile.id})}
         key={idx}
         profile={profile}
       />
@@ -80,7 +80,13 @@ const ProfileCardListComp = (props) => {
     <div>
       {/* show no results card if no profiles meet match */}
       { profiles.length > 0 ?
-       profileCards :
+       profiles.map((profile, idx) =>
+       <ProfileCardComp
+         connections={connections}
+         key={idx}
+         profile={profile}
+       />
+   ) :
        <NoResultsProfileCardComp></NoResultsProfileCardComp>
       }
     </div>
