@@ -72,6 +72,7 @@ const ProfileCardListComp = (props) => {
         connections={connections}
         key={idx}
         profile={profile}
+        bootcampFilter={props.bootcampFilter}
       />
   )
    

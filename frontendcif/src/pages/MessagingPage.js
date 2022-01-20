@@ -22,7 +22,7 @@ const MessagingPage = (props) => {
             .then(() => {
                 const me = new Talk.User({
                     id: user.id,
-                    name: user.username,
+                    name: user.first_name + " " + user.last_name,
                     email: user.email,
                     photoUrl: props.profile.img_url,
                 });
@@ -36,7 +36,7 @@ const MessagingPage = (props) => {
                 if (props.userToMessage) {
                 const other = new Talk.User({
                     id: props.userToMessage.user.id,
-                    name: props.userToMessage.user.username,
+                    name: props.userToMessage.user.first_name + " " + props.userToMessage.user.last_name,
                     email: props.userToMessage.user.email,
                     photoUrl: props.userToMessage.img_url
                 });

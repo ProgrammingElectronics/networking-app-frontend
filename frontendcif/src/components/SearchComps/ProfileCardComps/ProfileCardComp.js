@@ -22,11 +22,25 @@ const ProfileCardComp = (props) => {
 
 
   useEffect(() => {
+
+    const getConnections = async () => {
+      let data = await ConnectionRequestAPI.fetchConnections(token);
+      setConnections(data)
+      console.log('ProfileCardComp | useEffect | allConnections', data)
+    }
+
     if(props.connections){
+      setStatus(false)
+      //const connectStatus = props.connections.filter((connection) => connection.to_profile === props.profile.id)
+      console.log("all connections coming down as props", props.connections)
       const connectStatus = props.connections.filter((connection) => {
-        console.log("HERE!!!!",connection)
+        console.log("connection.from_profile",connection.from_profile)
+        console.log("connection.to_profile",connection.to_profile)
+        console.log("props.profile.id",props.profile.id)
         return connection.to_profile === props.profile.id
       })
+      console.log("connectStatus", connectStatus)
+
       // console.log('connection status', connectStatus)
       if(connectStatus[0]) {
         console.log('ProfileCardComp | useEffect | connectStatus', connectStatus[0].status)
@@ -37,10 +51,10 @@ const ProfileCardComp = (props) => {
         } else if (connectStatus[0].status === "rejected") {
           setColor("danger")
         }
-      }
+      } 
       
     }
-  }, [])
+  }, [props.bootcampFilter])
 
   const connectionHandler = async () => {
     
@@ -57,12 +71,21 @@ const ProfileCardComp = (props) => {
     
   }
 
+  const getStatus = () => {
+    return status
+  }
+
+//   <button onClick={connectionHandler} type="button" className="btn btn-info btn-rounded">
+//   Connect
+// </button>
+
+
   return (
     userInfo.profile !== props.profile.id ?
     <div id="profileCard" className="card">
       <div id="profileCard-left-column">
-          <img src={props.profile.img_url} width="150"
-          className="img-fluid" alt="profile"/>
+          <img src={props.profile.img_url} width="150" className="img-fluid" alt="profile"/>
+
           { status ?
           <MDBBadge id="status" color={color} className='ms-2' >{status}</MDBBadge>
           :
